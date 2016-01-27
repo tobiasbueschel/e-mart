@@ -3,7 +3,7 @@ Online Marketplace
 
 ##Installation
 
-Please run the following commands after cloning the repo
+Please run the following commands after cloning the repository
 
 ```
 npm install
