@@ -23,7 +23,9 @@
     "metisMenu": "~2.0.2",
     "fontawesome": "~4.3.0",
     "slimScroll": "https://github.com/rochal/jQuery-slimScroll.git#~1.3.6",
-    "PACE": "https://github.com/HubSpot/pace.git#~1.0.2"
+    "PACE": "https://github.com/HubSpot/pace.git#~1.0.2",
+    "angular-footable": "~1.0.3",
+    "footable": "~2.0.3"
   },
   "resolutions": {
     "angular": "1.3.7"
