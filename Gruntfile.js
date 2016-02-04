@@ -60,6 +60,7 @@ module.exports = function (grunt) {
                 }
             }
         },
+
         // Watch for changes in live edit
         watch: {
             styles: {

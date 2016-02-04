@@ -31,6 +31,11 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: "views/minor.html",
             data: { pageTitle: 'Example view' }
         })
+        .state('index.main2', {
+            url: "/main2",
+            templateUrl: "views/main2.html",
+            data: { pageTitle: 'Example view' }
+        })
         .state('commerce', {
             abstract: true,
             url: "/commerce",
