@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - @eu-cdbr-azure-west-d.cloudapp.net" uuid="041ac5af-de80-4aa1-ad52-46ac4187314e">
+    <database-info product="MySQL" version="5.5.45-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
+      <schema id="1" name="emartdb"/>
+      <table id="2" parent="1" name="auction"/>
+      <table id="3" parent="1" name="bid"/>
+      <table id="4" parent="1" name="category"/>
+      <table id="5" parent="1" name="condition"/>
+      <table id="6" parent="1" name="image"/>
+      <table id="7" parent="1" name="item"/>
+      <table id="8" parent="1" name="user"/>
+      <column id="9" parent="2" name="auctionID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="10" parent="2" name="actioneerID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="11" parent="2" name="itemID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="12" parent="2" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="13" parent="2" name="description">
+        <mandatory>1</mandatory>
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <column id="14" parent="2" name="startingPrice">
+        <mandatory>1</mandatory>
+        <data-type>decimal(12,2)</data-type>
+      </column>
+      <column id="15" parent="2" name="instantPrice">
+        <mandatory>1</mandatory>
+        <data-type>decimal(12,2)</data-type>
+      </column>
+      <column id="16" parent="2" name="reservePrice">
+        <mandatory>1</mandatory>
+        <data-type>decimal(12,2)</data-type>
+      </column>
+      <column id="17" parent="2" name="currentBid">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="18" parent="2" name="categoryID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="19" parent="2" name="isActive">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+      </column>
+      <column id="20" parent="2" name="condition">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="21" parent="2" name="startDate">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="22" parent="2" name="endDate">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <index id="23" parent="2" name="beAuctioned">
+        <columns>itemID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="24" parent="2" name="PRIMARY">
+        <columns>auctionID</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="25" parent="2" name="beAuctioned">
+        <columns>itemID</columns>
+        <ref-key>~.item.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="26" parent="2" name="starts">
+        <columns>auctionID</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="27" parent="3" name="bidID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="28" parent="3" name="bidderID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="29" parent="3" name="auctionID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="30" parent="3" name="bid_user">
+        <columns>bidderID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="31" parent="3" name="has">
+        <columns>auctionID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="32" parent="3" name="PRIMARY">
+        <columns>bidID</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="33" parent="3" name="bid_user">
+        <columns>bidderID</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="34" parent="3" name="has">
+        <columns>auctionID</columns>
+        <ref-key>~.auction.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="35" parent="4" name="categoryID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="36" parent="4" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="37" parent="4" name="description">
+        <mandatory>1</mandatory>
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <key id="38" parent="4" name="PRIMARY">
+        <columns>categoryID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="39" parent="5" name="conditionID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="40" parent="5" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="41" parent="5" name="description">
+        <mandatory>1</mandatory>
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <key id="42" parent="5" name="PRIMARY">
+        <columns>conditionID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="43" parent="6" name="imageID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="44" parent="6" name="image">
+        <mandatory>1</mandatory>
+        <data-type>blob</data-type>
+      </column>
+      <column id="45" parent="6" name="itemID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="46" parent="6" name="images_product">
+        <columns>itemID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="47" parent="6" name="PRIMARY">
+        <columns>imageID</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="48" parent="6" name="images_product">
+        <columns>itemID</columns>
+        <ref-key>~.item.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="49" parent="7" name="itemID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="50" parent="7" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="51" parent="7" name="description">
+        <mandatory>1</mandatory>
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <column id="52" parent="7" name="categoryID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="53" parent="7" name="ownerID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="54" parent="7" name="isSold">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+      </column>
+      <index id="55" parent="7" name="product_category_product">
+        <columns>categoryID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="56" parent="7" name="product_user">
+        <columns>ownerID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="57" parent="7" name="PRIMARY">
+        <columns>itemID</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="58" parent="7" name="product_category_product">
+        <columns>categoryID</columns>
+        <ref-key>~.category.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="59" parent="7" name="product_user">
+        <columns>ownerID</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="60" parent="8" name="userID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="61" parent="8" name="userName">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="62" parent="8" name="password">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="63" parent="8" name="firstName">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="64" parent="8" name="lastName">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="65" parent="8" name="addressLine1">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="66" parent="8" name="status">
+        <mandatory>1</mandatory>
+        <data-type>char(10)</data-type>
+      </column>
+      <column id="67" parent="8" name="addressLine2">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="68" parent="8" name="city">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="69" parent="8" name="postalCode">
+        <mandatory>1</mandatory>
+        <data-type>varchar(10)</data-type>
+      </column>
+      <column id="70" parent="8" name="country">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="71" parent="8" name="telephoneNumber">
+        <mandatory>1</mandatory>
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="72" parent="8" name="emailAddress">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="73" parent="8" name="type">
+        <mandatory>1</mandatory>
+        <data-type>varchar(10)</data-type>
+      </column>
+      <key id="74" parent="8" name="PRIMARY">
+        <columns>userID</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
