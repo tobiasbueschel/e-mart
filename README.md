@@ -55,6 +55,8 @@ bower install
 └── package.json
 ```
 
+##Team
+
 [![Tobias Büschel](https://avatars1.githubusercontent.com/u/13087421?v=3&s=460)](https://github.com/tobiasbueschel) | [![Kimeshan Naidoo](https://avatars1.githubusercontent.com/u/8416897?v=3&s=460)](https://github.com/kimeshan) | [![Johnnie Kang](https://avatars0.githubusercontent.com/u/16000835?v=3&s=460)](https://github.com/kajmokr)
 ---|---|---
 [Tobias Büschel](https://github.com/tobiasbueschel) | [Kimeshan Naidoo](https://github.com/kimeshan) | [Johnnie Kang](https://github.com/kajmokr)
