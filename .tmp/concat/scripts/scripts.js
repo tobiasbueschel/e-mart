@@ -83,6 +83,16 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: "views/login.html",
             data: { pageTitle: 'Login', specialClass: 'gray-bg' }
         })
+        .state('register', {
+            url: "/register",
+            templateUrl: "views/register.html",
+            data: { pageTitle: 'Register', specialClass: 'gray-bg' }
+        })
+        .state('forgot_password', {
+            url: "/forgot_password",
+            templateUrl: "views/forgot_password.html",
+            data: { pageTitle: 'Forgot password', specialClass: 'gray-bg' }
+        })
         .state('index', {
             abstract: true,
             url: "/index",
