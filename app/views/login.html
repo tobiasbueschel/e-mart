@@ -1,4 +1,4 @@
-<div class="middle-box text-center loginscreen  animated fadeInDown">
+<div class="middle-box text-center loginscreen  animated fadeInDown" ng-controller='loginCtrl'>
     <div>
         <div>
             <h1 class="logo-name">e - Mart</h1>
@@ -7,19 +7,20 @@
         <p>The best marketplace in the UK. Quickly buy your favorite things or get rid off old stuff and make good money.
         </p>
         <p>Login in. To see it in action.</p>
-        <form class="m-t" role="form" action="#">
+        <div class="m-t">
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="Username" required="">
+                <input type="email" ng-model="email" class="form-control" placeholder="Enter your Email" required="">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required="">
+                <input type="password" ng-model="password" class="form-control" placeholder="Password" required="">
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+            <button ng-click="login()" class="btn btn-primary block full-width m-b">Login</button>
+            <span>{{responseMessage}}</span>
 
             <a ui-sref="forgot_password"><small>Forgot password?</small></a>
             <p class="text-muted text-center"><small>Do not have an account?</small></p>
             <a class="btn btn-sm btn-white btn-block" ui-sref="register">Create an account</a>
-        </form>
+        </div>
         <p class="m-t"> <small>e - Mart &copy; 2016</small> </p>
     </div>
 </div>

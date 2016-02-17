@@ -1,16 +1,25 @@
 /**
- * INSPINIA - Responsive Admin Theme
- *
- * Inspinia theme use AngularUI Router to manage routing and views
+ * Emart uses AngularUI Router to manage routing and views
  * Each view are defined as state.
  * Initial there are written stat for all view in theme.
- *
  */
 function config($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/index/main");
+    $urlRouterProvider.otherwise("/main");
 
     $stateProvider
 
+
+        //-----------------------------------------------------
+        // ROOT
+        //-----------------------------------------------------
+        .state ('root', {
+            abstract: true,
+            templateUrl: 'views/common/content.html'
+        })
+
+        //-----------------------------------------------------
+        // LOGIN | REGISTER | FORGOT PASSWORD
+        //-----------------------------------------------------
         .state('login', {
             url: "/login",
             templateUrl: "views/login.html",
@@ -26,53 +35,35 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: "views/forgot_password.html",
             data: { pageTitle: 'Forgot password', specialClass: 'gray-bg' }
         })
-        .state('index', {
-            abstract: true,
-            url: "/index",
-            templateUrl: "views/common/content.html"
-        })
-        .state('index.main', {
+
+        //-----------------------------------------------------
+        // MAIN
+        //-----------------------------------------------------
+        .state('main', {
+            parent: "root",
             url: "/main",
             templateUrl: "views/main.html",
-            data: { pageTitle: 'Example view' }
+            data: { pageTitle: 'Main' }
         })
         .state('index.minor', {
             url: "/minor",
             templateUrl: "views/minor.html",
             data: { pageTitle: 'Example view' }
         })
-        .state('index.main2', {
-            url: "/main2",
-            templateUrl: "views/main2.html",
-            data: { pageTitle: 'Example view' }
-        })
-        .state('commerce', {
-            abstract: true,
-            url: "/commerce",
-            templateUrl: "views/common/content.html",
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['bower_components/footable/footable.all.min.js', 'bower_components/footable/footable.core.css']
-                        },
-                        {
-                            name: 'ui.footable',
-                            files: ['bower_components/footable/angular-footable.js']
-                        }
-                    ]);
-                }
-            }
-        })
-        .state('commerce.products_grid', {
-            url: "/products_grid",
+
+        //-----------------------------------------------------
+        // SELLING
+        //-----------------------------------------------------
+        .state('products', {
+            parent: "root",
+            url: "/products",
             templateUrl: "views/ecommerce_products_grid.html",
             data: { pageTitle: 'E-commerce grid' }
         })
 
 }
 angular
-    .module('inspinia')
+    .module('emart')
     .config(config)
     .run(function($rootScope, $state) {
         $rootScope.$state = $state;

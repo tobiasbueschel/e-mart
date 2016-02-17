@@ -13,10 +13,11 @@ module.exports = function (grunt) {
         dist: 'dist'
     };
 
+    // Grunt configuration
     grunt.initConfig({
 
         // Project settings
-        e_mart: appConfig,
+        emart: appConfig,
 
         php: {
             dist: {
@@ -27,6 +28,15 @@ module.exports = function (grunt) {
                     keepalive: false,
                     open: false
                 }
+            },
+            app: {
+                options: {
+                    hostname: '127.0.0.1',
+                    port: 9000,
+                    base: 'app', // Project root
+                    keepalive: false,
+                    open: false
+                }
             }
         },
         browserSync: {
@@ -34,6 +44,11 @@ module.exports = function (grunt) {
                 bsFiles: {
                     src: [
                         // Files you want to watch for changes
+                        'app/less/**/*.less',
+                        '<%= emart.app %>/scripts/{,*/}*.js',
+                        'app/styles/*.css',
+                        'app/*.html',
+                        'app/views/*.html'
                     ]
                 },
                 options: {
@@ -52,16 +67,170 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            // Your watch tasks
+            // TODO: LESS task needs to be added
+            styles: {
+                files: ['app/less/**/*.less'],
+                tasks: ['less', 'copy:styles']
+            },
+            js: {
+                files: ['<%= emart.app %>/scripts/{,*/}*.js']
+            }
+        },
+
+        // HERE ARE THE BUILD TASKS
+        // Compile less to css
+        less: {
+            development: {
+                options: {
+                    compress: true,
+                    optimization: 2
+                },
+                files: {
+                    "app/styles/style.css": "app/less/style.less"
+                }
+            }
+        },
+        // If you want to turn on uglify you will need write your angular code with string-injection based syntax
+        // For example this is normal syntax: function exampleCtrl ($scope, $rootScope, $location, $http){}
+        // And string-injection based syntax is: ['$scope', '$rootScope', '$location', '$http', function exampleCtrl ($scope, $rootScope, $location, $http){}]
+        uglify: {
+            options: {
+                mangle: false
+            }
+        },
+        // Clean dist folder
+        clean: {
+            dist: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= emart.dist %>/{,*/}*',
+                        '!<%= emart.dist %>/.git*'
+                    ]
+                }]
+            },
+            server: '.tmp'
+        },
+        // Copies remaining files to places other tasks can use
+        copy: {
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= emart.app %>',
+                        dest: '<%= emart.dist %>',
+                        src: [
+                            '*.{ico,png,txt}',
+                            '.htaccess',
+                            '*.html',
+                            'views/{,*/}*.html',
+                            'styles/patterns/*.*',
+                            'img/{,*/}*.*',
+                            'scripts/php/*.*'
+                        ]
+                    },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: 'bower_components/fontawesome',
+                        src: ['fonts/*.*'],
+                        dest: '<%= emart.dist %>'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: 'bower_components/bootstrap',
+                        src: ['fonts/*.*'],
+                        dest: '<%= emart.dist %>'
+                    },
+                ]
+            },
+            styles: {
+                expand: true,
+                cwd: '<%= emart.app %>/styles',
+                dest: '.tmp/styles/',
+                src: '{,*/}*.css'
+            }
+        },
+        // Renames files for browser caching purposes
+        filerev: {
+            dist: {
+                src: [
+                    '<%= emart.dist %>/scripts/{,*/}*.js',
+                    '<%= emart.dist %>/styles/{,*/}*.css',
+                    '<%= emart.dist %>/styles/fonts/*'
+                ]
+            }
+        },
+        htmlmin: {
+            dist: {
+                options: {
+                    collapseWhitespace: true,
+                    conservativeCollapse: true,
+                    collapseBooleanAttributes: true,
+                    removeCommentsFromCDATA: true,
+                    removeOptionalTags: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= emart.dist %>',
+                    src: ['*.html', 'views/{,*/}*.html'],
+                    dest: '<%= emart.dist %>'
+                }]
+            }
+        },
+        useminPrepare: {
+            html: 'app/index.html',
+            options: {
+                dest: 'dist'
+            }
+        },
+        usemin: {
+            html: ['dist/index.html']
         }
     });
 
     grunt.loadNpmTasks('grunt-browser-sync');
 
-    grunt.registerTask('default', [
+    // PHP server task
+    grunt.registerTask('php-server', [
         'php:dist',         // Start PHP Server
         'browserSync:dist', // Using the php instance as a proxy
         'watch'             // Any other watch tasks you want to run
     ]);
+
+    // Run live version of app
+    // TODO: task is not working 100% yet
+    grunt.registerTask('live', [
+        'clean:server',
+        'copy:styles',
+        'php:app',         // Start PHP Server
+        'browserSync:dist', // Using the php instance as a proxy
+        'watch'             // Any other watch tasks you want to run
+    ]);
+
+
+    // Run build version of app
+    grunt.registerTask('server', [
+        'build',
+        'php-server'
+    ]);
+
+    // Build version for production
+    grunt.registerTask('build', [
+        'clean:dist',
+        'less',
+        'useminPrepare',
+        'concat',
+        'copy:dist',
+        'cssmin',
+        'uglify',
+        'filerev',
+        'usemin',
+        'htmlmin'
+    ]);
+
 
 };

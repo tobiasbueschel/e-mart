@@ -1,3 +1,129 @@
+$(document).ready(function () {
+
+
+    // Full height
+    function fix_height() {
+        var heightWithoutNavbar = $("body > #wrapper").height() - 61;
+        $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
+
+        var navbarHeigh = $('nav.navbar-default').height();
+        var wrapperHeigh = $('#page-wrapper').height();
+
+        if(navbarHeigh > wrapperHeigh){
+            $('#page-wrapper').css("min-height", navbarHeigh + "px");
+        }
+
+        if(navbarHeigh < wrapperHeigh){
+            $('#page-wrapper').css("min-height", $(window).height()  + "px");
+        }
+
+        if ($('body').hasClass('fixed-nav')) {
+            if (navbarHeigh > wrapperHeigh) {
+                $('#page-wrapper').css("min-height", navbarHeigh - 60 + "px");
+            } else {
+                $('#page-wrapper').css("min-height", $(window).height() - 60 + "px");
+            }
+        }
+    }
+
+    $(window).bind("load resize scroll", function() {
+        if(!$("body").hasClass('body-small')) {
+            fix_height();
+        }
+    });
+
+    setTimeout(function(){
+        fix_height();
+    })
+});
+
+// Minimalize menu when screen is less than 768px
+$(function() {
+    $(window).bind("load resize", function() {
+        if ($(this).width() < 769) {
+            $('body').addClass('body-small')
+        } else {
+            $('body').removeClass('body-small')
+        }
+    })
+});
+
+(function () {
+    angular.module('emart', [
+        'ui.router',                    // Routing
+        'ui.bootstrap'                 // Bootstrap
+    ])
+})();
+/**
+ * Emart uses AngularUI Router to manage routing and views
+ * Each view are defined as state.
+ * Initial there are written stat for all view in theme.
+ */
+function config($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/main");
+
+    $stateProvider
+
+
+        //-----------------------------------------------------
+        // ROOT
+        //-----------------------------------------------------
+        .state ('root', {
+            abstract: true,
+            templateUrl: 'views/common/content.html'
+        })
+
+        //-----------------------------------------------------
+        // LOGIN | REGISTER | FORGOT PASSWORD
+        //-----------------------------------------------------
+        .state('login', {
+            url: "/login",
+            templateUrl: "views/login.html",
+            data: { pageTitle: 'Login', specialClass: 'gray-bg' }
+        })
+        .state('register', {
+            url: "/register",
+            templateUrl: "views/register.html",
+            data: { pageTitle: 'Register', specialClass: 'gray-bg' }
+        })
+        .state('forgot_password', {
+            url: "/forgot_password",
+            templateUrl: "views/forgot_password.html",
+            data: { pageTitle: 'Forgot password', specialClass: 'gray-bg' }
+        })
+
+        //-----------------------------------------------------
+        // MAIN
+        //-----------------------------------------------------
+        .state('main', {
+            parent: "root",
+            url: "/main",
+            templateUrl: "views/main.html",
+            data: { pageTitle: 'Main' }
+        })
+        .state('index.minor', {
+            url: "/minor",
+            templateUrl: "views/minor.html",
+            data: { pageTitle: 'Example view' }
+        })
+
+        //-----------------------------------------------------
+        // SELLING
+        //-----------------------------------------------------
+        .state('products', {
+            parent: "root",
+            url: "/products",
+            templateUrl: "views/ecommerce_products_grid.html",
+            data: { pageTitle: 'E-commerce grid' }
+        })
+
+}
+angular
+    .module('emart')
+    .config(config)
+    .run(function($rootScope, $state) {
+        $rootScope.$state = $state;
+    });
 /**
  * pageTitle - Directive for set Page title - mata title
  */
@@ -154,3 +280,49 @@ angular
     .directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
     .directive('iboxToolsFullScreen', iboxToolsFullScreen);
+
+/**
+ * MainCtrl - controller
+ */
+function MainCtrl($scope, $http) {
+
+    this.userName = 'Example user';
+    this.helloText = 'Welcome in SeedProject';
+    this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
+
+    $http.get("test.php").then(function(response) {
+        console.log(response.data.records);
+    });
+
+
+};
+
+
+angular
+    .module('emart')
+    .controller('MainCtrl', MainCtrl)
+
+    .controller('loginCtrl', function ($scope, $http, $state) {
+
+        $scope.login = function () {
+
+            var request = $http({
+                method: "post",
+                url: "/scripts/php/login.php",
+                data: {
+                    email: $scope.email,
+                    password: $scope.password
+                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            });
+            /* Successful HTTP post request or not */
+            request.success(function (data) {
+                if(data == "1"){
+                    $state.go('index.main');
+                }
+                else {
+                    $scope.responseMessage = "Username or Password is incorrect";
+                }
+            });
+        }
+    });

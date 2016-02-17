@@ -1,9 +1,4 @@
 /**
- * INSPINIA - Responsive Admin Theme
- *
- */
-
-/**
  * MainCtrl - controller
  */
 function MainCtrl($scope, $http) {
@@ -21,16 +16,16 @@ function MainCtrl($scope, $http) {
 
 
 angular
-    .module('inspinia')
+    .module('emart')
     .controller('MainCtrl', MainCtrl)
 
-    .controller('loginCtrl', function ($scope, $http) {
+    .controller('loginCtrl', function ($scope, $http, $state) {
 
         $scope.login = function () {
 
             var request = $http({
                 method: "post",
-                url: "login.php",
+                url: "/scripts/php/login.php",
                 data: {
                     email: $scope.email,
                     password: $scope.password
@@ -40,7 +35,7 @@ angular
             /* Successful HTTP post request or not */
             request.success(function (data) {
                 if(data == "1"){
-                    $scope.responseMessage = "Successfully Logged In";
+                    $state.go('index.main');
                 }
                 else {
                     $scope.responseMessage = "Username or Password is incorrect";
