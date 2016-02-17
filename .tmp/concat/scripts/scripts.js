@@ -101,21 +101,76 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: "views/main.html",
             data: { pageTitle: 'Main' }
         })
-        .state('index.minor', {
+        .state('minor', {
+            parent: "root",
             url: "/minor",
             templateUrl: "views/minor.html",
             data: { pageTitle: 'Example view' }
         })
 
         //-----------------------------------------------------
-        // SELLING
+        // E-COMMERCE
         //-----------------------------------------------------
-        .state('products', {
+        .state('orders', {
             parent: "root",
-            url: "/products",
+            url: "/orders",
+            templateUrl: "views/ecommerce_orders.html",
+            data: { pageTitle: 'E-commerce orders' }
+        })
+        .state('payments', {
+            parent: "root",
+            url: "/payments",
+            templateUrl: "views/ecommerce_payments.html",
+            data: { pageTitle: 'E-commerce payments' }
+        })
+        .state('product', {
+            parent: "root",
+            url: "/product",
+            templateUrl: "views/ecommerce_product.html",
+            data: { pageTitle: 'E-commerce product' }
+        })
+        .state('product-details', {
+            parent: "root",
+            url: "/product-details",
+            templateUrl: "views/ecommerce_product_details.html",
+            data: { pageTitle: 'E-commerce product details' }
+        })
+        .state('product-list', {
+            parent: "root",
+            url: "/product-list",
+            templateUrl: "views/ecommerce_product_list.html",
+            data: { pageTitle: 'E-commerce product list' }
+        })
+        .state('product-grid', {
+            parent: "root",
+            url: "/product-grid",
             templateUrl: "views/ecommerce_products_grid.html",
             data: { pageTitle: 'E-commerce grid' }
         })
+        .state('cart', {
+            parent: "root",
+            url: "/cart",
+            templateUrl: "views/ecommerce_cart.html",
+            data: { pageTitle: 'Cart' }
+        })
+
+        .state('invoice', {
+            parent: "root",
+            url: "/invoice",
+            templateUrl: "views/invoice.html",
+            data: { pageTitle: 'Invoice' }
+        })
+
+        //-----------------------------------------------------
+        // OTHER
+        //-----------------------------------------------------
+        .state('faq', {
+            parent: "root",
+            url: "/faq",
+            templateUrl: "views/faq.html",
+            data: { pageTitle: 'FAQ' }
+        })
+
 
 }
 angular
@@ -290,11 +345,6 @@ function MainCtrl($scope, $http) {
     this.helloText = 'Welcome in SeedProject';
     this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
 
-    $http.get("test.php").then(function(response) {
-        console.log(response.data.records);
-    });
-
-
 };
 
 
@@ -318,7 +368,7 @@ angular
             /* Successful HTTP post request or not */
             request.success(function (data) {
                 if(data == "1"){
-                    $state.go('index.main');
+                    $state.go('main');
                 }
                 else {
                     $scope.responseMessage = "Username or Password is incorrect";
