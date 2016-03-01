@@ -367,14 +367,14 @@ angular
             });
             /* Successful HTTP post request or not */
             request.success(function (data) {
-                if(data == "1"){
+                if(data == true){
                     $state.go('main');
                 }
                 else {
                     $scope.responseMessage = "Username or Password is incorrect";
                 }
             });
-        }
+        };
 
         $scope.registerUser = function () {
 

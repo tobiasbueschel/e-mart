@@ -1,36 +1,26 @@
 <?php
-// check username or password from databases
-$postdata = file_get_contents("php://input");
-$request = json_decode($postdata);
-$email = $request->email;
-$password = $request->password;
-if ($email == "one@gmail.com" && $password == "one") {
-    echo true;
-} else {
-    echo false;
-}
-
 require_once("dbConnection.php");
-dbConnect();
-
 ob_start();
-session_start();
 
-if (isset($_POST['submit'])) {
+if(isset($_POST)) {
+    dbConnect();
 
     // STORE POSTED VALUES IN VARIABLES
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $postdata = file_get_contents("php://input");
+    $request = json_decode($postdata);
+    $email = $request->email;
+    $password = $request->password;
+
 
     // VALIDATE VALUES
     // TODO: Implement validation function that checks if username and password is according to format
 
     // PROTECT AGAINST MYSQL INJECTION
-    $username = stripslashes($username);
+    $email = stripslashes($email);
     $password = stripslashes($password);
 
     // DATABASE QUERY
-    $sql = 'SELECT * FROM USERS WHERE username="' . $username . '"';
+    $sql = 'SELECT * FROM user WHERE emailAddress="' . $email . '"';
 
     if ( $result = $connection->query($sql) ){
 
@@ -40,34 +30,41 @@ if (isset($_POST['submit'])) {
             $data = mysqli_fetch_array($result);
 
             if ( password_verify($password, $data['password']) ){
-                // STARTS SESSION
-                $_SESSION['loggedIn'] = true;
-                $_SESSION['firstname'] = $data['firstname'];
-                $_SESSION['lastname'] = $data['lastname'];
-                $_SESSION['email'] = $data['email'];
-                $_SESSION['userID'] = $data['userID'];
-                $_SESSION['userType'] = $data['userType'];
 
-                ob_end_flush();
-                redirect_to("index.php");
+                // TODO: check if sessions are necessary
+                // STARTS SESSION
+                // session_start();
+                // $_SESSION['loggedIn'] = true;
+                // $_SESSION['firstname'] = $data['firstname'];
+                // $_SESSION['lastname'] = $data['lastname'];
+                // $_SESSION['email'] = $data['email'];
+                // $_SESSION['userID'] = $data['userID'];
+                // $_SESSION['userType'] = $data['userType'];
+
+                echo true;
             }
             else {
-                $_SESSION['loggedIn'] = 'failed';
+                error_log("error1 " . $sql . $connection->error);
+
+                echo false;
+                // $_SESSION['loggedIn'] = 'failed';
             }
         }
         else {
-            $_SESSION['loggedIn'] = 'failed';
+            error_log("error2 " . $sql . $connection->error);
+
+            echo false;
+            // $_SESSION['loggedIn'] = 'failed';
         }
     }
     else {
-        $_SESSION['loggedIn'] = 'failed';
+        error_log("error3 " . $sql . $connection->error);
+
+        echo false;
+        // $_SESSION['loggedIn'] = 'failed';
     }
 }
 
-ob_end_flush();
 dbClose();
-
-
-
-
+ob_end_flush();
 ?>

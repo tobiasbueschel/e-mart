@@ -1,7 +1,5 @@
 <?php
-
 require_once("dbConnection.php");
-
 ob_start();
 
 // STORES INPUT IN DATABASE IF SUBMIT BUTTON PRESSED
