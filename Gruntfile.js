@@ -100,6 +100,7 @@ module.exports = function (grunt) {
         },
         // Clean dist folder
         clean: {
+            options: { force: true },
             dist: {
                 files: [{
                     dot: true,
