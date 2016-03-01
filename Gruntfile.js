@@ -67,7 +67,6 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            // TODO: LESS task needs to be added
             styles: {
                 files: ['app/less/**/*.less'],
                 tasks: ['less', 'copy:styles']
@@ -76,7 +75,6 @@ module.exports = function (grunt) {
                 files: ['<%= emart.app %>/scripts/{,*/}*.js']
             }
         },
-
         // HERE ARE THE BUILD TASKS
         // Compile less to css
         less: {
@@ -111,10 +109,17 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            server: '.tmp'
+            server: '.tmp',
+            bower: 'app/bower_components'
         },
         // Copies remaining files to places other tasks can use
         copy: {
+            bower: {
+                expand: true,
+                cwd: 'bower_components',
+                src: '**',
+                dest: 'app/bower_components'
+            },
             dist: {
                 files: [
                     {
@@ -145,7 +150,7 @@ module.exports = function (grunt) {
                         cwd: 'bower_components/bootstrap',
                         src: ['fonts/*.*'],
                         dest: '<%= emart.dist %>'
-                    },
+                    }
                 ]
             },
             styles: {
@@ -197,6 +202,7 @@ module.exports = function (grunt) {
 
     // PHP server task
     grunt.registerTask('php-server', [
+        'clean:bower',
         'php:dist',         // Start PHP Server
         'browserSync:dist', // Using the php instance as a proxy
         'watch'             // Any other watch tasks you want to run
@@ -206,7 +212,9 @@ module.exports = function (grunt) {
     // TODO: task is not working 100% yet
     grunt.registerTask('live', [
         'clean:server',
+        'clean:bower',
         'copy:styles',
+        'copy:bower',
         'php:app',         // Start PHP Server
         'browserSync:dist', // Using the php instance as a proxy
         'watch'             // Any other watch tasks you want to run
@@ -222,6 +230,7 @@ module.exports = function (grunt) {
     // Build version for production
     grunt.registerTask('build', [
         'clean:dist',
+        'clean:bower',
         'less',
         'useminPrepare',
         'concat',
