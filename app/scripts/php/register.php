@@ -34,6 +34,8 @@ if(isset($_POST)) {
     // TODO: this should be done using the default value field in MYSQL
     $userType = 'user';
 
+    // TODO: add date registered to users table and to sql query
+
     $sql = "INSERT INTO user (userName, firstName, lastName, emailAddress, password, userType)
                 VALUES ('$username', '$firstname', '$lastname', '$email', '$password', '$userType')";
 
