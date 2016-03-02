@@ -31,7 +31,9 @@
     "slick-carousel": "^1.5.9",
     "angular-slick": "^0.2.1",
     "summernote": "^0.8.1",
-    "angular-summernote": "^0.7.1"
+    "angular-summernote": "^0.7.1",
+    "jquery.steps": "^1.1.0",
+    "iCheck": "icheck#^1.0.2"
   },
   "resolutions": {
     "angular": "^1.0.8",

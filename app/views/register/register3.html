@@ -1,0 +1,21 @@
+<h3>Register - Account Type</h3>
+<br>
+<p>What kind of account would you like to register?</p>
+<div class="form-group">
+     <label class="checkbox-inline">
+            <input type="radio" name="userType" icheck ng-model="register.buyer">&nbsp;&nbsp;Buyer
+     </label>
+    <label class="checkbox-inline">
+        <input type="radio" name="userType" icheck ng-model="register.seller">&nbsp;&nbsp;Seller
+    </label>
+</div>
+
+<div class="form-group">
+    <a class="btn btn-sm btn-white btn-block" ui-sref="register2">Previous</a>
+</div>
+
+<div class="form-group">
+    <div class="checkbox i-checks"><label><input type="checkbox" required><i></i> Accept the terms and conditions </label></div>
+</div>
+
+<button type="submit" class="btn btn-primary block full-width m-b">Register Account</button>

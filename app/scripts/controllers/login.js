@@ -22,6 +22,14 @@ emart.controller('loginCtrl', function ($scope, $http, $state) {
         });
     };
 
+    // All data will be store in this object
+    $scope.register = {};
+
+    // After process wizard
+    $scope.processForm = function() {
+        alert('Wizard completed');
+    };
+
     $scope.registerUser = function () {
 
         console.log("working");
@@ -30,11 +38,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state) {
             method: "post",
             url: "/scripts/php/register.php",
             data: {
-                username: $scope.username,
-                firstname: $scope.firstname,
-                lastname: $scope.lastname,
-                email: $scope.email,
-                password: $scope.password
+                register: $scope.register
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
@@ -47,7 +51,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state) {
                 $scope.responseMessage = "Registering user was not successful";
             }
         });
-    }
+    };
 
     $scope.forgotPassword = function () {
 

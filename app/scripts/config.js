@@ -26,10 +26,26 @@ function config($stateProvider, $urlRouterProvider) {
             data: { pageTitle: 'Login', specialClass: 'gray-bg' }
         })
         .state('register', {
-            url: "/register",
-            templateUrl: "views/register.html",
+            abstract: true,
+            templateUrl: "views/register/register.html",
             data: { pageTitle: 'Register', specialClass: 'gray-bg' }
         })
+        .state('register1', {
+            parent: 'register',
+            url: '/register',
+            templateUrl: 'views/register/register1.html'
+        })
+        .state('register2', {
+            parent: 'register',
+            url: '/register2',
+            templateUrl: 'views/register/register2.html'
+        })
+        .state('register3', {
+            parent: 'register',
+            url: '/register3',
+            templateUrl: 'views/register/register3.html'
+        })
+
         .state('forgot_password', {
             url: "/forgot_password",
             templateUrl: "views/forgot_password.html",

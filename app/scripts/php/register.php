@@ -10,6 +10,9 @@ if(isset($_POST)) {
     // STORE POSTED VALUES IN VARIABLES
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
+
+    error_log(print_r($request, true));
+
     $username = $request->username;
     $firstname = ucfirst($request->firstname);
     $lastname = ucfirst($request->lastname);
