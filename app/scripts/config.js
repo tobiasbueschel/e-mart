@@ -53,6 +53,16 @@ function config($stateProvider, $urlRouterProvider) {
         })
 
         //-----------------------------------------------------
+        // ADD ITEM
+        //-----------------------------------------------------
+        .state('additem', {
+            parent: "root",
+            url:"/additem",
+            templateUrl: "views/seller/additem.html",
+            data: {pageTitle: "Add Item"}
+        })
+
+        //-----------------------------------------------------
         // MAIN
         //-----------------------------------------------------
         .state('main', {

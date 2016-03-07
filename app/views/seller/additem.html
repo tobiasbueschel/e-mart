@@ -1,0 +1,131 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Add Item</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>My items</a>
+            </li>
+            <li class="active">
+                <strong>Add Item</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div ng-controller="addItemCtrl" class="row">
+        <div class="col-lg-12">
+            <div  class="tabs-container">
+
+                <tabset>
+                    <tab>
+                        <tab-heading>
+                            Item information
+                        </tab-heading>
+                        <div  class="panel-body">
+                            <fieldset class="form-horizontal">
+                                <!--ITEM NAME -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Name:</label>
+                                    <div class="col-sm-10"><input type="text" data-ng-model="data.name" class="form-control" placeholder="Product name"></div>
+                                </div>
+                                <!--ITEM CATEGORY-->
+                                <div class="form-group"><label class="col-sm-2 control-label">Category :</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control"  data-ng-model="data.category">
+                                            <!--PULL CATEGORIES FROM DATABASE -->
+                                            <option  ng-repeat="cat in data.categories" value="{{cat}}">{{cat}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--ITEM DESCRIPTION -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Description:</label>
+                                    <div class="col-sm-10"><input type="textarea" data-ng-model="data.description" class="summernote"></div>
+                                </div>
+                                <!--ITEM CONDITION-->
+                                <div class="form-group"><label class="col-sm-2 control-label">Condition :</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control"  data-ng-model="data.condition">
+                                            <!--PULL CONDITIONS FROM DATABASE -->
+                                            <option ng-repeat="c in data.conditions">{{c}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </tab>
+
+                    <tab>
+                        <tab-heading>
+                            Images
+                        </tab-heading>
+                        <div class="panel-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-stripped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            Image Preview
+                                        </th>
+                                        <th>
+                                            Upload
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="http://www.markdownelectricals.co.uk/images/DZ9135.jpg">
+                                        </td>
+                                        <td>
+                                            <input type="file" class="form-control">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="http://www.markdownelectricals.co.uk/images/DZ9135.jpg">
+                                        </td>
+                                        <td>
+                                            <input type="file" class="form-control">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="http://www.markdownelectricals.co.uk/images/DZ9135.jpg">
+                                        </td>
+                                        <td>
+                                            <input type="file" class="form-control">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <tab>
+                        <tab-heading>
+                            Complete
+                        </tab-heading>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-primary" ng-click="data.addItem()">Add Item</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {{data.responseMessage}}
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+
+</div>
