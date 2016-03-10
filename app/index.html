@@ -36,6 +36,10 @@
     <!--iCheck-->
     <link href="bower_components/iCheck/skins/square/green.css" rel="stylesheet">
 
+    <!--AngularJS Toaster-->
+    <link href="bower_components/AngularJS-Toaster/toaster.min.css" rel="stylesheet">
+
+
 
     <!-- Main Emart CSS files -->
     <!-- endbower -->
@@ -50,8 +54,10 @@
 </head>
 
 <!-- ControllerAs syntax -->
-<!-- Main controller with serveral data used in Inspinia theme on different view -->
+<!-- Main controller with several data used in E-Mart theme on different view -->
 <body ng-controller="MainCtrl as main" class="{{$state.current.data.specialClass}}">
+
+<toaster-container></toaster-container>
 
 <!-- Main view  -->
 <div ui-view></div>
@@ -73,7 +79,6 @@
 <!-- Peace JS -->
 <script src="bower_components/PACE/pace.min.js"></script>
 
-
 <!-- Angular scripts-->
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -85,22 +90,7 @@
 <script src="bower_components/summernote/dist/summernote.min.js"></script>
 <script src="bower_components/angular-summernote/dist/angular-summernote.min.js"></script>
 <script src="bower_components/iCheck/icheck.min.js"></script>
-<script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
-                <!--TODO ADD  DEPENDENCIES-->
-<!--{-->
-<!--files: ['css/plugins/summernote/summernote.css','css/plugins/summernote/summernote-bs3.css','js/plugins/summernote/summernote.min.js']-->
-<!--},-->
-<!--{-->
-<!--name: 'summernote',-->
-<!--files: ['css/plugins/summernote/summernote.css','css/plugins/summernote/summernote-bs3.css','js/plugins/summernote/summernote.min.js','js/plugins/summernote/angular-summernote.min.js']-->
-<!--}-->
-<!--{-->
-<!--files: ['css/plugins/slick/slick.css','css/plugins/slick/slick-theme.css','js/plugins/slick/slick.min.js']-->
-<!--},-->
-<!--{-->
-<!--name: 'slick',-->
-<!--files: ['js/plugins/slick/angular-slick.min.js']-->
-<!--}-->
+<script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
 
 
 <!-- Angular Dependiences -->

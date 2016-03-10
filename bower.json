@@ -34,7 +34,7 @@
     "angular-summernote": "^0.7.1",
     "jquery.steps": "^1.1.0",
     "iCheck": "icheck#^1.0.2",
-    "angular-file-upload": "~2.2.0"
+    "AngularJS-Toaster": "toaster#^1.2.0"
   },
   "resolutions": {
     "angular": "^1.0.8",

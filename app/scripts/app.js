@@ -4,5 +4,5 @@ var emart = angular.module('emart', [
     'ui.footable',
     'slick',
     'summernote',
-    'angularFileUpload'
+    'toaster'
 ]);

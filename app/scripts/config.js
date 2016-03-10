@@ -149,6 +149,12 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: "views/faq.html",
             data: { pageTitle: 'FAQ' }
         })
+        .state('contactUs', {
+            parent: "root",
+            url: "/contactUs",
+            templateUrl: "views/contactUs.html",
+            data: { pageTitle: 'Contact us' }
+        })
 
 
 }
