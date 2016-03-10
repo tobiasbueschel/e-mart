@@ -3,5 +3,6 @@ var emart = angular.module('emart', [
     'ui.bootstrap',                 // Bootstrap
     'ui.footable',
     'slick',
-    'summernote'
+    'summernote',
+    'toaster'
 ]);

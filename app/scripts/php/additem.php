@@ -28,7 +28,7 @@ if(!empty($_POST)) {
 
     //$sql = 'SELECT * FROM user WHERE emailAddress="' . $email . '"';
     $sql = "INSERT INTO item (name, description,categoryID,ownerID,isSold)
-            VALUES ('$name','$description', $category,$ownerID,$isSold)";
+            VALUES ('$name','$description', '$category', '$ownerID', '$isSold')";
 
     if ($connection->query($sql) == TRUE ){
         echo true;

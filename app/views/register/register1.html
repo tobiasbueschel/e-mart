@@ -1,21 +1,57 @@
-    <h3>Register - Account Information</h3>
-    <br>
-    <div class="form-group">
-        <input type="text" ng-model="register.username" class="form-control" placeholder="Username" required>
-    </div>
-    <div class="form-group">
-        <input type="email" ng-model="register.email" class="form-control" placeholder="Email" required>
-    </div>
-    <div class="form-group">
-        <input type="password" ng-model="register.password" class="form-control" placeholder="Password" required>
-    </div>
-    <div class="form-group">
-        <input type="password" ng-model="register.passwordConfirm" class="form-control" placeholder="Confirm Password" required>
-    </div>
+<h3>Register - Account Information</h3>
+<br>
 
-    <div class="form-group">
-        <a class="btn btn-primary btn-block" ui-sref="register2">Next</a>
-    </div>
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.username.$valid, 'has-error': registerForm.username.$invalid && registerForm.username.$dirty}">
+<input type="text" name="username" class="form-control m-b-sm" placeholder="Username"
+           data-ng-model="register.username"
+           data-ng-minlength="3"
+           data-ng-maxlength="20"
+           data-ng-trim="true"
+           data-ng-required="true">
+    <span ng-show="registerForm.username.$invalid && registerForm.username.$dirty" class="help-block m-b-none has-error">Your username is not valid.</span>
+</div>
 
-    <p class="text-muted text-center"><small>Already have an account?</small></p>
-    <a class="btn btn-sm btn-white btn-block" ui-sref="login">Login</a>
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.email.$valid, 'has-error': registerForm.email.$invalid && registerForm.email.$dirty}">
+    <input type="email" name="email" class="form-control m-b-sm has-error" placeholder="Email"
+           data-ng-model="register.email"
+           data-ng-minlength="3"
+           data-ng-maxlength="60"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.email.$invalid && registerForm.email.$dirty" class="help-block m-b-none has-error">Your email is not valid.</span>
+</div>
+
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.password.$valid, 'has-error': registerForm.password.$invalid && registerForm.password.$dirty}">
+    <input type="password" name="password" class="form-control m-b-sm" placeholder="Password"
+           data-ng-model="register.password"
+           data-ng-minlength="4"
+           data-ng-maxlength="40"
+           data-ng-pattern="/^[\S]+$/"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.password.$touched && registerForm.password.$error.required" class="help-block m-b-none has-error">You must provide a password.</span>
+    <span ng-show="registerForm.password.$error.minlength" class="help-block m-b-none has-error">Minimum password length is 4 characters.</span>
+    <span ng-show="registerForm.password.$error.maxlength" class="help-block m-b-none has-error">Maximum password length is 40 characters.</span>
+    <span ng-show="registerForm.password.$error.pattern" class="help-block m-b-none has-error">Whitespaces are not allowed.</span>
+</div>
+
+    <!--TODO: PASSWORD MATCHING VALIDATION-->
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.passwordConfirm.$valid, 'has-error': registerForm.passwordConfirm.$invalid && registerForm.passwordConfirm.$dirty}">
+    <input type="password" name="passwordConfirm" class="form-control m-b-sm" placeholder="Confirm Password"
+           data-ng-model="register.passwordConfirm"
+           data-ng-minlength="4"
+           data-ng-maxlength="40"
+           data-ng-pattern="/^[\S]+$/"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.passwordConfirm.$touched && registerForm.passwordConfirm.$error.required" class="help-block m-b-none has-error">You must confirm your password.</span>
+    <span ng-show="registerForm.passwordConfirm.$error.pattern" class="help-block m-b-none has-error">Your passwords need to match.</span>
+</div>
+
+<a class="btn btn-primary btn-block m-b-sm" ui-sref="register2">Next</a>
+<p class="text-muted text-center"><small>Already have an account?</small></p>
+<a class="btn btn-sm btn-white btn-block" ui-sref="login">Login</a>

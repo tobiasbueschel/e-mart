@@ -1,24 +1,28 @@
 <?php
 require_once("dbConnection.php");
 ob_start();
+dbConnect();
+
 
 // STORES INPUT IN DATABASE IF SUBMIT BUTTON PRESSED
 if(isset($_POST)) {
-    dbConnect();
-
 
     // STORE POSTED VALUES IN VARIABLES
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
 
-    error_log(print_r($request, true));
-
     $username = $request->username;
     $firstname = ucfirst($request->firstname);
     $lastname = ucfirst($request->lastname);
     $email = $request->email;
+    $username = $request->username;
     $password = $request->password;
-
+    $address = $request->address;
+    $city = $request->city;
+    $postalcode = $request->postalcode;
+    $country = $request->country;
+    $telephoneNumber = $request->telephoneNumber;
+    $usertype = $request->usertype;
 
     // PROTECT AGAINST MYSQL INJECTION
     $firstname = stripslashes($firstname);
@@ -26,18 +30,20 @@ if(isset($_POST)) {
     $email = stripslashes($email);
     $username = stripslashes($username);
     $password = stripslashes($password);
+    $address = stripslashes($address);
+    $city = stripslashes($city);
+    $postalcode = stripslashes($postalcode);
+    $country = stripslashes($country);
+    $telephoneNumber = stripslashes($telephoneNumber);
+    $usertype = stripslashes($usertype);
 
     // hashes the password using the bcrypt algorithm (default as of PHP 5.5.0)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    // stores userType = user
-    // TODO: this should be done using the default value field in MYSQL
-    $userType = 'user';
-
     // TODO: add date registered to users table and to sql query
 
-    $sql = "INSERT INTO user (userName, firstName, lastName, emailAddress, password, userType)
-                VALUES ('$username', '$firstname', '$lastname', '$email', '$password', '$userType')";
+    $sql = "INSERT INTO user (userName, firstName, lastName, emailAddress, password, address, city, postalCode, country, telephoneNumber, userType, dateRegistered)
+                VALUES ('$username', '$firstname', '$lastname', '$email', '$password', '$address', '$city', '$postalcode', '$country', '$telephoneNumber', '$usertype', CURRENT_TIMESTAMP)";
 
     if ($connection->query($sql) == TRUE ){
 
@@ -58,8 +64,8 @@ if(isset($_POST)) {
         echo false;
     }
 
-    dbClose();
 }
 
+dbClose();
 ob_end_flush();
 ?>

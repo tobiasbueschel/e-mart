@@ -33,7 +33,8 @@
     "summernote": "^0.8.1",
     "angular-summernote": "^0.7.1",
     "jquery.steps": "^1.1.0",
-    "iCheck": "icheck#^1.0.2"
+    "iCheck": "icheck#^1.0.2",
+    "AngularJS-Toaster": "toaster#^1.2.0"
   },
   "resolutions": {
     "angular": "^1.0.8",

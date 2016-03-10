@@ -1,31 +1,63 @@
 <h3>Register - Personal Information</h3>
 <br>
-<div class="form-group">
-    <input type="text" ng-model="register.firstname" class="form-control" placeholder="First Name" required>
+
+<div class="form-group"
+    data-ng-class="{'has-success': registerForm.firstname.$valid, 'has-error': registerForm.firstname.$invalid && registerForm.firstname.$dirty}">
+    <input type="text" name="firstname" class="form-control" placeholder="First Name"
+           data-ng-model="register.firstname"
+           data-ng-minlength="2"
+           data-ng-maxlength="30"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.firstname.$invalid && registerForm.firstname.$dirty" class="help-block m-b-none has-error">Your first name is not valid.</span>
 </div>
-<div class="form-group">
-    <input type="text" ng-model="register.lastname" class="form-control" placeholder="Last Name" required>
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.lastname.$valid, 'has-error': registerForm.lastname.$invalid && registerForm.lastname.$dirty}">
+    <input type="text" name="lastname" class="form-control" placeholder="Last Name"
+           data-ng-model="register.lastname"
+           data-ng-minlength="2"
+           data-ng-maxlength="30"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.lastname.$invalid && registerForm.lastname.$dirty" class="help-block m-b-none has-error">Your last name is not valid.</span>
 </div>
-<div class="form-group">
-    <input type="text" ng-model="register.address" class="form-control" placeholder="Address" required>
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.address.$valid, 'has-error': registerForm.address.$invalid && registerForm.address.$dirty}">
+     <input type="text" name="address" class="form-control" placeholder="Address"
+           data-ng-model="register.address"
+           data-ng-minlength="2"
+           data-ng-maxlength="60"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.address.$invalid && registerForm.address.$dirty" class="help-block m-b-none has-error">Your address is not valid.</span>
 </div>
-<div class="form-group">
-    <input type="text" ng-model="register.city" class="form-control" placeholder="City" required>
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.city.$valid, 'has-error': registerForm.city.$invalid && registerForm.city.$dirty}">
+     <input type="text" name="city" class="form-control" placeholder="City"
+           data-ng-model="register.city"
+           data-ng-minlength="2"
+           data-ng-maxlength="60"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.city.$invalid && registerForm.city.$dirty" class="help-block m-b-none has-error">Your city is not valid.</span>
 </div>
-<div class="form-group">
-    <input type="number" ng-model="register.postalcode" class="form-control" placeholder="Postal Code" required>
+<div class="form-group"
+     data-ng-class="{'has-success': registerForm.postalcode.$valid, 'has-error': registerForm.postalcode.$invalid && registerForm.postalcode.$dirty}">
+    <input type="text" name="postalcode" class="form-control" placeholder="Postal Code"
+           data-ng-model="register.postalcode"
+           data-ng-minlength="2"
+           data-ng-maxlength="10"
+           data-ng-trim="false"
+           data-ng-required="true">
+    <span ng-show="registerForm.postalcode.$invalid && registerForm.postalcode.$dirty" class="help-block m-b-none has-error">Your postal code is not valid.</span>
 </div>
 
-<div class="form-group">
-
-    <div class="btn-group btn-group-justified">
-        <div class="btn-group">
-            <button type="submit" id="like" class="btn btn-white" ui-sref="register1">Previous</button>
-        </div>
-        <div class="btn-group">
-            <button type="submit" id="nope" class="btn btn-primary" ui-sref="register3">Next</button>
-        </div>
+<div class="btn-group btn-group-justified">
+    <div class="btn-group">
+        <button type="submit" id="like" class="btn btn-white" ui-sref="register1">Previous</button>
     </div>
-
+    <div class="btn-group">
+        <button type="submit" id="nope" class="btn btn-primary" ui-sref="register3">Next</button>
+    </div>
 </div>
 

@@ -47,8 +47,7 @@ module.exports = function (grunt) {
                         'app/less/**/*.less',
                         '<%= emart.app %>/scripts/{,*/}*.js',
                         'app/styles/*.css',
-                        'app/*.html',
-                        'app/views/*.html'
+                        'app/**/*.html'
                     ]
                 },
                 options: {
