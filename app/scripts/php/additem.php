@@ -23,9 +23,6 @@ if(!empty($_POST)) {
     $isSold = 0;
 
     // DATABASE QUERY
-
-    //$sql = 'SELECT * FROM user WHERE emailAddress="' . $email . '"';
-
     $sql = "INSERT INTO item (name, description,categoryID, conditionID, ownerID,isSold)
             VALUES ('$name','$description', $category, $condition, $ownerID,$isSold)";
 

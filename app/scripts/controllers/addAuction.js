@@ -4,7 +4,7 @@
 
 emart.controller('addAuctionCtrl', function ($scope, $http, $state, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
-
+    console.log("CURRENT USER LOGGED IN", dataService.currentUserEmail);
 
 });
 

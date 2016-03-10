@@ -38,11 +38,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--ITEM CATEGORY-->
+                                <!--ITEM-->
                                 <div class="form-group"><label class="col-sm-2 control-label">Category :</label>
                                     <div class="col-sm-10">
                                         <select class="form-control"  data-ng-model="data.category">
-                                            <!--PULL CATEGORIES FROM DATABASE -->
+                                            <!--SELLERS ITEMS TO POPULATE DROPDOWN -->
                                             <option  ng-repeat="cat in data.categories track by cat.categoryID" value="{{cat.categoryID}}">{{cat.name}}</option>
                                         </select>
                                     </div>

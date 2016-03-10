@@ -3,8 +3,15 @@
  * This service provides a singleton for categories and conditions data
  */
 emart.service('dataService', function ($http) {
+    var dataServiceScope = this;
+    dataServiceScope.currentUserEmail = null;
 
-    this.getData = function() {
+    dataServiceScope.setCurrentUserEmail = function (email) {
+        console.log("Setting email..",email);
+        dataServiceScope.currentUserEmail = email;
+    }
+
+    dataServiceScope.getData = function() {
 
         // Angular $http() and then() both return promises themselves
         //Let's pull categories
@@ -28,5 +35,27 @@ emart.service('dataService', function ($http) {
             }
         });
     };
+
+    dataServiceScope.getSellerItems = function (userID) {
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowsGeneric.php",
+            data: {
+                table:'item',
+                where:'WHERE '
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            if (response!==0) { //if no error when fetching database rows
+                console.log(response);
+                data.categories = response.data.category;
+                data.conditions = response.data.itemcondition;
+                return data;
+            }
+            else {
+                console.log("Error loading drop down menu conditions and categories from database");
+            }
+        });
+    }
 
 })

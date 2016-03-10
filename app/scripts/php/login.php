@@ -22,6 +22,8 @@ if(isset($_POST)) {
     // DATABASE QUERY
     $sql = 'SELECT * FROM user WHERE emailAddress="' . $email . '"';
 
+
+
     if ( $result = $connection->query($sql) ){
 
         // VALIDATION: ONLY IF ONE ROW RETURNED
