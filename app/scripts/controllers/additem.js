@@ -1,13 +1,21 @@
 /**
  * Created by kimeshan on 07/03/2016.
  */
-emart.controller('addItemCtrl', function ($scope, $http, $state) {
+emart.controller('addItemCtrl', function ($scope, $http, $state, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
-    $scope.data.categories = ["Electronics","Household Appliances","Shoes","Clothes","Computers"];
-    $scope.data.conditions = ["Poor","Average","Good","Excellent","New"];
+
+
+    //Get categories and conditions data from dataService
+    var myDataPromise = dataService.getData();
+    myDataPromise.then(function(result) {
+        //inside promise then
+        $scope.data.categories = result.categories;
+        $scope.data.conditions = result.conditions;
+    });
+
     $scope.data.addItem = function () {
         console.log("Inside adding item method...");
-        console.log($scope.data.name,$scope.data.description);
+        console.log($scope.data.name,$scope.data.description, $scope.data.category, $scope.data.condition);
         var request = $http({
             method: "post",
             url: "/scripts/php/additem.php",
@@ -15,7 +23,8 @@ emart.controller('addItemCtrl', function ($scope, $http, $state) {
                 itemname: $scope.data.name,
                 description: $scope.data.description,
                 category: $scope.data.category,
-                condition: $scope.data.condition
+                condition: $scope.data.condition,
+                blobs: $scope.data.blobs
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });

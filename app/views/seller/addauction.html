@@ -1,0 +1,75 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Add Item</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>My items</a>
+            </li>
+            <li class="active">
+                <strong>Add Item</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div ng-controller="addAuctionCtrl" class="row">
+        <div class="col-lg-12">
+            <div  class="tabs-container">
+
+                <tabset>
+                    <tab>
+                        <tab-heading>
+                            Auction Info
+                        </tab-heading>
+                        <div  class="panel-body">
+                            <fieldset class="form-horizontal">
+                                <!--AUCTION TITLE -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Title:</label>
+                                    <div class="col-sm-10"><input type="text" data-ng-model="data.name" class="form-control" placeholder="Auction title"></div>
+                                </div>
+                                <!--AUCTION DESCRIPTION -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Description:</label>
+                                    <div class="col-sm-10">
+                                        <div summernote class="summernote"  ng-model="main.summernoteText">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--ITEM CATEGORY-->
+                                <div class="form-group"><label class="col-sm-2 control-label">Category :</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control"  data-ng-model="data.category">
+                                            <!--PULL CATEGORIES FROM DATABASE -->
+                                            <option  ng-repeat="cat in data.categories track by cat.categoryID" value="{{cat.categoryID}}">{{cat.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--AUCTION STARTING PRICE TITLE -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Starting Price:</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="£160.00"></div>
+                                </div>
+                                <!--AUCTION RESERVE PRICE TITLE -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Reserve Price:</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="£160.00"></div>
+                                </div>
+                                <!--AUCTION INSTANT PRICE TITLE -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Instant Price:</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="£160.00"></div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" ng-click="data.addAuction()">Create Auction</button>
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+
+</div>

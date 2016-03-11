@@ -36,21 +36,21 @@
                                     <div class="col-sm-10">
                                         <select class="form-control"  data-ng-model="data.category">
                                             <!--PULL CATEGORIES FROM DATABASE -->
-                                            <option  ng-repeat="cat in data.categories" value="{{cat}}">{{cat}}</option>
+                                            <option  ng-repeat="cat in data.categories track by cat.categoryID" value="{{cat.categoryID}}">{{cat.name}}</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <!--ITEM DESCRIPTION -->
                                 <div class="form-group"><label class="col-sm-2 control-label">Description:</label>
-                                    <div class="col-sm-10"><input type="textarea" data-ng-model="data.description" class="summernote"></div>
+                                    <div class="col-sm-10"><input type="textarea" data-ng-model="data.description" rows="5" cols="50" class="form-control"></div>
                                 </div>
                                 <!--ITEM CONDITION-->
                                 <div class="form-group"><label class="col-sm-2 control-label">Condition :</label>
                                     <div class="col-sm-10">
                                         <select class="form-control"  data-ng-model="data.condition">
                                             <!--PULL CONDITIONS FROM DATABASE -->
-                                            <option ng-repeat="c in data.conditions">{{c}}</option>
+                                            <option ng-repeat="c in data.conditions track by c.conditionID" value="{{c.conditionID}}">{{c.name}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -69,6 +69,9 @@
                                 <table class="table table-bordered table-stripped">
                                     <thead>
                                     <tr>
+                                        <th>
+                                            Image Drop Zone
+                                        </th>
                                         <th>
                                             Image Preview
                                         </th>
