@@ -9,7 +9,7 @@
            data-ng-maxlength="20"
            data-ng-trim="true"
            data-ng-required="true">
-    <span ng-show="registerForm.username.$invalid && registerForm.username.$dirty" class="help-block m-b-none has-error">Your username is not valid.</span>
+    <span data-ng-show="registerForm.username.$invalid && registerForm.username.$dirty" class="help-block m-b-none has-error">Your username is not valid.</span>
 </div>
 
 <div class="form-group"
@@ -20,7 +20,7 @@
            data-ng-maxlength="60"
            data-ng-trim="false"
            data-ng-required="true">
-    <span ng-show="registerForm.email.$invalid && registerForm.email.$dirty" class="help-block m-b-none has-error">Your email is not valid.</span>
+    <span data-ng-show="registerForm.email.$invalid && registerForm.email.$dirty" class="help-block m-b-none has-error">Your email is not valid.</span>
 </div>
 
 <div class="form-group"
@@ -48,10 +48,10 @@
            data-ng-pattern="/^[\S]+$/"
            data-ng-trim="false"
            data-ng-required="true">
-    <span ng-show="registerForm.passwordConfirm.$touched && registerForm.passwordConfirm.$error.required" class="help-block m-b-none has-error">You must confirm your password.</span>
-    <span ng-show="registerForm.passwordConfirm.$error.pattern" class="help-block m-b-none has-error">Your passwords need to match.</span>
+    <span data-ng-show="registerForm.passwordConfirm.$touched && registerForm.passwordConfirm.$error.required" class="help-block m-b-none has-error">You must confirm your password.</span>
+    <span data-ng-show="registerForm.passwordConfirm.$error.pattern" class="help-block m-b-none has-error">Your passwords need to match.</span>
 </div>
 
-<a class="btn btn-primary btn-block m-b-sm" ui-sref="register2">Next</a>
+<a class="btn btn-primary btn-block m-b-sm" data-ng-click="goRegister2()">Next</a>
 <p class="text-muted text-center"><small>Already have an account?</small></p>
-<a class="btn btn-sm btn-white btn-block" ui-sref="login">Login</a>
+<a class="btn btn-sm btn-white btn-block" data-ui-sref="login">Login</a>

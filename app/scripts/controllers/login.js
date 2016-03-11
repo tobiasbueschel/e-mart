@@ -1,5 +1,13 @@
+/************************************************************************
+ * LOGIN CONTROLLER
+ * Manages login(), registerUser(), forgotPassword() function.
+ ************************************************************************/
+
+// TODO: we might need to do all http requests in an AngularJS Service --> as normally this should not be in a controller
+
 emart.controller('loginCtrl', function ($scope, $http, $state, toaster) {
 
+    // LOGIN FUNCTION - If the login is successful the user is redirected to the home state
     $scope.login = function () {
 
         var request = $http({
@@ -27,7 +35,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster) {
                 toaster.pop({
                     type: 'error',
                     title: 'Error',
-                    body: 'Username or Password is incorrect.',
+                    body: 'Login unsuccessful :(',
                     showCloseButton: false,
                     timeout: 2500
                 });
@@ -35,7 +43,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster) {
         });
     };
 
-    // All data will be store in this object
+    // DATA FOR REGISTER FORM
     $scope.register = {};
     $scope.countries = [
         { "name": "Afghanistan", "code": "AF" },
@@ -285,14 +293,67 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster) {
         { "name": "Zimbabwe", "code": "ZW" }
     ];
 
-    // After process wizard
-    $scope.processForm = function() {
-        alert('Wizard completed');
+    // Checks if form fields have been filled. If yes, redirect to register2.html
+    $scope.goRegister2 = function() {
+
+        if( $scope.registerForm.username.$valid &&
+            $scope.registerForm.email.$valid &&
+            $scope.registerForm.password.$valid &&
+            $scope.registerForm.passwordConfirm.$valid ) {
+            $state.go('register2');
+        }
+        else{
+            toaster.pop({
+                type: 'error',
+                title: 'Error',
+                body: 'Please fill out all fields before proceeding!',
+                showCloseButton: false,
+                timeout: 2000
+            });
+        }
+
     };
 
+    // Checks if form fields have been filled. If yes, redirect to register3.html
+    $scope.goRegister3 = function() {
+
+        if( $scope.registerForm.firstname.$valid &&
+            $scope.registerForm.lastname.$valid &&
+            $scope.registerForm.address.$valid &&
+            $scope.registerForm.city.$valid &&
+            $scope.registerForm.postalcode.$valid ) {
+            $state.go('register3');
+        }
+        else{
+            toaster.pop({
+                type: 'error',
+                title: 'Error',
+                body: 'Please fill out all fields before proceeding!',
+                showCloseButton: false,
+                timeout: 2000
+            });
+        }
+
+    };
+
+    // Checks if form fields have been filled. If yes, try to register the user
     $scope.registerUser = function () {
 
-        console.log("working");
+        if( $scope.register.country == undefined ||
+            $scope.registerForm.phonenumber.$invalid ||
+            $scope.registerForm.phonenumber.$untouched ||
+            $scope.register.usertype == undefined ||
+            $scope.register.termsConditions == undefined ) {
+
+            toaster.pop({
+                type: 'error',
+                title: 'Error',
+                body: 'Please fill out all fields before proceeding!',
+                showCloseButton: false,
+                timeout: 2000
+            });
+            return;
+        }
 
         var request = $http({
             method: "post",
@@ -321,7 +382,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster) {
                 toaster.pop({
                     type: 'error',
                     title: 'Error',
-                    body: 'Failed to register user. The user already exists.',
+                    body: 'Failed to register user.',
                     showCloseButton: false,
                     timeout: 2000
                 });
@@ -329,9 +390,8 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster) {
         });
     };
 
+    // Sends a forgot password email to the user if the account is registered on the system
     $scope.forgotPassword = function () {
-
-        console.log("working");
 
         var request = $http({
             method: "post",
@@ -345,9 +405,23 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster) {
         request.success(function (data) {
             if(data == true){
                 $state.go('login');
+
+                toaster.pop({
+                    type: 'success',
+                    title: 'Success',
+                    body: 'We have sent you an email with a link to reset your password :)',
+                    showCloseButton: false,
+                    timeout: 2000
+                });
             }
             else {
-                $scope.responseMessage = "We don't recognize this email. Please try again";
+                toaster.pop({
+                    type: 'error',
+                    title: 'Error',
+                    body: 'We don\'t recognize this email. Please try again!',
+                    showCloseButton: false,
+                    timeout: 2000
+                });
             }
         });
     }

@@ -1,13 +1,12 @@
-/**
+/************************************************************************
  * Emart uses AngularUI Router to manage routing and views
  * Each view are defined as state.
  * Initial there are written stat for all view in theme.
- */
+ ************************************************************************/
 function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/main");
 
     $stateProvider
-
 
         //-----------------------------------------------------
         // ROOT
@@ -45,7 +44,6 @@ function config($stateProvider, $urlRouterProvider) {
             url: '/register3',
             templateUrl: 'views/register/register3.html'
         })
-
         .state('forgot_password', {
             url: "/forgot_password",
             templateUrl: "views/forgot_password.html",
