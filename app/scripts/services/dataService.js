@@ -5,11 +5,14 @@
 emart.service('dataService', function ($http) {
     var dataServiceScope = this;
     dataServiceScope.currentUserEmail = null;
+    dataServiceScope.currentUserID = null;
 
-    dataServiceScope.setCurrentUserEmail = function (email) {
-        console.log("Setting email..",email);
+    dataServiceScope.setCurrentUser = function (email,id) {
         dataServiceScope.currentUserEmail = email;
+        dataServiceScope.currentUserID = id;
     }
+
+
 
     dataServiceScope.getData = function() {
 
@@ -37,23 +40,23 @@ emart.service('dataService', function ($http) {
     };
 
     dataServiceScope.getSellerItems = function (userID) {
+        var items = null;
         return request = $http({
             method: "post",
             url: "/scripts/php/selectRowsGeneric.php",
             data: {
                 table:'item',
-                where:'WHERE '
+                where:'WHERE ownerID='+userID
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
             if (response!==0) { //if no error when fetching database rows
                 console.log(response);
-                data.categories = response.data.category;
-                data.conditions = response.data.itemcondition;
-                return data;
+                items = response;
+                return items;
             }
             else {
-                console.log("Error loading drop down menu conditions and categories from database");
+                console.log("Error response from database");
             }
         });
     }

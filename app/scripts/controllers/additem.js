@@ -36,7 +36,7 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService) {
                 //$state.go('main');
             }
             else {
-                $scope.data.responseMessage = "Coudln't write to DB!";
+                $scope.data.responseMessage = "Couldn't write to DB!";
             }
         });
     };
