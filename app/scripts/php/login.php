@@ -18,6 +18,8 @@ if(isset($_POST)) {
     // PROTECT AGAINST MYSQL INJECTION
     $email = stripslashes($email);
     $password = stripslashes($password);
+    session_start();
+    $_SESSION['email'] = $email;
 
     // DATABASE QUERY
     $sql = 'SELECT * FROM user WHERE emailAddress="' . $email . '"';

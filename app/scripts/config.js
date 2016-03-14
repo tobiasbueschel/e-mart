@@ -70,6 +70,17 @@ function config($stateProvider, $urlRouterProvider) {
             data: {pageTitle: "Create Auction"}
         })
         //-----------------------------------------------------
+        // CREATE BID
+        //-----------------------------------------------------
+        .state('createbid', {
+            parent: "root",
+            url:"/createbid?:id&{other}",
+            templateUrl: function (param){
+                return "views/buyer/createbid.php?id="+param.id +"&other="+param.other
+            },
+            data: {pageTitle: "Create Bid"}
+        })
+        //-----------------------------------------------------
         // MAIN
         //-----------------------------------------------------
         .state('main', {
@@ -115,7 +126,7 @@ function config($stateProvider, $urlRouterProvider) {
         .state('product-list', {
             parent: "root",
             url: "/product-list",
-            templateUrl: "views/ecommerce_product_list.html",
+            templateUrl: "views/product_list.php",
             data: { pageTitle: 'E-commerce product list' }
         })
         .state('product-grid', {
