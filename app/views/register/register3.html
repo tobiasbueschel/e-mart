@@ -2,7 +2,7 @@
 <br>
 <select class="form-control m-b" name="countries" data-ng-model="register.country" data-ng-required="true">
     <option value="" disabled selected>Select your country</option>
-    <option ng-repeat="country in countries">{{country.name}}</option>
+    <option data-ng-repeat="country in countries">{{country.name}}</option>
 </select>
 <div class="form-group"
      data-ng-class="{'has-success': registerForm.phonenumber.$valid, 'has-error': registerForm.phonenumber.$invalid && registerForm.phonenumber.$dirty}">
@@ -12,19 +12,19 @@
            data-ng-maxlength="15"
            data-ng-trim="false"
            data-ng-required="true">
-    <span ng-show="registerForm.phonenumber.$invalid && registerForm.phonenumber.$dirty" class="help-block m-b-none has-error">Your phone number is not valid.</span>
+    <span data-ng-show="registerForm.phonenumber.$invalid && registerForm.phonenumber.$dirty" class="help-block m-b-none has-error">Your phone number is not valid.</span>
 </div>
 
-<div class="checkbox i-checks"><label><input type="checkbox" data-ng-required="true"><i></i> Accept the terms and conditions </label></div>
+<div class="checkbox i-checks"><label><input type="checkbox" icheck data-ng-model="register.termsConditions" data-ng-required="true"><i></i>&nbsp;&nbsp;Accept the terms and conditions </label></div>
 
 
 <p>What kind of account would you like to register?</p>
 <div class="form-group">
      <label class="checkbox-inline">
-            <input type="radio" name="userType" icheck ng-model="register.usertype" value="buyer">&nbsp;&nbsp;Buyer
+            <input type="radio" name="userType" icheck data-ng-model="register.usertype" value="buyer">&nbsp;&nbsp;Buyer
      </label>
     <label class="checkbox-inline">
-        <input type="radio" name="userType" icheck ng-model="register.usertype" value="seller">&nbsp;&nbsp;Seller
+        <input type="radio" name="userType" icheck data-ng-model="register.usertype" value="seller">&nbsp;&nbsp;Seller
     </label>
 </div>
 

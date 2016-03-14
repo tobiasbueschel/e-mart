@@ -1,13 +1,12 @@
-/**
+/************************************************************************
  * Emart uses AngularUI Router to manage routing and views
  * Each view are defined as state.
  * Initial there are written stat for all view in theme.
- */
+ ************************************************************************/
 function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/main");
 
     $stateProvider
-
 
         //-----------------------------------------------------
         // ROOT
@@ -45,7 +44,6 @@ function config($stateProvider, $urlRouterProvider) {
             url: '/register3',
             templateUrl: 'views/register/register3.html'
         })
-
         .state('forgot_password', {
             url: "/forgot_password",
             templateUrl: "views/forgot_password.html",
@@ -70,6 +68,17 @@ function config($stateProvider, $urlRouterProvider) {
             url:"/addauction",
             templateUrl: "views/seller/addauction.html",
             data: {pageTitle: "Create Auction"}
+        })
+        //-----------------------------------------------------
+        // CREATE BID
+        //-----------------------------------------------------
+        .state('createbid', {
+            parent: "root",
+            url:"/createbid?:id&{other}",
+            templateUrl: function (param){
+                return "views/buyer/createbid.php?id="+param.id +"&other="+param.other
+            },
+            data: {pageTitle: "Create Bid"}
         })
         //-----------------------------------------------------
         // MAIN
@@ -117,7 +126,7 @@ function config($stateProvider, $urlRouterProvider) {
         .state('product-list', {
             parent: "root",
             url: "/product-list",
-            templateUrl: "views/ecommerce_product_list.html",
+            templateUrl: "views/product_list.php",
             data: { pageTitle: 'E-commerce product list' }
         })
         .state('product-grid', {
