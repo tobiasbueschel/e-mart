@@ -17,10 +17,8 @@ if(!empty($_POST)) {
     $description = $request->description;
     $category=$request->category;
     $condition = $request->condition;
-
-    //TEMP TO TEST INSERTION
-    $ownerID = 1; //tobias
-    $isSold = 0;
+    $ownerID = $request->ownerID; //tobias
+    $isSold = 0; //starting value
 
     // DATABASE QUERY
     $sql = "INSERT INTO item (name, description,categoryID, conditionID, ownerID,isSold)

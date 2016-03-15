@@ -2,17 +2,20 @@
  * Created by kimeshan on 10/03/2016.
  * This service provides a singleton for categories and conditions data
  */
-emart.service('dataService', function ($http) {
+emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
-    dataServiceScope.currentUserEmail = null;
-    dataServiceScope.currentUserID = null;
 
-    dataServiceScope.setCurrentUser = function (email,id) {
-        dataServiceScope.currentUserEmail = email;
-        dataServiceScope.currentUserID = id;
+
+    //User session tracking
+    dataServiceScope.userLoggedIn = false;
+    dataServiceScope.userObject = null;
+
+    dataServiceScope.setCurrentUser = function (usr) {
+        console.log(usr);
+        dataServiceScope.userLoggedIn = true;
+        dataServiceScope.userObject = usr;
+        $cookies.userID = usr.userID;
     }
-
-
 
     dataServiceScope.getData = function() {
 
@@ -50,6 +53,7 @@ emart.service('dataService', function ($http) {
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
+            console.log("Response", response);
             if (response!==0) { //if no error when fetching database rows
                 console.log(response);
                 items = response;
@@ -61,4 +65,4 @@ emart.service('dataService', function ($http) {
         });
     }
 
-})
+}])

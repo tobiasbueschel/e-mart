@@ -44,8 +44,8 @@ if(isset($_POST)) {
                 // $_SESSION['email'] = $data['email'];
                 // $_SESSION['userID'] = $data['userID'];
                 // $_SESSION['userType'] = $data['userType'];
-
-                echo true;
+                //return the user information to the front end
+                echo json_encode($data);
             }
             else {
                 error_log("error1 " . $sql . $connection->error);

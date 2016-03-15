@@ -24,7 +24,8 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService) {
                 description: $scope.data.description,
                 category: $scope.data.category,
                 condition: $scope.data.condition,
-                blobs: $scope.data.blobs
+                blobs: $scope.data.blobs,
+                ownerID: dataService.userObject.userID
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });

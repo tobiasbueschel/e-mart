@@ -4,5 +4,6 @@ var emart = angular.module('emart', [
     'ui.footable',
     'slick',
     'summernote',
-    'toaster'
+    'toaster',
+    'ngCookies'
 ]);

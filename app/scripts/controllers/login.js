@@ -22,9 +22,8 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
         });
         /* Successful HTTP post request or not */
         request.success(function (data) {
-
-            if(data == true){
-                dataServiceScope.setCurrentUser($scope.email, $scope.id);
+            if(typeof data.userID != 'undefined'){
+                dataService.setCurrentUser(data);
                 $state.go('main');
                 toaster.pop({
                     type: 'success',
@@ -380,7 +379,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
         request.success(function (data) {
             if(data == true){
                 //Set user email in data service so it can be accessed from other parts of the app
-                dataServiceScope.setCurrentUser($scope.register.email, $scope.register.id);
+                dataService.setCurrentUser($scope.register.email, $scope.register.id);
                 $state.go('main');
             }
             else {

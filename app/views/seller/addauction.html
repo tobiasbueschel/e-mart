@@ -34,30 +34,46 @@
                                 <!--AUCTION DESCRIPTION -->
                                 <div class="form-group"><label class="col-sm-2 control-label">Description:</label>
                                     <div class="col-sm-10">
-                                        <div summernote class="summernote"  ng-model="main.summernoteText">
-                                        </div>
+                                        <textarea rows="5" data-ng-model="data.description" class="form-control"></textarea>
+                                        </textarea>
                                     </div>
                                 </div>
                                 <!--ITEM-->
-                                <div class="form-group"><label class="col-sm-2 control-label">Category :</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">Item :</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control"  data-ng-model="data.auctionItem>
+                                        <select class="form-control"  data-ng-model="data.item">
                                             <!--SELLERS ITEMS TO POPULATE DROPDOWN -->
-                                            <option  ng-repeat="i in data.items track by i.itemID" value="{{i.itemID}}">{{i.name}} | {{i.description}}</option>
+                                            <option  ng-repeat="i in data.items track by $index" value="{{i.itemID}}">{{i.name}} | {{i.description}}</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <!--AUCTION START DATE -->
+                                <div class="form-group"><label class="col-sm-2 control-label">Start date :</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" data-ng-model="data.startdate" class="form-control" placeholder="07/01/2016">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--AUCTION END DATE -->
+                                <div class="form-group"><label class="col-sm-2 control-label">End date :</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" data-ng-model="data.enddate" class="form-control" placeholder="07/01/2016">
+                                        </div>
                                     </div>
                                 </div>
                                 <!--AUCTION STARTING PRICE TITLE -->
                                 <div class="form-group"><label class="col-sm-2 control-label">Starting Price:</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="£160.00"></div>
+                                    <div class="col-sm-10"><input type="number" data-ng-model="data.startingprice" class="form-control" placeholder="160.00"></div>
                                 </div>
                                 <!--AUCTION RESERVE PRICE TITLE -->
                                 <div class="form-group"><label class="col-sm-2 control-label">Reserve Price:</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="£160.00"></div>
+                                    <div class="col-sm-10"><input type="number" data-ng-model="data.reserveprice" class="form-control" placeholder="200.00"></div>
                                 </div>
                                 <!--AUCTION INSTANT PRICE TITLE -->
                                 <div class="form-group"><label class="col-sm-2 control-label">Instant Price:</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="£160.00"></div>
+                                    <div class="col-sm-10"><input type="number" data-ng-model="data.instantprice" class="form-control" placeholder="180.00"></div>
                                 </div>
                                 <div>
                                     <button class="btn btn-primary" ng-click="data.addAuction()">Create Auction</button>
