@@ -70,7 +70,7 @@ function config($stateProvider, $urlRouterProvider) {
             data: {pageTitle: "Create Auction"}
         })
         //-----------------------------------------------------
-        // CREATE BID
+        // BUYER
         //-----------------------------------------------------
         .state('createbid', {
             parent: "root",
@@ -79,6 +79,12 @@ function config($stateProvider, $urlRouterProvider) {
                 return "views/buyer/createbid.php?id="+param.id +"&other="+param.other
             },
             data: {pageTitle: "Create Bid"}
+        })
+        .state('myBid', {
+            parent: "root",
+            url: "/myBid",
+            templateUrl: "views/buyer/myBid.php",
+            data: { pageTitle: 'My Bid' }
         })
         //-----------------------------------------------------
         // MAIN
@@ -126,7 +132,7 @@ function config($stateProvider, $urlRouterProvider) {
         .state('product-list', {
             parent: "root",
             url: "/product-list",
-            templateUrl: "views/product_list.php",
+            templateUrl: "views/auction_list.html",
             data: { pageTitle: 'E-commerce product list' }
         })
         .state('product-grid', {
