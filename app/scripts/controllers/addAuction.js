@@ -2,13 +2,19 @@
  * Created by kimeshan on 10/03/2016.
  */
 
-emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, dataService) {
+emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, toaster, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
 
-    //get the items of the current user
+    //Initial the start and end date fields
+    var defaultAuctionLength = 7;
+    $scope.data.today = new Date();
+    $scope.data.startdate = $scope.data.today;
+    $scope.data.futureDate = new Date();
+    $scope.data.futureDate.setDate($scope.data.futureDate.getDate() + defaultAuctionLength);
+    $scope.data.enddate =   $scope.data.futureDate;
 
-    //Get categories and conditions data from dataService
-    //Get categories and conditions data from dataService
+
+    //Get items of the current users
     var sellerItemsPromise = dataService.getSellerItems($cookies.userID);
     sellerItemsPromise.then(function(result) {
             //inside promise then
@@ -18,38 +24,64 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, da
     console.log($scope.data.items);
     //get the item chosen
     $scope.data.addAuction = function () {
+        console.log($scope.data);
         console.log($scope.data.startdate, $scope.data.enddate);
-        var request = $http({
-            method: "post",
-            url: "/scripts/php/addauction.php",
-            data: {
-                auctioneerid: $cookies.userID,
-                itemid: $scope.data.item,
-                auctionname: $scope.data.name,
-                description: $scope.data.description,
-                startingprice: $scope.data.startingprice,
-                reserveprice: $scope.data.reserveprice,
-                instantprice: $scope.data.instantprice,
-                startdate: $scope.data.startdate,
-                enddate: $scope.data.enddate
+        //Validation
 
-            },
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        });
 
-        // Successful HTTP post request or not
-        request.success(function (data) {
-            console.log("Response: ",data);
-            if(data == 1){
-                $scope.data.responseMessage = "ITEM ADDED SUCCESSFULLY!";
-                //$state.go('main');
-            }
-            else {
-                $scope.data.responseMessage = "Couldn't write to DB!";
-            }
-        });
+        if ($scope.data.auctionForm.name.$valid &&
+            $scope.data.auctionForm.description.$valid &&
+            $scope.data.auctionForm.item.$valid &&
+            $scope.data.auctionForm.startdate.$valid &&
+            $scope.data.auctionForm.enddate.$valid &&
+            $scope.data.auctionForm.startprice.$valid &&
+            $scope.data.auctionForm.reserveprice.$valid &&
+            $scope.data.auctionForm.instantprice.$valid
+        ) {
 
-    };
+            var request = $http({
+                method: "post",
+                url: "/scripts/php/addauction.php",
+                data: {
+                    auctioneerid: $cookies.userID,
+                    itemid: $scope.data.item,
+                    auctionname: $scope.data.name,
+                    description: $scope.data.description,
+                    startingprice: $scope.data.startingprice,
+                    reserveprice: $scope.data.reserveprice,
+                    instantprice: $scope.data.instantprice,
+                    startdate: $scope.data.startdate,
+                    enddate: $scope.data.enddate
+
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+
+            // Successful HTTP post request or not
+            request.success(function (data) {
+                console.log("Response: ", data);
+                if (data == 1) {
+                    $scope.data.responseMessage = "ITEM ADDED SUCCESSFULLY!";
+                    $state.go('main');
+                }
+                else {
+                    $scope.data.responseMessage = "Couldn't write to DB!";
+                }
+            });
+        }
+        else {
+            toaster.pop({
+                type: 'error',
+                title: 'Error',
+                body: 'Please fill out all fields before proceeding!',
+                showCloseButton: false,
+                timeout: 2000
+            });
+
+        }
+
+        };
+
 
 
 });

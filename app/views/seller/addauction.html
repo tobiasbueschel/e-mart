@@ -26,60 +26,144 @@
                             Auction Info
                         </tab-heading>
                         <div  class="panel-body">
-                            <fieldset class="form-horizontal">
+                            <form class="m-t" name="data.auctionForm" novalidate>
+                            <fieldset novalidate class="form-horizontal">
                                 <!--AUCTION TITLE -->
-                                <div class="form-group"><label class="col-sm-2 control-label">Title:</label>
-                                    <div class="col-sm-10"><input type="text" data-ng-model="data.name" class="form-control" placeholder="Auction title"></div>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.name.$valid, 'has-error': data.auctionForm.name.$invalid && data.auctionForm.name.$dirty}">
+
+                                    <label class="col-sm-2 control-label">Title:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="name" data-ng-model="data.name"
+                                                                  data-ng-minlength="3"
+                                                                  data-ng-maxlength="20"
+                                                                  data-ng-trim="true"
+                                                                  data-ng-required="true"
+                                                                  class="form-control" placeholder="Auction title">
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <p data-ng-show="data.auctionForm.name.$invalid && data.auctionForm.name.$dirty" class="help-block m-b-none has-error">Name is not valid.</p>
+                                    </div>
+
                                 </div>
                                 <!--AUCTION DESCRIPTION -->
-                                <div class="form-group"><label class="col-sm-2 control-label">Description:</label>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.description.$valid, 'has-error': data.auctionForm.description.$invalid && data.auctionForm.description.$dirty}">
+                                    <label class="col-sm-2 control-label">Description:</label>
                                     <div class="col-sm-10">
-                                        <textarea rows="5" data-ng-model="data.description" class="form-control"></textarea>
+                                        <textarea name="description" rows="5" maxlength="50" data-ng-model="data.description"
+                                                  data-ng-minlength="3"
+                                                  data-ng-trim="true"
+                                                  data-ng-required="true" class="form-control">
                                         </textarea>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <p data-ng-show="data.auctionForm.description.$invalid && data.auctionForm.description.$dirty" class="help-block m-b-none has-error">Description must be more than 3 characters.</p>
                                     </div>
                                 </div>
                                 <!--ITEM-->
-                                <div class="form-group"><label class="col-sm-2 control-label">Item :</label>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.item.$valid, 'has-error': data.auctionForm.item.$invalid && data.auctionForm.item.$dirty}">
+                                    <label class="col-sm-2 control-label">Item :</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control"  data-ng-model="data.item">
+                                        <select name="item" class="form-control"  data-ng-model="data.item" data-ng-required="true" data-ng-minlength="1">
                                             <!--SELLERS ITEMS TO POPULATE DROPDOWN -->
                                             <option  ng-repeat="i in data.items track by $index" value="{{i.itemID}}">{{i.name}} | {{i.description}}</option>
                                         </select>
                                     </div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <p data-ng-show="data.auctionForm.item.$invalid && data.auctionForm.item.$dirty" class="help-block m-b-none has-error">You must select an item.</p>
+                                    </div>
                                 </div>
                                 <!--AUCTION START DATE -->
-                                <div class="form-group"><label class="col-sm-2 control-label">Start date :</label>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.startdate.$valid, 'has-error': data.auctionForm.startdate.$invalid && data.auctionForm.startdate.$dirty}">
+                                    <label class="col-sm-2 control-label">Start date :</label>
                                     <div class="col-sm-10">
                                         <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" data-ng-model="data.startdate" class="form-control" placeholder="07/01/2016">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input name="startdate" type="date" min="{{data.today}}" data-ng-model="data.startdate" class="form-control" placeholder="dd-mm-yyyy">
                                         </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <p data-ng-show="data.auctionForm.startdate.$invalid && data.auctionForm.startdate.$dirty" class="help-block m-b-none has-error">Start date must be in the future.</p>
                                     </div>
                                 </div>
                                 <!--AUCTION END DATE -->
-                                <div class="form-group"><label class="col-sm-2 control-label">End date :</label>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.enddate.$valid, 'has-error': data.auctionForm.enddate.$invalid && data.auctionForm.enddate.$dirty}">
+                                    <label class="col-sm-2 control-label">End date :</label>
                                     <div class="col-sm-10">
                                         <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" data-ng-model="data.enddate" class="form-control" placeholder="07/01/2016">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input name="enddate" min="{{data.startdate}}" type="date" data-ng-model="data.enddate" class="form-control" placeholder="dd-mm-yyyy">
                                         </div>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <p data-ng-show="data.auctionForm.enddate.$invalid && data.auctionForm.enddate.$dirty" class="help-block m-b-none has-error">End date must be after start date.</p>
                                     </div>
                                 </div>
                                 <!--AUCTION STARTING PRICE TITLE -->
-                                <div class="form-group"><label class="col-sm-2 control-label">Starting Price:</label>
-                                    <div class="col-sm-10"><input type="number" data-ng-model="data.startingprice" class="form-control" placeholder="160.00"></div>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.startprice.$valid, 'has-error': data.auctionForm.startprice.$invalid && data.auctionForm.startprice.$dirty}">
+                                    <label class="col-sm-2 control-label">Starting Price:</label>
+                                    <div class="col-sm-10"><input name = "startprice" type="number" data-ng-model="data.startingprice"
+                                                                  data-ng-min="0"
+                                                                  data-ng-minlength="1"
+                                                                  data-ng-maxlength="65"
+                                                                  data-ng-trim="true"
+                                                                  data-ng-required="true"
+                                                                  class="form-control" placeholder="160.00"></div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <p data-ng-show="data.auctionForm.startprice.$invalid && data.auctionForm.startprice.$dirty" class="help-block m-b-none has-error">Enter a valid price</p>
+                                    </div>
                                 </div>
                                 <!--AUCTION RESERVE PRICE TITLE -->
-                                <div class="form-group"><label class="col-sm-2 control-label">Reserve Price:</label>
-                                    <div class="col-sm-10"><input type="number" data-ng-model="data.reserveprice" class="form-control" placeholder="200.00"></div>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.reserveprice.$valid, 'has-error': data.auctionForm.reserveprice.$invalid && data.auctionForm.reserveprice.$dirty}">
+                                    <label class="col-sm-2 control-label">Reserve Price:</label>
+                                    <div class="col-sm-10"><input name="reserveprice" type="number" data-ng-model="data.reserveprice"
+                                                                  data-ng-min="0"
+                                                                  data-ng-minlength="1"
+                                                                  data-ng-maxlength="65"
+                                                                  data-ng-trim="true"
+                                                                  data-ng-required="true"
+                                                                  class="form-control" placeholder="200.00"></div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <p data-ng-show="data.auctionForm.reserveprice.$invalid && data.auctionForm.reserveprice.$dirty" class="help-block m-b-none has-error">Enter a valid price</p>
+                                    </div>
                                 </div>
                                 <!--AUCTION INSTANT PRICE TITLE -->
-                                <div class="form-group"><label class="col-sm-2 control-label">Instant Price:</label>
-                                    <div class="col-sm-10"><input type="number" data-ng-model="data.instantprice" class="form-control" placeholder="180.00"></div>
+                                <div class="form-group"
+                                     data-ng-class="{'has-success': data.auctionForm.instantprice.$valid, 'has-error': data.auctionForm.instantprice.$invalid && data.auctionForm.instantprice.$dirty}">
+                                    <label class="col-sm-2 control-label">Instant Price:</label>
+                                    <div class="col-sm-10"><input name="instantprice" type="number" data-ng-model="data.instantprice"
+                                                                  data-ng-min="0"
+                                                                  data-ng-minlength="1"
+                                                                  data-ng-maxlength="65"
+                                                                  data-ng-trim="true"
+                                                                  data-ng-required="true"
+                                                                  class="form-control" placeholder="180.00"></div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-10">
+                                    <p data-ng-show="data.auctionForm.reserveprice.$invalid && data.auctionForm.reserveprice.$dirty" class="help-block m-b-none has-error">Enter a valid price</p>
                                 </div>
                                 <div>
                                     <button class="btn btn-primary" ng-click="data.addAuction()">Create Auction</button>
                                 </div>
 
                             </fieldset>
+                         </form>
 
                         </div>
                     </tab>
