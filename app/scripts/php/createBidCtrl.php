@@ -12,33 +12,40 @@ if(isset($_POST)) {
     $request = json_decode($postdata);
     $bidPrice = $request->bidPrice;
     $auctionID = $request->auctionID;
-
-    echo $bidPrice, $emailAddress;
+    /*$sql = 'SELECT bidPrice FROM bid WHERE auctionID = $auctionID';
+    if ($result = $connection->query($sql)) {
+        while ($row = $result->fetch_assoc()) {
+            $currentBidPrice = $row['bidPrice'];
+        }
+            echo $currentBidPrice;
+            if ($bidPrice < $currentBidPrice) {
+                echo false;
+            }
+    }
+    */
+    echo $bidPrice;
     $sql1 = 'SELECT userID FROM user WHERE emailAddress="' . $emailAddress . '"';
 
-    echo $sql1."\n";
-
-
+    /*
+     * */
     if ($result = $connection->query($sql1)) {
         while ($row = $result->fetch_assoc()) {
             $bidderID=$row['userID'];
         }
-        echo $bidderID;
         $sql2 = "INSERT INTO bid (bidderID, auctionID, bidPrice)
             VALUES ($bidderID, $auctionID, $bidPrice)";
 
-        echo $sql2.'\n';
-
-        if ($connection->query($sql2) == TRUE) {
-            echo "sql2 successful";
-            echo true;
-        } else {
-            // logs errors to console
-            error_log("error" . $sql2 . $connection->error);
-            echo false;
+        $sql3 = "UPDATE auction a LEFT JOIN (select bidPrice,bidID,auctionID from bid natural join auction where bidPrice = (select max(bidPrice) from bid WHERE auctionID= $auctionID)) b
+    on a.auctionID = b.auctionID set currentBidID=b.bidID where a.auctionID = $auctionID and endDate > curDate()";
+        try {
+            $connection->autocommit(FALSE);
+            $connection->query($sql2);
+            $connection->query($sql3);
+            $connection->commit();
+        } catch (Exception $e) {
+            $connection->rollback();
         }
     }else {
-        // logs errors to console
         error_log("error" . $sql1 . $connection->error);
         echo false;
     }
