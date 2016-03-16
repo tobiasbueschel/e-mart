@@ -2,10 +2,10 @@
  * MainCtrl - controller
  */
 
-emart.controller('MainCtrl', function ($scope, $http, $state) {
+emart.controller('MainCtrl', function ($scope, $http, $state, dataService) {
 
-    this.userName = 'Example user';
-    this.helloText = 'Welcome in SeedProject';
-    this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
+    this.userName = 'Welcome';
+    this.helloText = 'E-Mart';
+    this.descriptionText = 'Buy and sell items.';
 
 });

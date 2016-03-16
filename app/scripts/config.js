@@ -69,6 +69,17 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: "views/seller/addauction.html",
             data: {pageTitle: "Create Auction"}
         })
+
+        //-----------------------------------------------------
+        // ADD AUCTION
+        //-----------------------------------------------------
+        .state('sellerdashboard', {
+            parent: "root",
+            url:"/sellerdashboard",
+            templateUrl: "views/seller/sellerDashboard.html",
+            data: {pageTitle: "Seller Dashboard"}
+        })
+
         //-----------------------------------------------------
         // BUYER
         //-----------------------------------------------------
