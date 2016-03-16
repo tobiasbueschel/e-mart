@@ -76,14 +76,14 @@ function config($stateProvider, $urlRouterProvider) {
             parent: "root",
             url:"/createbid?:id&{other}",
             templateUrl: function (param){
-                return "views/buyer/createbid.php?id="+param.id +"&other="+param.other
+                return "views/buyer/createbid.html?id="+param.id +"&other="+param.other
             },
             data: {pageTitle: "Create Bid"}
         })
         .state('myBid', {
             parent: "root",
             url: "/myBid",
-            templateUrl: "views/buyer/myBid.php",
+            templateUrl: "views/buyer/bidList.html",
             data: { pageTitle: 'My Bid' }
         })
         //-----------------------------------------------------
@@ -132,7 +132,7 @@ function config($stateProvider, $urlRouterProvider) {
         .state('product-list', {
             parent: "root",
             url: "/product-list",
-            templateUrl: "views/auction_list.html",
+            templateUrl: "views/auctionList.html",
             data: { pageTitle: 'E-commerce product list' }
         })
         .state('product-grid', {

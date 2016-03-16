@@ -21,7 +21,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
 
         // Angular $http() and then() both return promises themselves
         //Let's pull categories
-        var data = {}
+        var data = {};
         return request = $http({
             method: "post",
             url: "/scripts/php/getAllRows.php",
@@ -58,6 +58,29 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log(response);
                 items = response;
                 return items;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    }
+
+    dataServiceScope.getAuctions = function () {
+
+        var auctiondata = {};
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/getAllRows.php",
+            data: {
+                tables:["auction"]
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+                console.log(response);
+                auctiondata.auctions = response.data.auction;
+                return auctiondata;
             }
             else {
                 console.log("Error response from database");

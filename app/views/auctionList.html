@@ -52,22 +52,19 @@
 
                         </tr>
                         </thead>
-                        <tbody ng-repeat="cat in data track by cat.categoryID">
+                        <tbody >
 
-                                <tr>
-                                    <td>{{cat.}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>£</td>
-                                    <td>£</td>
-                                    <td>
-                                        <span class="label label-primary"></span>
-                                    </td>
+                                <tr ng-repeat="cat in data.auctions track by cat.auctionID">
+                                    <td>{{cat.name}}</td>
+                                    <td>{{cat.itemID}}</td>
+                                    <td>£{{cat.instantPrice}}</td>
+                                    <td>£{{cat.reservePrice}}</td>
+                                    <td><span class="label label-primary">{{cat.isActive}}</span></td>
                                     <td class="text-right">
                                         <div class="btn-group">
                                             <button class="btn-white btn btn-xs" ui-sref="product-details">View
                                             </button>
-                                            <button class="btn-white btn btn-xs" type="submit" >
+                                            <button class="btn-white btn btn-xs" type="submit" ui-sref="createbid({id:{{cat.auctionID}}, other:'{{cat.name}}'})" >
                                                 Create Bid
                                             </button>
                                         </div>
