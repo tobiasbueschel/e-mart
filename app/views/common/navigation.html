@@ -2,9 +2,9 @@
     <div class="sidebar-collapse">
         <ul side-navigation class="nav metismenu" id="side-menu">
 
-            <li class="nav-header" ng-if="user.userName">
+            <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <img alt="image" class="img-circle" src="{{ user.twProfileImage }}" height="42" width="42"/>
+                    <img alt="image" class="img-circle" ng-if="user.userName" src="{{ user.twProfileImage }}" height="42" width="42"/>
                     <a class="dropdown-toggle">
                             <span class="clear">
                                 <span class="block m-t-xs">
