@@ -16,6 +16,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     dataServiceScope.userLoggedIn = false;
     dataServiceScope.userObject = null;
 
+    //Hashes an array of object by hashfield property, returns a hashed object (table)
     dataServiceScope.generateHashTable = function (array, hashfield) {
         var hashTable = {};
         array.forEach(function (element, index) {
