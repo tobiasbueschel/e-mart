@@ -5,10 +5,26 @@
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
 
+    //Store categories and conditions here
+    dataServiceScope.categories = null;
+    dataServiceScope.conditions = null;
+    //Hashed categories and conditions by ID
+    dataServiceScope.hashedCategories = null;
+    dataServiceScope.hashedConditions = null;
 
     //User session tracking
     dataServiceScope.userLoggedIn = false;
     dataServiceScope.userObject = null;
+
+    dataServiceScope.generateHashTable = function (array, hashfield) {
+        var hashTable = {};
+        array.forEach(function (element, index) {
+            var currentHashKey = element[hashfield]+"";
+            hashTable[currentHashKey] = element;
+        })
+        console.log(hashTable);
+        return hashTable;
+    }
 
     dataServiceScope.setCurrentUser = function (usr) {
         console.log(usr);
@@ -16,6 +32,16 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         dataServiceScope.userObject = usr;
         $cookies.userID = usr.userID;
     }
+
+    dataServiceScope.getConditionbyID = function (conditionID) {
+        if (dataServiceScope.conditions!=null) {
+            dataServiceScope.conditions.forEach (function (condition) {
+                if (condition.conditionID==conditionID) return condition;
+            })
+        }
+        return null;
+    }
+
 
     dataServiceScope.getData = function() {
 
@@ -34,6 +60,12 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log(response);
                 data.categories = response.data.category;
                 data.conditions = response.data.itemcondition;
+                dataServiceScope.categories = response.data.category;
+                dataServiceScope.conditions = response.data.itemcondition;
+                //hash  conditions by conditions Id dataServiceScope.conditions, and same for categories
+                dataServiceScope.hashedCategories = dataServiceScope.generateHashTable(dataServiceScope.categories, "categoryID");
+                dataServiceScope.hashedConditions = dataServiceScope.generateHashTable(dataServiceScope.conditions, "conditionID");
+                console.log(dataServiceScope.hashedConditions);
                 return data;
             }
             else {
@@ -41,6 +73,9 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             }
         });
     };
+
+    //call it
+    dataServiceScope.getData();
 
     dataServiceScope.getSellerItems = function (userID) {
         var items = null;
@@ -58,6 +93,28 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log(response);
                 items = response;
                 return items;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    }
+
+    dataServiceScope.getSellerAuctions = function (auctioneerID) {
+        var auctions = null;
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowsGeneric.php",
+            data: {
+                table:'auction',
+                where:'WHERE auctioneerID='+auctioneerID
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+                console.log("auctions from db", response);
+                return response;
             }
             else {
                 console.log("Error response from database");
