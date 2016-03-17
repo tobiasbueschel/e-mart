@@ -381,6 +381,13 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
                 //Set user email in data service so it can be accessed from other parts of the app
                 dataService.setCurrentUser($scope.register.email, $scope.register.id);
                 $state.go('main');
+                toaster.pop({
+                    type: 'success',
+                    title: 'Success',
+                    body: 'You have successfully registered your account. Welcomen to E-Mart.',
+                    showCloseButton: false,
+                    timeout: 3000
+                });
             }
             else {
                 toaster.pop({
