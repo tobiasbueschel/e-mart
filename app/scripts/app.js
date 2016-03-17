@@ -5,5 +5,6 @@ var emart = angular.module('emart', [
     'slick',
     'summernote',
     'toaster',
-    'ngCookies'
+    'ngCookies',
+    'firebase'
 ]);

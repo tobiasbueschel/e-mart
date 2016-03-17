@@ -1,5 +1,7 @@
 <h3>Register - Account Type</h3>
 <br>
+<button type="button" class="btn btn-primary block full-width m-b" data-ng-class="{ 'btn-outline': !twDisabled }" data-ng-disabled="twDisabled" data-ng-click="registerTwitter()"><i class="fa fa-twitter"></i>&nbsp;&nbsp;Add Twitter Account</button>
+
 <select class="form-control m-b" name="countries" data-ng-model="register.country" data-ng-required="true">
     <option value="" disabled selected>Select your country</option>
     <option data-ng-repeat="country in countries">{{country.name}}</option>
