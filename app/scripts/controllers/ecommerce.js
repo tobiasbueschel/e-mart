@@ -5,7 +5,6 @@
 
 emart.controller('ecommerceCtrl', function ($scope, $http, $state, toaster) {
 
-    // DATA FOR REGISTER FORM
     $scope.products = {
         itemID: 1,
         name: 'item name',
@@ -21,11 +20,8 @@ emart.controller('ecommerceCtrl', function ($scope, $http, $state, toaster) {
         },
         bids: {
             currentBid: 23,
-            endingBid: 36,
-
+            endingBid: 36
         }
     };
-
-
 
 });
