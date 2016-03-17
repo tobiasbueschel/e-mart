@@ -1,26 +1,21 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul side-navigation class="nav metismenu" id="side-menu">
-            <li class="nav-header">
 
-                <div class="dropdown profile-element" dropdown>
-                    <a class="dropdown-toggle" dropdown-toggle href>
+            <li class="nav-header" ng-if="user.userName">
+                <div class="dropdown profile-element">
+                    <img alt="image" class="img-circle" src="{{ user.twProfileImage }}" height="42" width="42"/>
+                    <a class="dropdown-toggle">
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">{{main.userName}}</strong>
+                                    <strong class="font-bold">{{ user.userName }}</strong>
                              </span>
-                                <span class="text-muted text-xs block">Example menu<b class="caret"></b></span>
+                                <span class="text-muted text-xs block">{{ "something else" }}</span>
                             </span>
                     </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a ui-sref="login">Logout</a></li>
-                    </ul>
                 </div>
-                <div class="logo-element">
-                    IN+
-                </div>
-
             </li>
+
 
             <li ui-sref-active="active">
                 <a ui-sref="main"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
