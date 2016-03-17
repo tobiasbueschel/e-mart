@@ -80,12 +80,6 @@ function config($stateProvider, $urlRouterProvider) {
             },
             data: {pageTitle: "Create Bid"}
         })
-        .state('myBid', {
-            parent: "root",
-            url: "/myBid",
-            templateUrl: "views/buyer/bidList.html",
-            data: { pageTitle: 'My Bid' }
-        })
         //-----------------------------------------------------
         // MAIN
         //-----------------------------------------------------
@@ -153,6 +147,14 @@ function config($stateProvider, $urlRouterProvider) {
             url: "/invoice",
             templateUrl: "views/invoice.html",
             data: { pageTitle: 'Invoice' }
+        })
+        .state('viewbid', {
+            parent: "root",
+            url: "/viewbid?:id&{other}",
+            templateUrl: function (param){
+                return "views/viewbid.html?id="+param.id +"&other="+param.other
+            },
+            data: { pageTitle: 'View Bid' }
         })
 
         //-----------------------------------------------------

@@ -1,32 +1,26 @@
-/**
- * MainCtrl - controller
- */
-
-emart.controller('MainCtrl', function ($scope, $http, $state) {
-
-    this.userName = 'Example user';
-    this.helloText = 'Welcome in SeedProject';
-    this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
-    var now = new Date();
+emart.controller('viewBidCtrl', function ($scope, $stateParams, $http, $state, $cookies, toaster) {
+    $scope.data = {}; //creating new scope that can be used inside tabset
+    $scope.data.auctionname = $stateParams.other;
     (function () {
+        console.log($stateParams);
         return request = $http({
             method: "post",
-            url: "/scripts/php/dateCtrl.php",
+            url: "/scripts/php/viewbid.php",
             data: {
-                userID: $cookies.userID
+                auctionID: $stateParams.id
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
+            console.log(response);
             if (response!==0) { //if no error when fetching database rows
                 console.log(response);
+                $scope.data.bids = response.data;
             }
             else {
                 console.log("Error loading drop down menu conditions and categories from database");
             }
         });
     })();
-
-
 
 
 });

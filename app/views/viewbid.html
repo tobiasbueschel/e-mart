@@ -1,0 +1,78 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>View Bids</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Auction List</a>
+            </li>
+            <li class="active">
+                <strong>View Bids</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div ng-controller="viewBidCtrl" class="row">
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <h2>Acution name: {{data.auctionname}}</h2>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <table class="footable table table-stripped toggle-arrow-tiny"  data-page-size="15">
+                        <thead>
+                        <tr>
+
+                            <th>Bid ID</th>
+                            <th data-hide="phone">Bidder ID</th>
+                            <th data-hide="phone">Bid Pirce</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="cat in data.bids track by cat.bidID">
+                            <td>
+                                {{cat.bidID}}
+                            </td>
+                            <td>
+                                {{cat.bidderID}}
+                            </td>
+                            <td>
+                                {{cat.bidPrice}}
+                            </td>
+                            <td>
+                                <span class="label label-primary">Current Bid</span>
+                            </td>
+                        </tr>
+
+
+
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="7">
+                                <ul class="pagination pull-right"></ul>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>

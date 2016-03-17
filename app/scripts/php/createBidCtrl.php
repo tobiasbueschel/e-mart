@@ -23,7 +23,7 @@ if(isset($_POST)) {
             }
     }
     */
-    echo $bidPrice;
+
     $sql1 = 'SELECT userID FROM user WHERE emailAddress="' . $emailAddress . '"';
 
     /*
@@ -42,6 +42,7 @@ if(isset($_POST)) {
             $connection->query($sql2);
             $connection->query($sql3);
             $connection->commit();
+            echo true;
         } catch (Exception $e) {
             $connection->rollback();
         }

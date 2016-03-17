@@ -23,15 +23,19 @@
                             Bid Info
                         </tab-heading>
                         <div  class="panel-body">
-                            <fieldset class="form-horizontal">
+                            <fieldset class="form-horizontal" >
                                 <!--AUCTION TITLE -->
-                                <div class="form-group"><label class="col-sm-2 control-label">Auction Name:</label>
-                                <h4>{{cat.name}}</h4>
+                                <div class="form-group" ><label class="col-sm-2 control-label">Auction Name:</label>
+                                <h4>{{data.auctionname}}</h4>
+                                </div>
+                                </br>
+                                <div class="form-group" ><label class="col-sm-2 control-label">Current Bid Price:</label>
+                                <h4>£{{data.currentBidPrice}}</h4>
                                 </div>
                                 </br>
                                 <!--AUCTION BID PRICE TITLE -->
                                 <div class="form-group"><label class="col-sm-2 control-label">Bid Price:</label>
-                                    <div class="col-sm-10"><input type="number" data-ng-model="data.bidPrice" class="form-control" placeholder="£160.00"></div>
+                                    <div class="col-sm-10"><input type="number" data-ng-model="data.bidPrice" id="bidPrice"class="form-control" placeholder="£{{data.currentBidPrice}}↑"/></div>
                                 </div>
                                 <div>
                                     <button class="btn btn-primary" ng-click="data.createBid()">Create Bid</button>
