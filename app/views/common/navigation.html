@@ -5,65 +5,55 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <img alt="image" class="img-circle" ng-if="user.twProfileImage" src="{{ user.twProfileImage }}" height="42" width="42"/>
-                    <a class="dropdown-toggle" data-ui-sref="profile">
+                    <a class="dropdown-toggle" data-ui-sref="profile.rating">
                             <span class="clear">
                                 <span class="block m-t-xs">
                                     <strong class="font-bold">{{ user.userName }}</strong>
                              </span>
-                                <span class="text-muted text-xs block">{{ "something else" }}</span>
+                                <span class="text-muted text-xs block">{{ user.userType }}</span>
                             </span>
                     </a>
                 </div>
             </li>
+            <li ui-sref-active="active">
+                <a ui-sref="additem"><i class="fa fa-money"></i> <span class="nav-label">SELL ITEM</span> </a>
+            </li>
+            <li ui-sref-active="active">
+                <a href=""><i class="fa fa-user"></i> <span class="nav-label">{{ 'SELLER DASHBOARD' }}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
+                    <li ui-sref-active="active" data-ui-sref="profile.rating"><a>Profile</a></li>
+                    <li ui-sref-active="active" data-ui-sref="seller.onsale"><a>Items On Sale</a></li>
+                    <li ui-sref-active="active" data-ui-sref="seller.draft"><a>Items Drafted</a></li>
+                    <li ui-sref-active="active" data-ui-sref="seller.sold"><a>Items Sold</a></li>
+                </ul>
+            </li>
 
+            <li ui-sref-active="active" data-ng-if="">
+                <a href=""><i class="fa fa-user"></i> <span class="nav-label">{{ 'BUYER DASHBOARD' }}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
+                    <li ui-sref-active="active" data-ui-sref="profile.rating"><a>Profile</a></li>
+                    <li ui-sref-active="active" data-ui-sref="myBid"><a>My Bid</a></li>
+                </ul>
+            </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="main"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
+                <a ui-sref="ecommerce"><i class="fa fa-clock-o"></i> <span class="nav-label">ENDING SOON</span> </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="search"><i class="fa fa-search"></i> <span class="nav-label">Search</span> </a>
+
+            <li ng-class="{active: $state.includes('charts')}">
+                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'CATEGORIES' }}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
+                    <li ui-sref-active="active" data-ui-sref="ecommerce.grid" data-ng-repeat="category in data.categories"><a >{{ category.name }}</a></li>
+                </ul>
             </li>
+
             <li ui-sref-active="active">
-                <a ui-sref="additem"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Add Item</span> </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="addauction"><i class="fa fa-gavel"></i> <span class="nav-label">Create Auction</span> </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="sellerdashboard"><i class="fa fa-lock"></i> <span class="nav-label">Seller Dashboard</span> </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="myBid"><i class="fa fa-shopping-cart"></i> <span class="nav-label">My Bid</span> </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="minor"><i class="fa fa-desktop"></i> <span class="nav-label">Minor page</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="orders"><i class="fa fa-desktop"></i> <span class="nav-label">Orders</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="payments"><i class="fa fa-desktop"></i> <span class="nav-label">Payments</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="product"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Product</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="product-details"><i class="fa fa-desktop"></i> <span class="nav-label">Product Details</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="product-list"><i class="fa fa-desktop"></i> <span class="nav-label">Auction List</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="product-grid"><i class="fa fa-desktop"></i> <span class="nav-label">Product Grid</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="invoice"><i class="fa fa-desktop"></i> <span class="nav-label">Invoice</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="faq"><i class="fa fa-desktop"></i> <span class="nav-label">FAQ</span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="contactUs"><i class="fa fa-desktop"></i> <span class="nav-label">Contact us</span></a>
+                <a href=""><i class="fa fa-info-circle"></i> <span class="nav-label">{{ 'HELP' }}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
+                    <li ui-sref-active="active" data-ui-sref="faq"><a>FAQ</a></li>
+                    <li ui-sref-active="active" data-ui-sref="contact"><a>Contact Us</a></li>
+                    <li ui-sref-active="active" data-ui-sref="tos"><a>Terms & Conditions</a></li>
+                </ul>
             </li>
         </ul>
 

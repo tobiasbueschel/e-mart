@@ -64,28 +64,49 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         })
 
         //-----------------------------------------------------
-        // SEARCH RESULTS
+        // PROFILE
         //-----------------------------------------------------
-        .state('search', {
-            parent: "root",
-            url:"/search",
-            templateUrl: "views/search.html",
-            data: {pageTitle: "Search auctions"}
+        .state('profile', {
+            templateUrl: "views/common/content.html",
+            controller: "profileCtrl",
+            data: { mainState: 'profile.rating', mainStateName: 'Profile', name: 'My Account' }
+        })
+        .state('profile.rating', {
+            url: "/profile",
+            templateUrl: "views/profile/profile_rating.html",
+            data: { pageTitle: 'My Account | Profil Rating', subStateName: 'Rating' }
         })
 
         //-----------------------------------------------------
-        // ADD ITEM
+        // SELLER DASHBOARD
         //-----------------------------------------------------
+        .state('seller', {
+            templateUrl: "views/common/content.html",
+            data: { mainState: 'profile.rating', mainStateName: 'Profile', name: 'Seller Dashboard', toggleView: true }
+        })
+        .state('seller.draft', {
+            url: "/seller-draft",
+            templateUrl: "views/seller/seller_draft.html",
+            data: { pageTitle: 'Seller Dashboard | Items Drafted', subStateName: 'Items Drafted' }
+        })
+        .state('seller.onsale', {
+            url: "/seller-onsale",
+            templateUrl: "views/seller/seller_onsale.html",
+            data: { pageTitle: 'Seller Dashboard | Items On Sale', subStateName: 'Items On Sale' }
+        })
+        .state('seller.sold', {
+            url: "/seller-sold",
+            templateUrl: "views/seller/seller_sold.html",
+            data: { pageTitle: 'Seller Dashboard | Items Sold', subStateName: 'Items On Sale' }
+        })
+
+        //TODO: NEED WORK
         .state('additem', {
             parent: "root",
             url:"/additem",
             templateUrl: "views/seller/additem.html",
             data: {pageTitle: "Add Item"}
         })
-
-        //-----------------------------------------------------
-        // EDIT ITEM
-        //-----------------------------------------------------
         .state('edititem', {
             parent: "root",
             url:"/edititem?:itemid",
@@ -94,10 +115,6 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             },
             data: {pageTitle: "Edit Item"}
         })
-
-        //-----------------------------------------------------
-        // ADD AUCTION
-        //-----------------------------------------------------
         .state('addauction', {
             parent: "root",
             url:"/addauction",
@@ -106,18 +123,12 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         })
 
         //-----------------------------------------------------
-        // SELLER DASHBOARD
+        // BUYER DASHBOARD
         //-----------------------------------------------------
-        .state('sellerdashboard', {
+        .state('buyer', {
             parent: "root",
-            url:"/sellerdashboard",
-            templateUrl: "views/seller/sellerDashboard.html",
-            data: {pageTitle: "Seller Dashboard"}
+            templateUrl: "views/buyer/buyer.html"
         })
-
-        //-----------------------------------------------------
-        // BUYER
-        //-----------------------------------------------------
         .state('createbid', {
             parent: "root",
             url:"/createbid?:id&{other}",
@@ -125,74 +136,6 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
                 return "views/buyer/createbid.html?id="+param.id +"&other="+param.other
             },
             data: {pageTitle: "Create Bid"}
-        })
-        //-----------------------------------------------------
-        // MAIN
-        //-----------------------------------------------------
-        .state('main', {
-            parent: "root",
-            url: "/main",
-            templateUrl: "views/main.html",
-            data: { pageTitle: 'Main' }
-        })
-        .state('minor', {
-            parent: "root",
-            url: "/minor",
-            templateUrl: "views/minor.html",
-            data: { pageTitle: 'Example view' }
-        })
-
-        //-----------------------------------------------------
-        // E-COMMERCE
-        //-----------------------------------------------------
-        .state('orders', {
-            parent: "root",
-            url: "/orders",
-            templateUrl: "views/ecommerce_orders.html",
-            data: { pageTitle: 'E-commerce orders' }
-        })
-        .state('payments', {
-            parent: "root",
-            url: "/payments",
-            templateUrl: "views/ecommerce_payments.html",
-            data: { pageTitle: 'E-commerce payments' }
-        })
-        .state('product', {
-            parent: "root",
-            url: "/product",
-            templateUrl: "views/ecommerce_product.html",
-            data: { pageTitle: 'E-commerce product' }
-        })
-        .state('product-details', {
-            parent: "root",
-            url: "/product-details",
-            templateUrl: "views/ecommerce_product_details.html",
-            data: { pageTitle: 'E-commerce product details' }
-        })
-        .state('product-list', {
-            parent: "root",
-            url: "/product-list",
-            templateUrl: "views/auctionList.html",
-            data: { pageTitle: 'E-commerce product list' }
-        })
-        .state('product-grid', {
-            parent: "root",
-            url: "/product-grid",
-            templateUrl: "views/ecommerce_products_grid.html",
-            data: { pageTitle: 'E-commerce grid' }
-        })
-        .state('cart', {
-            parent: "root",
-            url: "/cart",
-            templateUrl: "views/ecommerce_cart.html",
-            data: { pageTitle: 'Cart' }
-        })
-
-        .state('invoice', {
-            parent: "root",
-            url: "/invoice",
-            templateUrl: "views/invoice.html",
-            data: { pageTitle: 'Invoice' }
         })
         .state('viewbid', {
             parent: "root",
@@ -202,35 +145,81 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             },
             data: { pageTitle: 'View Bid' }
         })
+        .state('cart', {
+            parent: "root",
+            url: "/cart",
+            templateUrl: "views/ecommerce_cart.html",
+            data: { pageTitle: 'Cart' }
+        })
+        .state('invoice', {
+            parent: "root",
+            url: "/invoice",
+            templateUrl: "views/buyer/invoice.html",
+            data: { pageTitle: 'Invoice' }
+        })
+        .state('payments', {
+            parent: "root",
+            url: "/payments",
+            templateUrl: "views/ecommerce_payments.html",
+            data: { pageTitle: 'E-commerce payments' }
+        })
 
         //-----------------------------------------------------
-        // OTHER
+        // E-COMMERCE
+        //-----------------------------------------------------
+        .state('ecommerce', {
+            templateUrl: "views/common/content.html",
+            controller: "ecommerceCtrl",
+            data: { mainState: 'ecommerce.grid', mainStateName: 'Product Grid', name: 'E-Commerce', toggleView: true }
+        })
+        .state('ecommerce.grid', {
+            url: "/ecommerce",
+            templateUrl: "views/ecommerce/products_grid.html",
+            data: { pageTitle: 'E-commerce | Product Grid', subStateName: 'Product Grid' }
+        })
+        .state('ecommerce.product', {
+            url: "/ecommerce-product",
+            templateUrl: "views/ecommerce/ecommerce_product.html",
+            data: { pageTitle: 'E-commerce | Product', subStateName: 'Product' }
+        })
+        .state('ecommerce.details', {
+            url: "/ecommerce-details",
+            templateUrl: "views/ecommerce/ecommerce_product_details.html",
+            data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
+        })
+        .state('ecommerce.list', {
+            url: "/ecommerce-list",
+            templateUrl: "views/ecommerce/auctionList.html",
+            data: { pageTitle: 'E-commerce | Product List', subStateName: 'Product List' }
+        })
+
+        //-----------------------------------------------------
+        // HELP & OTHERS
         //-----------------------------------------------------
         .state('faq', {
             parent: "root",
             url: "/faq",
-            templateUrl: "views/faq.html",
-            data: { pageTitle: 'FAQ' }
+            templateUrl: "views/other/faq.html",
+            data: { pageTitle: 'FAQ', name: 'Help', mainStateName: 'Frequently Asked Questions' }
         })
-        .state('contactUs', {
+        .state('contact', {
             parent: "root",
-            url: "/contactUs",
-            templateUrl: "views/contactUs.html",
-            data: { pageTitle: 'Contact us' }
+            url: "/contact",
+            templateUrl: "views/other/contactUs.html",
+            data: { pageTitle: 'Contact us', name: 'Help', mainStateName: 'Contact us' }
         })
-
-        //-----------------------------------------------------
-        // PROFILE
-        //-----------------------------------------------------
-        .state('profile', {
-                parent: "root",
-                url: "/profile",
-                templateUrl: "views/profile.html",
-                data: { pageTitle: 'Profile' },
-                controller: "profileCtrl"
-        });
-
-
+        .state('tos', {
+            parent: "root",
+            url: "/tos",
+            templateUrl: "views/other/tos.html",
+            data: { pageTitle: 'Terms & Conditions', name: 'Help', mainStateName: 'Terms & Conditions' }
+        })
+        .state('search', {
+            parent: "root",
+            url:"/search",
+            templateUrl: "views/search.html",
+            data: {pageTitle: "Search auctions"}
+        })
 }
 
 angular
