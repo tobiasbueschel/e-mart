@@ -57,7 +57,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
 
 
     //Get items of the current user
-    var sellerItemsPromise = dataService.getSellerItems($cookies.userID);
+    var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));
     sellerItemsPromise.then(function(result) {
         //inside promise then
         $scope.data.items = result.data;
@@ -66,7 +66,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
     });
 
     //Get sold items of user
-    var sellerSoldItemsPromise = dataService.getSellerSoldItems($cookies.userID);
+    var sellerSoldItemsPromise = dataService.getSellerSoldItems($cookies.get('userID'));
     sellerSoldItemsPromise.then(function(result) {
         //inside promise then
         $scope.data.soldItems = result.data;
@@ -74,7 +74,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
     });
 
     //Get the auctions of the current user
-    var sellerAuctionsPromise = dataService.getSellerAuctions($cookies.userID);
+    var sellerAuctionsPromise = dataService.getSellerAuctions($cookies.get('userID'));
     sellerAuctionsPromise.then(function(result) {
         //inside promise then
         $scope.data.auctions = result.data;
