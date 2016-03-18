@@ -36,6 +36,11 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         $cookies.userName = usr.userName;
         $cookies.twUsername = usr.twUsername;
         $cookies.twProfileImage = usr.twProfileImage;
+        $cookies.firstName = usr.firstName;
+        $cookies.lastName = usr.lastName;
+        $cookies.userType = usr.userType;
+        $cookies.dateRegistered = usr.dateRegistered;
+        $cookies.city = usr.city;
 
     };
 

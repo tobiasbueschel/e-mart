@@ -12,6 +12,10 @@ emart.controller('MainCtrl', function ($scope, $http, $state, $cookies) {
 
     $scope.user.userName = $cookies.userName;
     $scope.user.twProfileImage = $cookies.twProfileImage;
-
+    $scope.user.firstName = $cookies.firstName;
+    $scope.user.lastName = $cookies.lastName;
+    $scope.user.userType = $cookies.userType;
+    $scope.user.city = $cookies.city;
+    $scope.user.dateRegistered = $cookies.dateRegistered ? new Date($cookies.dateRegistered.replace(/-/g,"/")) : null;
 
 });

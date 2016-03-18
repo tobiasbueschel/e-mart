@@ -192,3 +192,26 @@ angular
     .directive('minimalizaSidebar', minimalizaSidebar)
     .directive('icheck', icheck)
     .directive('iboxToolsFullScreen', iboxToolsFullScreen);
+
+emart.directive('starRating', function () {
+    // source: http://stackoverflow.com/questions/23646395/rendering-a-star-rating-system-using-angularjs
+    return {
+        restrict: 'A',
+        template: '<ul class="rating">' +
+                        '<li ng-repeat="star in stars" ng-class="star">' + '\u2605' + '</li>' + '<li id="ratingTotal">' + '&nbsp;&nbsp;( ' + '{{ ratingTotal }}' + ' )' + '</li>'
+                + '</ul>',
+        scope: {
+            ratingValue: '=',
+            ratingTotal: '=',
+            max: '='
+        },
+        link: function (scope, elem, attrs) {
+            scope.stars = [];
+            for (var i = 0; i < scope.max; i++) {
+                scope.stars.push({
+                    filled: i < scope.ratingValue
+                });
+            }
+        }
+    }
+});

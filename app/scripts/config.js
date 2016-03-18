@@ -184,6 +184,17 @@ function config($stateProvider, $urlRouterProvider) {
             data: { pageTitle: 'Contact us' }
         })
 
+        //-----------------------------------------------------
+        // PROFILE
+        //-----------------------------------------------------
+        .state('profile', {
+                parent: "root",
+                url: "/profile",
+                templateUrl: "views/profile.html",
+                data: { pageTitle: 'Profile' },
+                controller: "profileCtrl"
+        });
+
 
 }
 angular

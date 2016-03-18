@@ -4,8 +4,8 @@
 
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <img alt="image" class="img-circle" ng-if="user.userName" src="{{ user.twProfileImage }}" height="42" width="42"/>
-                    <a class="dropdown-toggle">
+                    <img alt="image" class="img-circle" ng-if="user.twProfileImage" src="{{ user.twProfileImage }}" height="42" width="42"/>
+                    <a class="dropdown-toggle" data-ui-sref="profile">
                             <span class="clear">
                                 <span class="block m-t-xs">
                                     <strong class="font-bold">{{ user.userName }}</strong>
