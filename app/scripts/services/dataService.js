@@ -4,7 +4,7 @@
  */
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
-    console.log($cookies.userID);
+
     //Store categories and conditions here
     dataServiceScope.categories = null;
     dataServiceScope.conditions = null;
@@ -88,6 +88,28 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     //call it
     dataServiceScope.getData();
 
+    //All live auctions
+    dataServiceScope.getAllLiveAuctions = function () {
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowsGeneric.php",
+            data: {
+                table:'auction',
+                where:'WHERE isActive=1'
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+                items = response;
+                return items;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    }
+
     dataServiceScope.getSellerItems = function (userID) {
         var items = null;
         return request = $http({
@@ -109,7 +131,9 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
+
+
 
     dataServiceScope.getSellerAuctions = function (auctioneerID) {
         var auctions = null;
@@ -131,7 +155,29 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
+
+    dataServiceScope.getItemImage = function(itemID) {
+
+        var image = {};
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowsGeneric.php",
+            data: {
+                tables:'image',
+                where: 'WHERE itemID='+itemID
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+                return response;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    };
 
     dataServiceScope.getAuctions = function () {
 
@@ -156,4 +202,4 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         });
     }
 
-}])
+}]);

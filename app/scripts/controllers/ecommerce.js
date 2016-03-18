@@ -24,4 +24,26 @@ emart.controller('ecommerceCtrl', function ($scope, $http, $state, toaster) {
         }
     };
 
+    $scope.views = [
+        "ecommerce.grid",
+        "ecommerce.list",
+        "ecommerce.product",
+        "ecommerce.details"
+    ];
+
+
+    $scope.toggleView = function() {
+
+        for (i = 0; i < $scope.views.length; i++) {
+            if ($state.current.name === $scope.views[i]) {
+                if ( $state.current.name === $scope.views[3] ) {
+                    $state.go($scope.views[0]);
+                }
+                else{
+                    $state.go($scope.views[i+1]);
+                }
+            }
+        }
+    }
+
 });

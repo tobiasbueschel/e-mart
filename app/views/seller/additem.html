@@ -106,6 +106,8 @@
                                         <p data-ng-show="data.itemForm.condition.$invalid && data.itemForm.condition.$dirty" class="help-block m-b-none has-error">Select item condition</p>
                                     </div>
                                 </div>
+
+
                                 <div class="form-group"><label class="col-sm-2 control-label">Images :</label>
                                     <div class="col-sm-4">
                                         <div flow-init flow-name="uploader.flow" flow-files-added="data.processFiles($files)">
@@ -123,10 +125,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">Images Uploaded</label>
-                                    <div class="row" ng-repeat="image in data.imageStrings track by $index">
-                                        <div class="col-xs-6"><img ng-src="{{data.imageStrings[$index]}}"/></div>
-                                    </div>
+                                <div ng-show="data.imageStrings.length>0" class="ibox-content">
+                                        <carousel interval="data.slideInterval">
+                                            <slide ng-repeat="image in data.imageStrings track by $index">
+                                                <img ng-src="{{data.imageStrings[$index]}}" style="margin:auto;">
+                                            </slide>
+                                        </carousel>
                                 </div>
 
                                 <div  ng-show="data.imagesSaved" class="row">
