@@ -1,7 +1,6 @@
-/**
- * Created by kimeshan on 10/03/2016.
+/************************************************************************************
  * This service provides a singleton for categories and conditions data
- */
+ ************************************************************************************/
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
 
@@ -55,7 +54,6 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         }
         return null;
     };
-
 
     dataServiceScope.getData = function() {
         console.log("GETTING CONDITIONS AND CAT DATA");
