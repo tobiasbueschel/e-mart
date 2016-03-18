@@ -3,7 +3,8 @@
  * Each view are defined as state.
  * Initial there are written stat for all view in theme.
  ************************************************************************/
-function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
+
+emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
 
     //Flow factory for file uploads
     flowFactoryProvider.defaults = {
@@ -73,8 +74,18 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         })
         .state('profile.rating', {
             url: "/profile",
-            templateUrl: "views/profile/profile_rating.html",
+            templateUrl: "views/profile/ratings.html",
             data: { pageTitle: 'My Account | Profil Rating', subStateName: 'Rating' }
+        })
+        .state('profile.messages', {
+            url: "/messages",
+            templateUrl: "views/profile/messages.html",
+            data: { pageTitle: 'My Account | Messages', subStateName: 'Messages' }
+        })
+        .state('profile.settings', {
+            url: "/settings",
+            templateUrl: "views/profile/settings.html",
+            data: { pageTitle: 'My Account | Settings', subStateName: 'Settings' }
         })
 
 
@@ -82,11 +93,10 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         // ENDING SOON
         //-----------------------------------------------------
         .state('endingsoon', {
-            url: "/endingsoon",
             parent: "root",
+            url: "/endingsoon",
             templateUrl: "views/buyer/ending_soon.html",
-            //controller: "profileCtrl",
-            data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon' }
+            data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon', hide: true, toggleView: true }
         })
 
         //-----------------------------------------------------
@@ -96,6 +106,12 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             templateUrl: "views/common/content.html",
             controller: "sellerDashboardCtrl",
             data: { mainState: 'profile.rating', mainStateName: 'Profile', name: 'Seller Dashboard', toggleView: true }
+        })
+        .state('seller.additem', {
+            url:"/additem",
+            templateUrl: "views/seller/additem.html",
+            controller: 'addItemCtrl',
+            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item' }
         })
         .state('seller.draft', {
             url: "/seller-draft",
@@ -113,13 +129,7 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             data: { pageTitle: 'Seller Dashboard | Items Sold', subStateName: 'Items On Sale' }
         })
 
-        //TODO: NEED WORK
-        .state('additem', {
-            parent: "root",
-            url:"/additem",
-            templateUrl: "views/seller/additem.html",
-            data: {pageTitle: "Add Item"}
-        })
+
         .state('edititem', {
             parent: "root",
             url:"/edititem?:itemid",
@@ -139,10 +149,27 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         // BUYER DASHBOARD
         //-----------------------------------------------------
         .state('buyer', {
-            parent: "root",
-            templateUrl: "views/buyer/buyer.html"
+            templateUrl: "views/common/content.html",
+            data: { mainState: 'buyer.bids', mainStateName: 'My Bids', name: 'Buyer Dashboard' }
         })
-        .state('createbid', {
+        .state('buyer.bids', {
+            url: "/bids",
+            templateUrl: "views/buyer/bids.html",
+            data: { pageTitle: 'Buyer Dashboard | My Bids' }
+        })
+        .state('buyer.boughtItems', {
+            url: "/bought-items",
+            templateUrl: "views/buyer/boughtItems.html",
+            data: { pageTitle: 'Buyer Dashboard | Bought Items', subStateName: "Bought Items" }
+        })
+        .state('buyer.bookmarks', {
+            url: "/bookmarks",
+            templateUrl: "views/buyer/bookmarks.html",
+            data: { pageTitle: 'Buyer Dashboard | Bookmarks', subStateName: "Bookmarks" }
+        })
+
+
+        .state('buyer.createbid', {
             parent: "root",
             url:"/createbid?:id&{other}",
             templateUrl: function (param){
@@ -186,23 +213,31 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             data: { mainState: 'ecommerce.grid', mainStateName: 'Product Grid', name: 'E-Commerce', toggleView: true }
         })
         .state('ecommerce.grid', {
-            url: "/ecommerce",
-            templateUrl: "views/ecommerce/products_grid.html",
+            url:"/ecommerce?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/products_grid.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product Grid', subStateName: 'Product Grid' }
         })
         .state('ecommerce.product', {
-            url: "/ecommerce-product",
-            templateUrl: "views/ecommerce/ecommerce_product.html",
+            url: "/ecommerce-product?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/ecommerce_product.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product', subStateName: 'Product' }
         })
         .state('ecommerce.details', {
-            url: "/ecommerce-details",
-            templateUrl: "views/ecommerce/ecommerce_product_details.html",
+            url: "/ecommerce-details?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/ecommerce_product_details.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
         })
         .state('ecommerce.list', {
-            url: "/ecommerce-list",
-            templateUrl: "views/ecommerce/auctionList.html",
+            url: "/ecommerce-list?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/auctionList.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product List', subStateName: 'Product List' }
         })
 
@@ -230,14 +265,8 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         .state('search', {
             parent: "root",
             url:"/search",
-            templateUrl: "views/search.html",
-            data: {pageTitle: "Search auctions"}
+            templateUrl: "views/other/search.html",
+            controller: "searchCtrl",
+            data: { pageTitle: 'Search Results', name: 'Search Results', hide: true }
         })
-}
-
-angular
-    .module('emart')
-    .config(config)
-    .run(function($rootScope, $state) {
-        $rootScope.$state = $state;
-    });
+});

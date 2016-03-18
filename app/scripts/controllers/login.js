@@ -474,7 +474,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
                 toaster.pop({
                     type: 'error',
                     title: 'Error',
-                    body: 'We don\'t recognize this email. Please try again!',
+                    body: 'Login was unsuccessful. Please try again!',
                     showCloseButton: false,
                     timeout: 2000
                 });

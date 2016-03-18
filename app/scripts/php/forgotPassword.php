@@ -3,77 +3,68 @@
 ob_start();
 require_once ("dbConnection.php");
 
-// Always set content-type when sending HTML email
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-$headers .= 'From: <info@e-mart.azurewebsites.net>' . "\r\n";
+// AZURE SENDGRID AUTHENTICATION
+$url = 'https://api.sendgrid.com/';
+$user = 'azure_4a08c7d5b58920cfcdd7e5390945734c@azure.com';
+$pass = 'emart1234';
 
-
-// TODO: create a new table in MYSQL TO STORE EMAIL TEMPLATES IN DATABASE
-
-//function sendRegistrationMail($emailTO, $firstName, $lastName, $activationCode) {
-//    global $headers;
-//
-//    $message =  '<html>
-//                    <h3> Hi ' . $firstName . ' ' . $lastName . ', </h3>
-//                    <br>
-//                    Thanks for creating your <strong>E-Mart account!</strong>
-//                    <br><br>
-//                    As part of our signup process, we need to confirm your email address.
-//                    Please click the link below:
-//                    <br>
-//                    <a href="www.emosurgery.com/login.php?email=' . $emailTO . '&key=' . $activationCode . '">
-//                    Confirm your account</a>
-//                </html>';
-//    mail($emailTO, 'EMOS Confirm Account', $message, $headers);
-//}
-
-function DeletionMail($emailTO, $firstName, $lastName) {
-    global $headers;
-
-    $message =  '<html>
-                    <h3> Hi ' . $firstName . ' ' . $lastName . ', </h3>
-                    <br>
-                    You have succesfully deleted your account!
-                    <br><br>
-                    Thank you for using E-Mart! We would love to hear why you decided to delete your account.
-                    You can leave us some feedback here: www.e-mart.azurewebsites.net/feedback
-                    <br>
-                </html>';
-    mail($emailTO, 'E-Mart Delete Account', $message, $headers);
-}
-
+// SENDS EMAIL TO USER IF HE/SHE FORGOT THE PASSWORD
 function forgotPassword($emailTO) {
-    global $headers;
+    global $user, $pass;
 
-    $message =  '<html>
-                    <h3>Hi</h3>
-                    <br>
-                    Please click on the link below to reset your password:
-                    <br><br>
-                    http://www.e-mart.azurewebsites.net/
-                    <br>
-                </html>';
-    mail($emailTO, 'E-Mart Forgot Password', $message, $headers);
-    echo true;
+    return $params = array(
+            'api_user' => $user,
+            'api_key' => $pass,
+            'to' => $emailTO,
+            'subject' => 'E-Mart reset password',
+            'html' =>   "<html>
+                            <head></head>
+                            <body>
+                                <p>Hi, you have requested a new password?<br>
+                                Visit this <span><a href=\"www.e-mart.azurewebsites.net\">URL</a></span> to reset it.<br>
+                                </p>
+                            </body>
+                        </html>",
+            'text' => 'testing body',
+            'from' => 'info@emart.com'
+        );
 }
 
+// EXECUTES PHP SCRIPT AND CHECKS WHICH FUNCTION TO CALL
 if(isset($_POST)) {
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
     $email = $request->email;
 
     error_log($request->email);
-    error_log($email);
+    $params = forgotPassword($email);
 
+    $request = $url.'api/mail.send.json';
 
-    forgotPassword($email);
+    // Generate curl request
+    $session = curl_init($request);
+
+    // Tell curl to use HTTP POST
+    curl_setopt ($session, CURLOPT_POST, true);
+
+    // Tell curl that this is the body of the POST
+    curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+
+    // Tell curl not to return headers, but do return the response
+    curl_setopt($session, CURLOPT_HEADER, false);
+    curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+    // obtain response
+    $response = curl_exec($session);
+    curl_close($session);
+
+    // print everything out
+    // print_r($response);
+
+    echo true;
 }
 else{
     echo false;
 }
-
-
 ob_end_flush();
-
 ?>

@@ -6,33 +6,40 @@
                 <div class="dropdown profile-element">
                     <img alt="image" class="img-circle" ng-if="user.twProfileImage" src="{{ user.twProfileImage }}" height="42" width="42"/>
                     <a class="dropdown-toggle" data-ui-sref="profile.rating">
-                            <span class="clear">
-                                <span class="block m-t-xs">
-                                    <strong class="font-bold">{{ user.userName }}</strong>
-                             </span>
-                                <span class="text-muted text-xs block">{{ user.userType }}</span>
-                            </span>
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">{{ user.userName }}</strong>
+                         </span>
+                            <span class="text-muted text-xs block">{{ user.userType }}</span>
+                        </span>
                     </a>
                 </div>
             </li>
+
             <li ui-sref-active="active">
-                <a ui-sref="additem"><i class="fa fa-money"></i> <span class="nav-label">SELL ITEM</span> </a>
-            </li>
-            <li ui-sref-active="active">
-                <a href=""><i class="fa fa-user"></i> <span class="nav-label">{{ 'SELLER DASHBOARD' }}</span><span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-user"></i> <span class="nav-label">{{ 'MY PROFILE' }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
                     <li ui-sref-active="active" data-ui-sref="profile.rating"><a>Profile</a></li>
+                    <li ui-sref-active="active" data-ui-sref="profile.messages"><a>Messages</a></li>
+                    <li ui-sref-active="active" data-ui-sref="profile.settings"><a>Settings</a></li>
+                </ul>
+            </li>
+            <li ui-sref-active="active">
+                <a href=""><i class="fa fa-gavel"></i> <span class="nav-label">{{ 'SELLER DASHBOARD' }}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
+                    <li ui-sref-active="active" data-ui-sref="seller.additem"><a>Add Item</a></li>
                     <li ui-sref-active="active" data-ui-sref="seller.onsale"><a>Items On Sale</a></li>
                     <li ui-sref-active="active" data-ui-sref="seller.draft"><a>Items Drafted</a></li>
                     <li ui-sref-active="active" data-ui-sref="seller.sold"><a>Items Sold</a></li>
                 </ul>
             </li>
 
-            <li ui-sref-active="active" data-ng-if="">
-                <a href=""><i class="fa fa-user"></i> <span class="nav-label">{{ 'BUYER DASHBOARD' }}</span><span class="fa arrow"></span></a>
+            <li ui-sref-active="active">
+                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'BUYER DASHBOARD' }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
-                    <li ui-sref-active="active" data-ui-sref="profile.rating"><a>Profile</a></li>
-                    <li ui-sref-active="active" data-ui-sref="myBid"><a>My Bid</a></li>
+                    <li ui-sref-active="active" data-ui-sref="buyer.bids"><a>My Bids</a></li>
+                    <li ui-sref-active="active" data-ui-sref="buyer.boughtItems"><a>Bought Items</a></li>
+                    <li ui-sref-active="active" data-ui-sref="buyer.bookmarks"><a>Bookmarks</a></li>
                 </ul>
             </li>
 
@@ -41,7 +48,7 @@
             </li>
 
             <li ng-class="{active: $state.includes('charts')}">
-                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'CATEGORIES' }}</span><span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-list"></i> <span class="nav-label">{{ 'CATEGORIES' }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
                     <li ui-sref-active="active" data-ui-sref="ecommerce.grid" data-ng-repeat="category in data.categories"><a >{{ category.name }}</a></li>
                 </ul>

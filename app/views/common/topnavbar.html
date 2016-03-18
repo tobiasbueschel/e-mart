@@ -2,25 +2,13 @@
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <span minimaliza-sidebar></span>
-            <form role="search" class="navbar-form-custom"">
+            <form role="search" class="navbar-form-custom">
                 <div class="form-group">
                     <input type="text" placeholder="{{ 'SEARCH' }}" ng-model="data.navSearchTerm" ng-change="data.navSearch()" class="form-control" name="top-search" id="top-search">
                 </div>
             </form>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-            <!--<li>-->
-                <!--<span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>-->
-            <!--</li>-->
-            <!--<li class="dropdown" dropdown>-->
-                <!--<a class="dropdown-toggle count-info" href dropdown-toggle>-->
-                    <!--Language-->
-                <!--</a>-->
-                <!--<ul class="dropdown-menu animated fadeInRight m-t-xs" ng-controller="translateCtrl">-->
-                    <!--<li><a ng-click="changeLanguage('en')">English</a></li>-->
-                    <!--<li><a ng-click="changeLanguage('es')">Spanish</a></li>-->
-                <!--</ul>-->
-            <!--</li>-->
             <li class="dropdown" dropdown>
                 <a class="dropdown-toggle count-info" href dropdown-toggle>
                     <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
@@ -29,7 +17,7 @@
                     <li>
                         <div class="dropdown-messages-box">
                             <a ui-sref="profile" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a7.jpg">
+                                <img alt="image" class="img-circle" src="">
                             </a>
 
                             <div>
@@ -43,7 +31,7 @@
                     <li>
                         <div class="dropdown-messages-box">
                             <a ui-sref="profile" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a4.jpg">
+                                <img alt="image" class="img-circle" src="">
                             </a>
 
                             <div>
@@ -57,7 +45,7 @@
                     <li>
                         <div class="dropdown-messages-box">
                             <a ui-sref="profile" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/profile.jpg">
+                                <img alt="image" class="img-circle" src="">
                             </a>
 
                             <div>
@@ -120,13 +108,8 @@
                 </ul>
             </li>
             <li>
-                <a ui-sref="login">
+                <a data-ng-click="logout()">
                     <i class="fa fa-sign-out"></i> Log out
-                </a>
-            </li>
-            <li>
-                <a ng-click="$root.rightSidebar = !$root.rightSidebar">
-                    <i class="fa fa-tasks"></i>
                 </a>
             </li>
         </ul>

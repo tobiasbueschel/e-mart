@@ -28,19 +28,22 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     };
 
     dataServiceScope.setCurrentUser = function (usr) {
+        console.log("hello");
         console.log(usr);
+
         dataServiceScope.userLoggedIn = true;
         dataServiceScope.userObject = usr;
 
-        $cookies.userID = usr.userID;
-        $cookies.userName = usr.userName;
-        $cookies.twUsername = usr.twUsername;
-        $cookies.twProfileImage = usr.twProfileImage;
-        $cookies.firstName = usr.firstName;
-        $cookies.lastName = usr.lastName;
-        $cookies.userType = usr.userType;
-        $cookies.dateRegistered = usr.dateRegistered;
-        $cookies.city = usr.city;
+        // Setting a cookie
+        $cookies.put('userID', usr.userID);
+        $cookies.put('userName', usr.userName);
+        $cookies.put('twUsername', usr.twUsername);
+        $cookies.put('twProfileImage', usr.twProfileImage);
+        $cookies.put('firstName', usr.firstName);
+        $cookies.put('lastName', usr.lastName);
+        $cookies.put('userType', usr.userType);
+        $cookies.put('dateRegistered', usr.dateRegistered);
+        $cookies.put('city', usr.city);
 
     };
 
@@ -107,7 +110,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
 
     dataServiceScope.getSellerItems = function (userID) {
         var items = null;

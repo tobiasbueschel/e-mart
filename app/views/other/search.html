@@ -1,0 +1,19 @@
+<div class="col-lg-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <h2>
+                {{data.srLength}} results found for: <span class="text-navy">{{ data.searchterm }}</span>
+            </h2>
+            <div ng-repeat="result in data.searchResults">
+                <div class="hr-line-dashed"></div>
+                <div class="search-result">
+                    <h3><a href="">{{result.name}}</a></h3>
+                    <a href="" class="search-link">{{result.description}}</a>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
