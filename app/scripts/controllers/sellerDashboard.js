@@ -20,40 +20,53 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
 
     $scope.data.deleteItem = function (itemID) {
         console.log("Delete item", itemID);
-        var deleteItem = $http({
-            method: 'post',
-            url: "/scripts/php/editRowsBySQL.php",
-            data: {
-                sql: "DELETE FROM item WHERE itemID="+itemID
+
+        swal({
+            title: "Are you sure?",
+            text: "Deleting this item cannot be undone!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel!",
+            allowOutsideClick: true,
+            closeOnConfirm: false,
+            closeOnCancel: true
+        }, function(isConfirm){
+            if (isConfirm) {
+                var deleteItem = $http({
+                    method: 'post',
+                    url: "/scripts/php/editRowsBySQL.php",
+                    data: {
+                        sql: "DELETE FROM item WHERE itemID="+itemID
+                    }
+                });
+                deleteItem.success(function (data) {
+                    console.log("response" ,data);
+                    if (data==1) {
+                        //Item deleted
+                        $state.reload();
+                        swal({
+                            title: "Success!",
+                            text: "Item has been deleted!",
+                            type: "success",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Delete failed!",
+                            text: "Only non-auctioned items can be deleted",
+                            type: "warning",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                });
             }
         });
-
-        deleteItem.success(function (data) {
-            console.log("response" ,data);
-            if (data==1) {
-                //Item deleted
-                $state.reload();
-                toaster.pop({
-                    type: 'message',
-                    title: 'Delete complete',
-                    body: 'Item has been deleted',
-                    showCloseButton: false,
-                    timeout: 2000
-                });
-
-
-            }
-            else {
-                toaster.pop({
-                    type: 'error',
-                    title: 'Delete failed',
-                    body: 'Only non-auctioned items can be deleted',
-                    showCloseButton: false,
-                    timeout: 2000
-                });
-            }
-        })
-    }
+    };
 
 
     //Get items of the current user

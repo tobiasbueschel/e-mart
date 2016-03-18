@@ -343,11 +343,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
     };
 
     $scope.registerTwitter = function() {
-
-
         var ref = new Firebase("https://emart.firebaseio.com");
-        var isNewUser = true;
-
 
         ref.authWithOAuthPopup("twitter", function(error, authData) {
             if (error) {
@@ -363,16 +359,13 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
 
                 console.log(authData);
 
-                console.log(authData.twitter.username);
-                console.log(authData.twitter.profileImageURL);
-
                 $scope.register.twUsername = authData.twitter.username;
                 $scope.register.twProfileImage = authData.twitter.profileImageURL;
 
                 toaster.pop({
                     type: 'Success',
                     title: 'Success',
-                    body: 'Adding Twitter was successfuk :)',
+                    body: 'Adding Twitter was successful :)',
                     showCloseButton: false,
                     timeout: 2500
                 });

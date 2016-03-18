@@ -52,7 +52,7 @@ emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, 
             $scope.data.imageObject = data;
             data.forEach(function (image) {
                 $scope.data.imageStrings.push(image.image);
-            })
+            });
             console.log($scope.data.imageStrings);
             console.log($scope.data.imageObject);
         }
@@ -85,7 +85,7 @@ emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, 
         if ($scope.data.imageStrings.length>0) {
             $scope.data.imagesSaved = true;
         }
-    }
+    };
     //Get categories and conditions data from dataService
     var myDataPromise = dataService.getData();
     myDataPromise.then(function(result) {

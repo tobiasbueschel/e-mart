@@ -30,7 +30,7 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
         if ($scope.data.imageStrings.length>0) {
             $scope.data.imagesSaved = true;
         }
-    }
+    };
 
     $scope.data.addItem = function () {
         console.log("Inside adding item method...");
