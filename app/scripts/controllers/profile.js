@@ -29,7 +29,7 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
     };
 
     //Get items of the current user
-    var sellerItemsPromise = dataService.getSellerItems($cookies.userID);
+    var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));
     sellerItemsPromise.then(function(result) {
         //inside promise then
         $scope.data.items = result.data;
@@ -37,7 +37,7 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
     });
 
     //Get the auctions of the current user
-    var sellerAuctionsPromise = dataService.getSellerAuctions($cookies.userID);
+    var sellerAuctionsPromise = dataService.getSellerAuctions($cookies.get('userID'));
     sellerAuctionsPromise.then(function(result) {
         console.log(result.data);
         $scope.data.auctions = result.data;

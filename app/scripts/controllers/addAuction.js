@@ -43,7 +43,7 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
                 method: "post",
                 url: "/scripts/php/addauction.php",
                 data: {
-                    auctioneerid: $cookies.userID,
+                    auctioneerid: $cookies.get('userID'),
                     itemid: $scope.data.item,
                     auctionname: $scope.data.name,
                     description: $scope.data.description,

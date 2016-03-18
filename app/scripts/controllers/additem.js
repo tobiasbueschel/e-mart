@@ -9,6 +9,9 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
     $scope.data.imagesSaved = false;
     $scope.data.imagesAdded = "Add images first.";
 
+    $scope.data.categories = dataService.categories;
+    $scope.data.conditions = dataService.conditions;
+
     //process files
     $scope.data.processFiles = function(files) {
         angular.forEach(files, function (flowFile, i) {
@@ -27,7 +30,7 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
         if ($scope.data.imageStrings.length>0) {
             $scope.data.imagesSaved = true;
         }
-    }
+    };
 
     $scope.data.addItem = function () {
         console.log("Inside adding item method...");
@@ -40,7 +43,7 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
                 description: $scope.data.description,
                 category: $scope.data.category,
                 condition: $scope.data.condition,
-                ownerID: $cookies.userID
+                ownerID: $cookies.get('userID')
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
@@ -66,7 +69,7 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
                     console.log("Image insertion response from database", data);
                     if (data == 1) {
                         $scope.data.responseMessage = "ITEM AND IMAGES SUCCESSFULLY ADDED!";
-                        $state.go('seller-draft');
+                        $state.go('seller.draft');
                     }
                 });
             }

@@ -105,7 +105,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         .state('seller', {
             templateUrl: "views/common/content.html",
             controller: "sellerDashboardCtrl",
-            data: { mainState: 'profile.rating', mainStateName: 'Profile', name: 'Seller Dashboard', toggleView: true }
+            data: { mainState: 'seller.onsale', mainStateName: 'On Sale', name: 'Seller Dashboard', toggleView: true }
         })
         .state('seller.additem', {
             url:"/additem",
@@ -129,13 +129,13 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             data: { pageTitle: 'Seller Dashboard | Items Sold', subStateName: 'Items Sold' }
         })
 
-        .state('edititem', {
-            parent: "root",
+        .state('seller.edititem', {
             url:"/edititem?:itemid",
+            controller: "editItemCtrl",
             templateUrl: function (param){
                 return "views/seller/edititem.html?itemid="+param.id;
             },
-            data: {pageTitle: "Edit Item"}
+            data: { pageTitle: 'Seller Dashboard | Edit Item', subStateName: 'Edit Item' }
         })
         .state('addauction', {
             parent: "root",
