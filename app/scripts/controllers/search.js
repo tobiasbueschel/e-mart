@@ -1,14 +1,20 @@
 /**
  * Created by kimeshan on 18/03/2016.
  */
-emart.controller('searchCtrl', function ($scope, $http, $stateParams, $state, toaster) {
+emart.controller('searchCtrl', function ($scope, $http, $stateParams, $state, toaster, searchService) {
     $scope.data = {};
     $scope.data.searchResults = [];
     $scope.data.srLength = $scope.data.searchResults.length;
     $scope.data.searchterm  = "";
 
+    //On search bar change
+    $scope.$on('navSearchChanged', function (event, args) {
+        console.log("Caught...", args.newterm);
+        $scope.data.searchterm = args.newterm;
+        $scope.data.searchAuctions();
+    });
+
     $scope.data.searchAuctions = function () {
-        console.log($scope.data.searchterm);
         //Search request
         var searchRequest = $http({
             method: "post",
@@ -22,9 +28,7 @@ emart.controller('searchCtrl', function ($scope, $http, $stateParams, $state, to
         //Check promise
         searchRequest.success(function (data) {
             console.log("Response", data);
-
             if (data) {
-
                 //Success
                 $scope.data.searchResults = data;
                 $scope.data.srLength = $scope.data.searchResults.length;
@@ -32,7 +36,6 @@ emart.controller('searchCtrl', function ($scope, $http, $stateParams, $state, to
         })
     }
 
-    $scope.data.searchAuctions();
 
 
 
