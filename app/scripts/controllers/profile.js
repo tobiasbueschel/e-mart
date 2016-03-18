@@ -16,5 +16,4 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, dataSe
     $scope.viewSold = false;
 
 
-
 });
