@@ -69,7 +69,7 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
                     console.log("Image insertion response from database", data);
                     if (data == 1) {
                         $scope.data.responseMessage = "ITEM AND IMAGES SUCCESSFULLY ADDED!";
-                        $state.go('seller-draft');
+                        $state.go('seller.draft');
                     }
                 });
             }
