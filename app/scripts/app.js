@@ -7,5 +7,6 @@ var emart = angular.module('emart', [
     'toaster',
     'ngCookies',
     'flow',
-    'firebase'
+    'firebase',
+    'timer'
 ]);

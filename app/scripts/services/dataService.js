@@ -4,7 +4,7 @@
  */
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
-    console.log($cookies.userID);
+
     //Store categories and conditions here
     dataServiceScope.categories = null;
     dataServiceScope.conditions = null;
@@ -109,7 +109,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
 
     dataServiceScope.getSellerAuctions = function (auctioneerID) {
         var auctions = null;
@@ -131,7 +131,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
 
     dataServiceScope.getAuctions = function () {
 
@@ -156,4 +156,4 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         });
     }
 
-}])
+}]);

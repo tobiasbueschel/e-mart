@@ -2,7 +2,7 @@
  * MainCtrl - controller
  */
 
-emart.controller('MainCtrl', function ($scope, $http, $state, $cookies) {
+emart.controller('MainCtrl', function ($scope, $http, $state, $cookies, dataService) {
 
     this.userName = 'Example user';
     this.helloText = 'Welcome in SeedProject';
@@ -17,5 +17,14 @@ emart.controller('MainCtrl', function ($scope, $http, $state, $cookies) {
     $scope.user.userType = $cookies.userType;
     $scope.user.city = $cookies.city;
     $scope.user.dateRegistered = $cookies.dateRegistered ? new Date($cookies.dateRegistered.replace(/-/g,"/")) : null;
+
+
+    //Get categories and conditions data from dataService
+    var myDataPromise = dataService.getData();
+    myDataPromise.then(function(result) {
+        //inside promise then
+        $scope.data.categories = result.categories;
+        $scope.data.conditions = result.conditions;
+    });
 
 });

@@ -113,8 +113,8 @@
                     <h5>Products On Sale</h5>
                 </div>
                 <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-md-6">
+                    <div class="row">
+                            <div class="col-md-6" ng-repeat="i in data.items track by i.itemID">
                                 <div class="ibox">
                                     <div class="ibox-content product-box">
 
@@ -122,99 +122,29 @@
                                             [ INFO ]
                                         </div>
                                         <div class="product-desc">
-                                <span class="product-price">
-                                    $10
-                                </span>
-                                            <small class="text-muted">Category</small>
-                                            <a href="#" class="product-name"> Product</a>
+                                            <span class="product-bid">
+                                                0 bids
+                                            </span>
+                                            <span class="product-price">
+                                                £10
+                                            </span>
 
+                                            <small class="text-muted">{{ data.getCategoryOfItem(i) }}</small>
+                                            <a href="#" class="product-name">{{ i.name }}</a>
 
-
+                                            <!--<tr ng-repeat="i in data.items track by i.itemID">-->
+                                                <!--<td>{{i.name}}</td>-->
+                                                <!--<td>{{i.description}}</td>-->
+                                                <!--<td>{{data.getCategoryOfItem(i)}}</td>-->
+                                                <!--<td>{{data.getConditionOfItem(i)}}</td>-->
                                             <div class="small m-t-xs">
-                                                Many desktop publishing packages and web page editors now.
+                                                {{ i.description }}
                                             </div>
-                                            <div class="m-t text-righ">
 
-                                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="ibox">
-                                    <div class="ibox-content product-box">
-
-                                        <div class="product-imitation">
-                                            [ INFO ]
-                                        </div>
-                                        <div class="product-desc">
-                                <span class="product-price">
-                                    $10
-                                </span>
-                                            <small class="text-muted">Category</small>
-                                            <a href="#" class="product-name"> Product</a>
+                                            <timer />
 
 
-
-                                            <div class="small m-t-xs">
-                                                Many desktop publishing packages and web page editors now.
-                                            </div>
-                                            <div class="m-t text-righ">
-
-                                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="ibox">
-                                    <div class="ibox-content product-box active">
-
-                                        <div class="product-imitation">
-                                            [ INFO ]
-                                        </div>
-                                        <div class="product-desc">
-                                <span class="product-price">
-                                    $10
-                                </span>
-                                            <small class="text-muted">Category</small>
-                                            <a href="#" class="product-name"> Product</a>
-
-
-
-                                            <div class="small m-t-xs">
-                                                Many desktop publishing packages and web page editors now.
-                                            </div>
-                                            <div class="m-t text-righ">
-
-                                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="ibox">
-                                    <div class="ibox-content product-box">
-
-                                        <div class="product-imitation">
-                                            [ INFO ]
-                                        </div>
-                                        <div class="product-desc">
-                                <span class="product-price">
-                                    $10
-                                </span>
-                                            <small class="text-muted">Category</small>
-                                            <a href="#" class="product-name"> Product</a>
-
-
-
-                                            <div class="small m-t-xs">
-                                                Many desktop publishing packages and web page editors now.
-                                            </div>
-                                            <div class="m-t text-righ">
+                                            <div class="m-t text-left">
 
                                                 <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
                                             </div>
