@@ -126,9 +126,8 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         .state('seller.sold', {
             url: "/seller-sold",
             templateUrl: "views/seller/seller_sold.html",
-            data: { pageTitle: 'Seller Dashboard | Items Sold', subStateName: 'Items On Sale' }
+            data: { pageTitle: 'Seller Dashboard | Items Sold', subStateName: 'Items Sold' }
         })
-
 
         .state('edititem', {
             parent: "root",
