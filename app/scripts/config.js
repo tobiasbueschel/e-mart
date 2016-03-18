@@ -17,7 +17,7 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         console.log('catchAll', arguments);
     });
 
-    $urlRouterProvider.otherwise("/main");
+    $urlRouterProvider.otherwise("/endingsoon");
 
     $stateProvider
 
@@ -77,11 +77,24 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             data: { pageTitle: 'My Account | Profil Rating', subStateName: 'Rating' }
         })
 
+
+        //-----------------------------------------------------
+        // ENDING SOON
+        //-----------------------------------------------------
+        .state('endingsoon', {
+            url: "/endingsoon",
+            parent: "root",
+            templateUrl: "views/buyer/ending_soon.html",
+            //controller: "profileCtrl",
+            data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon' }
+        })
+
         //-----------------------------------------------------
         // SELLER DASHBOARD
         //-----------------------------------------------------
         .state('seller', {
             templateUrl: "views/common/content.html",
+            controller: "sellerDashboardCtrl",
             data: { mainState: 'profile.rating', mainStateName: 'Profile', name: 'Seller Dashboard', toggleView: true }
         })
         .state('seller.draft', {
