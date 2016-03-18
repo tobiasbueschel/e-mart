@@ -4,6 +4,14 @@
 emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, dataService, $cookies) {
     $scope.data = {}; //creating new scope that can be used inside tabset
     $scope.data.itemid = $stateParams.itemid;
+    //$scope.data.slideInterval = 2000;
+    $scope.data.imageStrings = [];
+
+    $scope.data.deleteImage = function (idx) {
+        console.log($scope.data.imageStrings.length);
+        $scope.data.imageStrings.splice(idx, 1);
+        console.log($scope.data.imageStrings.length);
+    }
     console.log("ITEM ID", $scope.data.itemid);
     //Set default values
     var reqItem = $http({
@@ -26,13 +34,26 @@ emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, 
         }
     });
 
-    reqItem.success(function (data) {
+
+    var getImages = $http({
+        method: "post",
+        url: "/scripts/php/selectRowsGeneric.php",
+        data: {
+            table: 'image',
+            where: 'WHERE itemID='+$scope.data.itemid
+        },
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    getImages.success(function (data) {
         if (data) {
-            console.log("Item returned", data);
-            var currentItem = $scope.data.category = $scope.data.condition = data[0];
-            $scope.data.name = currentItem.name;
-            $scope.data.description = currentItem.description;
-            //$scope.data.imageStrings = ;
+            console.log("Images returned", data);
+            $scope.data.imageObject = data;
+            data.forEach(function (image) {
+                $scope.data.imageStrings.push(image.image);
+            })
+            console.log($scope.data.imageStrings);
+            console.log($scope.data.imageObject);
         }
     });
 
@@ -40,12 +61,13 @@ emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, 
 
     $scope.data.select = "selected";
     //Add image
-    $scope.data.imageStrings = [];
+
     $scope.data.imagesSaved = false;
     $scope.data.imagesAdded = "Add images first.";
 
     //process files
     $scope.data.processFiles = function(files) {
+        $scope.data.imageStrings = [];
         angular.forEach(files, function (flowFile, i) {
             var fileReader = new FileReader();
             fileReader.onload = function (event) {
@@ -71,48 +93,61 @@ emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, 
         $scope.data.conditions = result.conditions;
     });
 
-    $scope.data.addItem = function () {
-        console.log("Inside adding item method...");
+    $scope.data.editItem = function () {
+        console.log("Inside edit item method...");
         console.log($scope.data.name,$scope.data.description, $scope.data.category, $scope.data.condition);
         var request = $http({
             method: "post",
-            url: "/scripts/php/additem.php",
+            url: "/scripts/php/editRowsBySQL.php",
             data: {
-                itemname: $scope.data.name,
-                description: $scope.data.description,
-                category: $scope.data.category.categoryID,
-                condition: $scope.data.condition.conditionID,
-                ownerID: $cookies.userID
+                sql: "UPDATE item SET name='"
+                +$scope.data.name+"',description='"+$scope.data.description+"',categoryID='"
+                +$scope.data.category.categoryID+"', conditionID='"+$scope.data.condition.conditionID
+                +"' WHERE itemID='"+$scope.data.itemid+"'"
             },
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: { 'Content-Type': 'application/json' }
         });
 
 
         /* Successful HTTP post request or not */
         request.success(function (data) {
-            console.log("Response: ",data);
-            if(data[0]) {
-                $scope.data.newItemID = data[0];
-                //insert images into database
-                var insertImages = $http({
-                    method: "post",
-                    url: "/scripts/php/addImages.php",
-                    data: {
-                        itemID: $scope.data.newItemID,
-                        images: $scope.data.imageStrings
-                    },
-                    headers: {'Content-Type': 'application/json'}
-                });
+            if(data==1) {
+                //ITEM EDITED SUCCESSFULLY
+                //remove all old images from database
+                var deleteImages = $http({
+                     method: "post",
+                     url: "/scripts/php/editRowsBySQL.php",
+                     data: {
+                         sql: "DELETE FROM image WHERE itemID="+$scope.data.itemid+"",
+                     },
+                     headers: {'Content-Type': 'application/json'}
+                 });
 
-                insertImages.success(function (data) {
-                    console.log("Image insertion response from database", data);
-                    if (data == 1) {
-                        $scope.data.responseMessage = "ITEM AND IMAGES SUCCESSFULLY ADDED!";
-                        $state.go('sellerdashboard');
+                deleteImages.success(function (data) {
+                    console.log("Image deletion response....", data);
+                    if (data==1) {
+                        console.log("Images sucessfully deleted!");
+                        //Now add the new images
+                        var insertImages = $http({
+                             method: "post",
+                             url: "/scripts/php/addImages.php",
+                             data: {
+                                 itemID: $scope.data.itemid,
+                                 images: $scope.data.imageStrings
+                             },
+                             headers: {'Content-Type': 'application/json'}
+                         });
+
+                         insertImages.success(function (data) {
+                            console.log("Image insertion response from database", data);
+                            if (data == 1) {
+                                 $scope.data.responseMessage = "ITEM AND IMAGES SUCCESSFULLY UPDATED!";
+                                $state.go('sellerdashboard');
+                            }
+                         });
                     }
                 });
             }
-
             else {
                 $scope.data.responseMessage = "Couldn't write to DB!";
             }

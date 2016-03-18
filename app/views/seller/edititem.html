@@ -97,13 +97,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group"><label class="col-sm-2 control-label">Images Uploaded</label>
-                                        <div class="row" ng-repeat="image in data.imageStrings track by $index">
-                                            <div class="col-xs-6"><img ng-src="{{data.imageStrings[$index]}}"/></div>
-                                        </div>
+                                    <div ng-show="data.imageStrings.length>0" class="ibox-content">
+                                        <carousel interval="data.slideInterval">
+                                            <slide ng-repeat="image in data.imageStrings track by $index">
+                                                <img ng-src="{{data.imageStrings[$index]}}" style="margin:auto;">
+                                                <button ng-click="data.deleteImage($index)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                            </slide>
+                                        </carousel>
                                     </div>
 
-                                    <div  ng-show="data.imagesSaved" class="row">
+                                    <div  ng-show="data.imageStrings.length>0" class="row">
                                         <div class="col-xs-12">
                                             <button class="btn btn-block btn-primary" ng-click="data.editItem()">Update ITEM</button>
                                         </div>
