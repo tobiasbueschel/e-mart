@@ -11,10 +11,6 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
         max: 5
     }];
 
-    $scope.viewRating = false;
-    $scope.viewOnSale = true;
-    $scope.viewSold = false;
-
     $scope.data = {}; //creating new scope that can be used inside tabset
     $scope.data.categories = dataService.hashedCategories;
     $scope.data.conditions = dataService.hashedConditions;

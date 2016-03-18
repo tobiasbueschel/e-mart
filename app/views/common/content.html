@@ -11,8 +11,36 @@
         <!-- Page wrapper -->
         <div ng-include="'views/common/topnavbar.html'"></div>
 
-        <!-- Main view  -->
-        <div ui-view></div>
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-8">
+                <h2>{{$state.current.data.name}}</h2>
+                <ol class="breadcrumb" data-ng-hide="$state.current.data.hide">
+                    <li>
+                        <a data-ui-sref="{{ $state.current.data.mainState }}">{{ $state.current.data.mainStateName }}</a>
+                    </li>
+                    <li class="active">
+                        <strong>{{$state.current.data.subStateName}}</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-4" data-ng-if="!$state.current.data.toggleView">
+            </div>
+            <div class="col-lg-4" data-ng-if="$state.current.data.toggleView">
+                <div class="title-action">
+                    <button ng-click="toggleView();" type="button" class="btn btn-primary"><i class="fa fa-eye"></i> Toggle View </button>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+
+                <!-- Main view  -->
+                <div ui-view></div>
+
+            </div>
+        </div>
+
 
         <!-- Footer -->
         <div ng-include="'views/common/footer.html'"></div>
