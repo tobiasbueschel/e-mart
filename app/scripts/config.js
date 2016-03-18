@@ -64,6 +64,16 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         })
 
         //-----------------------------------------------------
+        // SEARCH RESULTS
+        //-----------------------------------------------------
+        .state('search', {
+            parent: "root",
+            url:"/search",
+            templateUrl: "views/search.html",
+            data: {pageTitle: "Search auctions"}
+        })
+
+        //-----------------------------------------------------
         // ADD ITEM
         //-----------------------------------------------------
         .state('additem', {
