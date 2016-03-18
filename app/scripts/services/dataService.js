@@ -55,7 +55,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
 
 
     dataServiceScope.getData = function() {
-
+        console.log("GETTING CONDITIONS AND CAT DATA");
         // Angular $http() and then() both return promises themselves
         //Let's pull categories
         var data = {};
@@ -68,6 +68,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
             if (response!==0) { //if no error when fetching database rows
+                console.log("GOT RESPONSE AFTER FETCHING CONDITIONS AND CATS");
                 console.log(response);
                 data.categories = response.data.category;
                 data.conditions = response.data.itemcondition;
@@ -117,7 +118,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             url: "/scripts/php/selectRowsGeneric.php",
             data: {
                 table:'item',
-                where:'WHERE ownerID='+userID
+                where:'WHERE ownerID='+userID+' AND iSold=0'
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {

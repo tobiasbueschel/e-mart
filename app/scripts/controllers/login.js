@@ -24,7 +24,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
         request.success(function (data) {
             if(typeof data.userID != 'undefined'){
                 dataService.setCurrentUser(data);
-                $state.go('main');
+                $state.go('endingsoon');
                 toaster.pop({
                     type: 'success',
                     title: 'Welcome',
