@@ -154,6 +154,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         .state('buyer.mybids', {
             url: "/bybids",
             templateUrl: "views/buyer/mybids.html",
+            controller: "BuyerDashboardCtrl",
             data: { pageTitle: 'Buyer Dashboard | My Bids' }
         })
         .state('buyer.boughtItems', {
@@ -164,6 +165,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         .state('buyer.bookmarks', {
             url: "/bookmarks",
             templateUrl: "views/buyer/bookmarks.html",
+            controller: "bookmarkCtrl",
             data: { pageTitle: 'Buyer Dashboard | Bookmarks', subStateName: "Bookmarks" }
         })
 

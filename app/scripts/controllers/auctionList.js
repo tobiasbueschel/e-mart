@@ -12,7 +12,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $cookies, d
             method: "post",
             url: "/scripts/php/selectRowBysql.php",
             data: {
-                sql: "select a.auctionID, itemID, name, description, instantPrice, isActive, endDate, bidID, bidderID, bidPrice from auction a LEFT JOIN bid b ON a.currentBidID = b.bidID;"
+                sql: "select a.auctionID, itemID, name, description, instantPrice, isActive, endDate, bidID, bidderID, bidPrice from auction a LEFT JOIN bid b ON a.currentBidID = b.bidID WHERE isActive = true;"
             },
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
@@ -33,7 +33,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $cookies, d
             url: "/scripts/php/bookmark.php",
             data: {
                 auctionID: auctionID,
-                bidderID: $cookies.get('userID')
+                userID: $cookies.get('userID')
             },
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
