@@ -114,11 +114,11 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         })
 
         //TODO: NEED WORK
-        .state('additem', {
-            parent: "root",
+        .state('seller.additem', {
             url:"/additem",
             templateUrl: "views/seller/additem.html",
-            data: {pageTitle: "Add Item"}
+            controller: 'addItemCtrl',
+            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item' }
         })
         .state('edititem', {
             parent: "root",
