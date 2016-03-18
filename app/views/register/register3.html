@@ -1,5 +1,7 @@
 <h3>Register - Account Type</h3>
 <br>
+<button type="button" class="btn btn-primary block full-width m-b" data-ng-class="{ 'btn-outline': !twDisabled }" data-ng-disabled="twDisabled" data-ng-click="registerTwitter()"><i class="fa fa-twitter"></i>&nbsp;&nbsp;Add Twitter Account</button>
+
 <select class="form-control m-b" name="countries" data-ng-model="register.country" data-ng-required="true">
     <option value="" disabled selected>Select your country</option>
     <option data-ng-repeat="country in countries">{{country.name}}</option>
@@ -21,10 +23,10 @@
 <p>What kind of account would you like to register?</p>
 <div class="form-group">
      <label class="checkbox-inline">
-            <input type="radio" name="userType" icheck data-ng-model="register.usertype" value="buyer">&nbsp;&nbsp;Buyer
+            <input type="radio" name="userType" icheck data-ng-model="register.usertype" value="Buyer">&nbsp;&nbsp;Buyer
      </label>
     <label class="checkbox-inline">
-        <input type="radio" name="userType" icheck data-ng-model="register.usertype" value="seller">&nbsp;&nbsp;Seller
+        <input type="radio" name="userType" icheck data-ng-model="register.usertype" value="Seller">&nbsp;&nbsp;Seller
     </label>
 </div>
 

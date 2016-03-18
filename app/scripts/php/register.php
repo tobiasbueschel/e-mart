@@ -23,6 +23,8 @@ if(isset($_POST)) {
     $country = $request->country;
     $telephoneNumber = $request->telephoneNumber;
     $usertype = $request->usertype;
+    $twUsername = $request->twUsername;
+    $twProfileImage = $request->twProfileImage;
 
     // PROTECT AGAINST MYSQL INJECTION
     $firstname = stripslashes($firstname);
@@ -36,14 +38,16 @@ if(isset($_POST)) {
     $country = stripslashes($country);
     $telephoneNumber = stripslashes($telephoneNumber);
     $usertype = stripslashes($usertype);
+    $twUsername = stripslashes($twUsername);
+    $twProfileImage = stripslashes($twProfileImage);
 
     // hashes the password using the bcrypt algorithm (default as of PHP 5.5.0)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     // TODO: add date registered to users table and to sql query
 
-    $sql = "INSERT INTO user (userName, firstName, lastName, emailAddress, password, address, city, postalCode, country, telephoneNumber, userType, dateRegistered)
-                VALUES ('$username', '$firstname', '$lastname', '$email', '$password', '$address', '$city', '$postalcode', '$country', '$telephoneNumber', '$usertype', CURRENT_TIMESTAMP)";
+    $sql = "INSERT INTO user (userName, firstName, lastName, emailAddress, password, address, city, postalCode, country, telephoneNumber, userType, dateRegistered, twUsername, twProfileImage)
+                VALUES ('$username', '$firstname', '$lastname', '$email', '$password', '$address', '$city', '$postalcode', '$country', '$telephoneNumber', '$usertype', CURRENT_TIMESTAMP, '$twUsername', '$twProfileImage')";
 
     if ($connection->query($sql) == TRUE ){
 

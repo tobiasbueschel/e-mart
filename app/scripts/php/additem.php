@@ -25,7 +25,13 @@ if(!empty($_POST)) {
             VALUES ('$name','$description', $category, $condition, $ownerID,$isSold)";
 
     if ($connection->query($sql) == TRUE ){
-        echo true;
+        $getInsertedRow = "SELECT LAST_INSERT_ID()";
+
+        if ($result = $connection->query($getInsertedRow)) {
+            $row = mysqli_fetch_array($result);
+            echo json_encode($row);
+        }
+
     }
     else{
         // logs errors to console

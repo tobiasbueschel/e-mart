@@ -4,7 +4,7 @@
  */
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
-
+    console.log($cookies.userID);
     //Store categories and conditions here
     dataServiceScope.categories = null;
     dataServiceScope.conditions = null;
@@ -22,17 +22,27 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         array.forEach(function (element, index) {
             var currentHashKey = element[hashfield]+"";
             hashTable[currentHashKey] = element;
-        })
+        });
         console.log(hashTable);
         return hashTable;
-    }
+    };
 
     dataServiceScope.setCurrentUser = function (usr) {
         console.log(usr);
         dataServiceScope.userLoggedIn = true;
         dataServiceScope.userObject = usr;
+
         $cookies.userID = usr.userID;
-    }
+        $cookies.userName = usr.userName;
+        $cookies.twUsername = usr.twUsername;
+        $cookies.twProfileImage = usr.twProfileImage;
+        $cookies.firstName = usr.firstName;
+        $cookies.lastName = usr.lastName;
+        $cookies.userType = usr.userType;
+        $cookies.dateRegistered = usr.dateRegistered;
+        $cookies.city = usr.city;
+
+    };
 
     dataServiceScope.getConditionbyID = function (conditionID) {
         if (dataServiceScope.conditions!=null) {
@@ -41,7 +51,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             })
         }
         return null;
-    }
+    };
 
 
     dataServiceScope.getData = function() {

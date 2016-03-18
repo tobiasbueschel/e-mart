@@ -1,0 +1,123 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Edit Item</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div ng-controller="editItemCtrl" class="row">
+        <div class="col-lg-12">
+            <div  class="tabs-container">
+
+                <tabset>
+                    <tab>
+                        <tab-heading>
+                            Item information
+                        </tab-heading>
+                        <div  class="panel-body">
+                            <form class="m-t" name="data.editForm" novalidate>
+                                <fieldset class="form-horizontal">
+                                    <!--ITEM NAME -->
+                                    <div class="form-group"
+                                         data-ng-class="{'has-success': data.editForm.name.$valid, 'has-error': data.editForm.name.$invalid && data.editForm.name.$dirty}">
+
+                                        <label class="col-sm-2 control-label">Name:</label>
+                                        <div class="col-sm-10">
+                                            <input name="name" type="text" data-ng-model="data.name"
+                                                   data-ng-minlength="3"
+                                                   data-ng-maxlength="20"
+                                                   data-ng-trim="true"
+                                                   data-ng-required="true"
+                                                   class="form-control" placeholder="Apple iPhone">
+                                        </div>
+                                        <!--VALIDATION -->
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-10">
+                                            <p data-ng-show="data.editForm.name.$invalid && data.editForm.name.$dirty" class="help-block m-b-none has-error">Name not long enough.</p>
+                                        </div>
+
+                                    </div>
+                                    <!--ITEM CATEGORY-->
+                                    <div class="form-group"
+                                         data-ng-class="{'has-success': data.editForm.category.$valid, 'has-error': data.editForm.category.$invalid && data.editForm.category.$dirty}">
+                                        <label class="col-sm-2 control-label">Category :</label>
+                                        <div class="col-sm-10">
+                                            <select name="category" class="form-control" data-ng-model="data.category"
+                                                    ng-options="cat as cat.name for cat in data.categories track by cat.categoryID">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!--ITEM DESCRIPTION -->
+                                    <div class="form-group"
+                                         data-ng-class="{'has-success': data.editForm.description.$valid, 'has-error': data.editForm.description.$invalid && data.editForm.description.$dirty}">
+
+                                        <label class="col-sm-2 control-label">Description:</label>
+                                        <div class="col-sm-10">
+                                        <textarea name="description" rows="5" data-ng-model="data.description" class="form-control"
+                                                  data-ng-minlength="3"
+                                                  data-ng-maxlength="1000"
+                                                  data-ng-trim="true"
+                                                  data-ng-required="true"
+                                                  class="form-control" placeholder="Gold edition iPhone with 32GB storage.">
+                                        </textarea>
+                                        </div>
+
+                                        <!--VALIDATION -->
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-10">
+                                            <p data-ng-show="data.editForm.description.$invalid && data.editForm.description.$dirty" class="help-block m-b-none has-error">Description must be more than 3 and less than 1000 chars.</p>
+                                        </div>
+                                    </div>
+                                    <!--ITEM CONDITION-->
+                                    <div class="form-group"
+                                         data-ng-class="{'has-success': data.editForm.condition.$valid, 'has-error': data.editForm.condition.$invalid && data.editForm.condition.$dirty}">
+                                        <label class="col-sm-2 control-label">Condition :</label>
+                                        <div class="col-sm-10">
+                                            <select name="condition" class="form-control" data-ng-model="data.condition"
+                                                    ng-options="c as c.name for c in data.conditions track by c.conditionID">
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group"><label class="col-sm-2 control-label">Images :</label>
+                                        <div class="col-sm-4">
+                                            <div flow-init flow-name="uploader.flow" flow-files-added="data.processFiles($files)">
+                                                <button class="btn btn-primary" flow-btn type="file">Add Images</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            {{data.imagesAdded}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-sm-2 control-label">Upload :</label>
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-success" ng-click="data.saveImages()">Upload</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-sm-2 control-label">Images Uploaded</label>
+                                        <div class="row" ng-repeat="image in data.imageStrings track by $index">
+                                            <div class="col-xs-6"><img ng-src="{{data.imageStrings[$index]}}"/></div>
+                                        </div>
+                                    </div>
+
+                                    <div  ng-show="data.imagesSaved" class="row">
+                                        <div class="col-xs-12">
+                                            <button class="btn btn-block btn-primary" ng-click="data.editItem()">Update ITEM</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </tab>
+
+
+                </tabset>
+            </div>
+        </div>
+    </div>
+
+</div>
