@@ -18,6 +18,10 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         return $scope.data.hashedItems[itemID].name;
     };
 
+    $scope.data.createAuction = function () {
+        $state.go('addauction');
+    }
+
     $scope.data.deleteItem = function (itemID) {
         console.log("Delete item", itemID);
 
