@@ -11,16 +11,6 @@ var emart = angular.module('emart', [
     'timer'
 ]);
 
-emart.run(function($rootScope, $state, dataService) {
-
+emart.run(function($rootScope, $state) {
     $rootScope.$state = $state;
-
-    //Get categories and conditions data from dataService
-    var myDataPromise = dataService.getData();
-    myDataPromise.then(function(result) {
-        //inside promise then
-        $scope.data.categories = result.categories;
-        $scope.data.conditions = result.conditions;
-    });
-
 });

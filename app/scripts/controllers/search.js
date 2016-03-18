@@ -1,6 +1,3 @@
-/**
- * Created by kimeshan on 18/03/2016.
- */
 emart.controller('searchCtrl', function ($scope, $http, $stateParams, $state, toaster, searchService) {
     $scope.data = {};
     $scope.data.searchResults = [];

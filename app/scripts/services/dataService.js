@@ -1,7 +1,6 @@
-/**
- * Created by kimeshan on 10/03/2016.
+/************************************************************************************
  * This service provides a singleton for categories and conditions data
- */
+ ************************************************************************************/
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
 
@@ -56,7 +55,6 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         return null;
     };
 
-
     dataServiceScope.getData = function() {
         console.log("GETTING CONDITIONS AND CAT DATA");
         // Angular $http() and then() both return promises themselves
@@ -71,8 +69,6 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
             if (response!==0) { //if no error when fetching database rows
-                console.log("GOT RESPONSE AFTER FETCHING CONDITIONS AND CATS");
-                console.log(response);
                 data.categories = response.data.category;
                 data.conditions = response.data.itemcondition;
                 dataServiceScope.categories = response.data.category;
@@ -80,7 +76,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 //hash  conditions by conditions Id dataServiceScope.conditions, and same for categories
                 dataServiceScope.hashedCategories = dataServiceScope.generateHashTable(dataServiceScope.categories, "categoryID");
                 dataServiceScope.hashedConditions = dataServiceScope.generateHashTable(dataServiceScope.conditions, "conditionID");
-                console.log(dataServiceScope.hashedConditions);
+                console.log(dataServiceScope.hashedConditions, dataServiceScope.hashedCategories);
                 return data;
             }
             else {
@@ -121,7 +117,30 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             url: "/scripts/php/selectRowsGeneric.php",
             data: {
                 table:'item',
-                where:'WHERE ownerID='+userID+' AND iSold=0'
+                where:'WHERE ownerID='+userID+' AND isSold=0'
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+                console.log(response);
+                items = response;
+                return items;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    };
+
+    dataServiceScope.getSellerSoldItems = function (userID) {
+        var items = null;
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowsGeneric.php",
+            data: {
+                table:'item',
+                where:'WHERE ownerID='+userID+' AND isSold=0'
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {

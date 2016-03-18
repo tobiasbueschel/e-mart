@@ -10,8 +10,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
     var myDataPromise = dataService.getData();
     myDataPromise.then(function(result) {
         //inside promise then
-        $scope.data.categories = result.categories;
-        $scope.data.conditions = result.conditions;
+        $scope.$broadcast('fetchedCC');
     });
 
 });
