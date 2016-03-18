@@ -4,15 +4,14 @@
 
 emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookies, toaster, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
-    $scope.data.categories = dataService.hashedCategories;
-    $scope.data.conditions = dataService.hashedConditions;
 
     $scope.data.getCategoryOfItem = function (item) {
-        return $scope.data.categories[item.categoryID].name;
+        console.log(item,dataService.categories);
+        return dataService.hashedCategories[item.categoryID].name;
     };
 
     $scope.data.getConditionOfItem = function (item) {
-        return $scope.data.conditions[item.conditionID].name;
+        return dataService.hashedConditions[item.conditionID].name;
     };
 
     $scope.data.getItemNamebyID = function (itemID) {
@@ -63,6 +62,15 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         //inside promise then
         $scope.data.items = result.data;
         $scope.data.hashedItems = dataService.generateHashTable($scope.data.items, "itemID");
+        $scope.$broadcast('sellerItemsObtains');
+    });
+
+    //Get sold items of user
+    var sellerSoldItemsPromise = dataService.getSellerSoldItems($cookies.userID);
+    sellerSoldItemsPromise.then(function(result) {
+        //inside promise then
+        $scope.data.soldItems = result.data;
+        $scope.data.soldHashedItems = dataService.generateHashTable($scope.data.items, "itemID");
     });
 
     //Get the auctions of the current user
