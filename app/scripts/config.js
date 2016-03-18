@@ -3,7 +3,8 @@
  * Each view are defined as state.
  * Initial there are written stat for all view in theme.
  ************************************************************************/
-function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
+
+emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
 
     //Flow factory for file uploads
     flowFactoryProvider.defaults = {
@@ -88,15 +89,13 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         })
 
 
-
         //-----------------------------------------------------
         // ENDING SOON
         //-----------------------------------------------------
         .state('endingsoon', {
-            url: "/endingsoon",
             parent: "root",
+            url: "/endingsoon",
             templateUrl: "views/buyer/ending_soon.html",
-            //controller: "profileCtrl",
             data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon', hide: true, toggleView: true }
         })
 
@@ -266,14 +265,8 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         .state('search', {
             parent: "root",
             url:"/search",
-            templateUrl: "views/search.html",
-            data: {pageTitle: "Search auctions"}
+            templateUrl: "views/other/search.html",
+            controller: "searchCtrl",
+            data: { pageTitle: 'Search Results', name: 'Search Results', hide: true }
         })
-}
-
-angular
-    .module('emart')
-    .config(config)
-    .run(function($rootScope, $state) {
-        $rootScope.$state = $state;
-    });
+});

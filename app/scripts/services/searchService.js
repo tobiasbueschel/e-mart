@@ -10,10 +10,6 @@ emart.service('searchService', ['$rootScope', '$http', function ($rootScope, $ht
         console.log("Setting search term...");
         searchServiceScope.currentSearchTerm = term;
         $rootScope.$broadcast('navSearchChanged', { newterm: term });
-
     }
-
-
-
 
 }]);
