@@ -10,3 +10,7 @@ var emart = angular.module('emart', [
     'firebase',
     'timer'
 ]);
+
+emart.run(function($rootScope, $state) {
+    $rootScope.$state = $state;
+});
