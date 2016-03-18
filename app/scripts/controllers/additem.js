@@ -28,13 +28,6 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
             $scope.data.imagesSaved = true;
         }
     }
-    //Get categories and conditions data from dataService
-    var myDataPromise = dataService.getData();
-    myDataPromise.then(function(result) {
-        //inside promise then
-        $scope.data.categories = result.categories;
-        $scope.data.conditions = result.conditions;
-    });
 
     $scope.data.addItem = function () {
         console.log("Inside adding item method...");

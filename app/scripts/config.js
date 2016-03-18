@@ -3,7 +3,8 @@
  * Each view are defined as state.
  * Initial there are written stat for all view in theme.
  ************************************************************************/
-function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
+
+emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
 
     //Flow factory for file uploads
     flowFactoryProvider.defaults = {
@@ -17,7 +18,7 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         console.log('catchAll', arguments);
     });
 
-    $urlRouterProvider.otherwise("/main");
+    $urlRouterProvider.otherwise("/endingsoon");
 
     $stateProvider
 
@@ -129,10 +130,6 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             parent: "root",
             templateUrl: "views/buyer/buyer.html"
         })
-
-        //-----------------------------------------------------
-        // BUYER
-        //-----------------------------------------------------
         .state('createbid', {
             parent: "root",
             url:"/createbid?:id&{other}",

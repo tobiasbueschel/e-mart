@@ -28,19 +28,22 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     };
 
     dataServiceScope.setCurrentUser = function (usr) {
+        console.log("hello");
         console.log(usr);
+
         dataServiceScope.userLoggedIn = true;
         dataServiceScope.userObject = usr;
 
-        $cookies.userID = usr.userID;
-        $cookies.userName = usr.userName;
-        $cookies.twUsername = usr.twUsername;
-        $cookies.twProfileImage = usr.twProfileImage;
-        $cookies.firstName = usr.firstName;
-        $cookies.lastName = usr.lastName;
-        $cookies.userType = usr.userType;
-        $cookies.dateRegistered = usr.dateRegistered;
-        $cookies.city = usr.city;
+        // Setting a cookie
+        $cookies.put('userID', usr.userID);
+        $cookies.put('userName', usr.userName);
+        $cookies.put('twUsername', usr.twUsername);
+        $cookies.put('twProfileImage', usr.twProfileImage);
+        $cookies.put('firstName', usr.firstName);
+        $cookies.put('lastName', usr.lastName);
+        $cookies.put('userType', usr.userType);
+        $cookies.put('dateRegistered', usr.dateRegistered);
+        $cookies.put('city', usr.city);
 
     };
 
@@ -55,7 +58,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
 
 
     dataServiceScope.getData = function() {
-
+        console.log("GETTING CONDITIONS AND CAT DATA");
         // Angular $http() and then() both return promises themselves
         //Let's pull categories
         var data = {};
@@ -68,6 +71,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
             if (response!==0) { //if no error when fetching database rows
+                console.log("GOT RESPONSE AFTER FETCHING CONDITIONS AND CATS");
                 console.log(response);
                 data.categories = response.data.category;
                 data.conditions = response.data.itemcondition;
@@ -108,7 +112,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
 
     dataServiceScope.getSellerItems = function (userID) {
         var items = null;
@@ -117,7 +121,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             url: "/scripts/php/selectRowsGeneric.php",
             data: {
                 table:'item',
-                where:'WHERE ownerID='+userID
+                where:'WHERE ownerID='+userID+' AND iSold=0'
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {

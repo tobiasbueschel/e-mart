@@ -7,7 +7,6 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
     $scope.data.categories = dataService.hashedCategories;
     $scope.data.conditions = dataService.hashedConditions;
 
-
     $scope.data.getCategoryOfItem = function (item) {
         return $scope.data.categories[item.categoryID].name;
     };
