@@ -47,6 +47,9 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
 
     // DATA FOR REGISTER FORM
     $scope.register = {};
+    $scope.register.twUsername = false;
+    $scope.register.twProfileImage = false;
+
     $scope.countries = [
         { "name": "Afghanistan", "code": "AF" },
         { "name": "Åland Islands", "code": "AX" },
@@ -294,6 +297,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
         { "name": "Zambia", "code": "ZM" },
         { "name": "Zimbabwe", "code": "ZW" }
     ];
+    $scope.twDisabled = false;
 
     // Checks if form fields have been filled. If yes, redirect to register2.html
     $scope.goRegister2 = function() {
@@ -338,6 +342,45 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
 
     };
 
+    $scope.registerTwitter = function() {
+
+
+        var ref = new Firebase("https://emart.firebaseio.com");
+        var isNewUser = true;
+
+
+        ref.authWithOAuthPopup("twitter", function(error, authData) {
+            if (error) {
+                toaster.pop({
+                    type: 'error',
+                    title: 'Error',
+                    body: 'Adding Twitter was unsuccessful :(',
+                    showCloseButton: false,
+                    timeout: 2500
+                });
+            } else {
+                $scope.twDisabled = true;
+
+                console.log(authData);
+
+                console.log(authData.twitter.username);
+                console.log(authData.twitter.profileImageURL);
+
+                $scope.register.twUsername = authData.twitter.username;
+                $scope.register.twProfileImage = authData.twitter.profileImageURL;
+
+                toaster.pop({
+                    type: 'Success',
+                    title: 'Success',
+                    body: 'Adding Twitter was successfuk :)',
+                    showCloseButton: false,
+                    timeout: 2500
+                });
+             }
+        });
+
+    };
+
     // Checks if form fields have been filled. If yes, try to register the user
     $scope.registerUser = function () {
 
@@ -371,7 +414,9 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
                 postalcode: $scope.register.postalcode,
                 country: $scope.register.country,
                 telephoneNumber: $scope.register.phonenumber,
-                usertype: $scope.register.usertype
+                usertype: $scope.register.usertype,
+                twUsername: $scope.register.twUsername,
+                twProfileImage: $scope.register.twProfileImage
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
@@ -384,7 +429,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
                 toaster.pop({
                     type: 'success',
                     title: 'Success',
-                    body: 'You have successfully registered your account. Welcomen to E-Mart.',
+                    body: 'You have successfully registered your account. Welcome to E-Mart.',
                     showCloseButton: false,
                     timeout: 3000
                 });

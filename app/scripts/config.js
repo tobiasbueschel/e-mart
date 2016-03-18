@@ -209,6 +209,17 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             data: { pageTitle: 'Contact us' }
         })
 
+        //-----------------------------------------------------
+        // PROFILE
+        //-----------------------------------------------------
+        .state('profile', {
+                parent: "root",
+                url: "/profile",
+                templateUrl: "views/profile.html",
+                data: { pageTitle: 'Profile' },
+                controller: "profileCtrl"
+        });
+
 
 }
 
