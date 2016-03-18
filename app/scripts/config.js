@@ -134,9 +134,9 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: "views/ecommerce_product_details.html",
             data: { pageTitle: 'E-commerce product details' }
         })
-        .state('product-list', {
+        .state('auctionList', {
             parent: "root",
-            url: "/product-list",
+            url: "/auctionList",
             templateUrl: "views/auctionList.html",
             data: { pageTitle: 'E-commerce product list' }
         })
