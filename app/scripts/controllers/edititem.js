@@ -11,8 +11,9 @@ emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, 
         console.log($scope.data.imageStrings.length);
         $scope.data.imageStrings.splice(idx, 1);
         console.log($scope.data.imageStrings.length);
-    }
+    };
     console.log("ITEM ID", $scope.data.itemid);
+
     //Set default values
     var reqItem = $http({
         method: "post",

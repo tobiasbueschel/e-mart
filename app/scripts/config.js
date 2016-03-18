@@ -17,7 +17,7 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         console.log('catchAll', arguments);
     });
 
-    $urlRouterProvider.otherwise("/main");
+    $urlRouterProvider.otherwise("/profile");
 
     $stateProvider
 
@@ -126,10 +126,27 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         // BUYER DASHBOARD
         //-----------------------------------------------------
         .state('buyer', {
-            parent: "root",
-            templateUrl: "views/buyer/buyer.html"
+            templateUrl: "views/common/content.html",
+            data: { mainState: 'buyer.bids', mainStateName: 'My Bids', name: 'Buyer Dashboard' }
         })
-        .state('createbid', {
+        .state('buyer.bids', {
+            url: "/bids",
+            templateUrl: "views/buyer/bids.html",
+            data: { pageTitle: 'Buyer Dashboard | My Bids' }
+        })
+        .state('buyer.boughtItems', {
+            url: "/bought-items",
+            templateUrl: "views/buyer/boughtItems.html",
+            data: { pageTitle: 'Buyer Dashboard | Bought Items', subStateName: "Bought Items" }
+        })
+        .state('buyer.bookmarks', {
+            url: "/bookmarks",
+            templateUrl: "views/buyer/bookmarks.html",
+            data: { pageTitle: 'Buyer Dashboard | Bookmarks', subStateName: "Bookmarks" }
+        })
+
+
+        .state('buyer.createbid', {
             parent: "root",
             url:"/createbid?:id&{other}",
             templateUrl: function (param){
@@ -173,23 +190,31 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             data: { mainState: 'ecommerce.grid', mainStateName: 'Product Grid', name: 'E-Commerce', toggleView: true }
         })
         .state('ecommerce.grid', {
-            url: "/ecommerce",
-            templateUrl: "views/ecommerce/products_grid.html",
+            url:"/ecommerce?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/products_grid.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product Grid', subStateName: 'Product Grid' }
         })
         .state('ecommerce.product', {
-            url: "/ecommerce-product",
-            templateUrl: "views/ecommerce/ecommerce_product.html",
+            url: "/ecommerce-product?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/ecommerce_product.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product', subStateName: 'Product' }
         })
         .state('ecommerce.details', {
-            url: "/ecommerce-details",
-            templateUrl: "views/ecommerce/ecommerce_product_details.html",
+            url: "/ecommerce-details?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/ecommerce_product_details.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
         })
         .state('ecommerce.list', {
-            url: "/ecommerce-list",
-            templateUrl: "views/ecommerce/auctionList.html",
+            url: "/ecommerce-list?:categoryid",
+            templateUrl: function (param){
+                return "views/ecommerce/auctionList.html?categoryid="+param.id;
+            },
             data: { pageTitle: 'E-commerce | Product List', subStateName: 'Product List' }
         })
 
