@@ -4,7 +4,7 @@
  */
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
-    console.log($cookies.userID);
+
     //Store categories and conditions here
     dataServiceScope.categories = null;
     dataServiceScope.conditions = null;
@@ -109,7 +109,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
 
     dataServiceScope.getSellerAuctions = function (auctioneerID) {
         var auctions = null;
@@ -131,7 +131,40 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
-    }
+    };
+
+    dataServiceScope.getItemImage = function(itemID) {
+
+        var image = {};
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowsGeneric.php",
+            data: {
+                tables:'image',
+                where: 'WHERE itemID='+itemID
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+
+                console.log("Images returned", data);
+                $scope.data.imageObject = data;
+                data.forEach(function (image) {
+                    $scope.data.imageStrings.push(image.image);
+                });
+                console.log($scope.data.imageStrings);
+                console.log($scope.data.imageObject);
+
+                console.log(response);
+                image = response.data.image;
+                return image;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    };
 
     dataServiceScope.getAuctions = function () {
 
@@ -156,4 +189,4 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         });
     }
 
-}])
+}]);

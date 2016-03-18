@@ -10,15 +10,15 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
 
     $scope.data.getCategoryOfItem = function (item) {
         return $scope.data.categories[item.categoryID].name;
-    }
+    };
 
     $scope.data.getConditionOfItem = function (item) {
         return $scope.data.conditions[item.conditionID].name;
-    }
+    };
 
     $scope.data.getItemNamebyID = function (itemID) {
         return $scope.data.hashedItems[itemID].name;
-    }
+    };
 
     $scope.data.deleteItem = function (itemID) {
         console.log("Delete item", itemID);
