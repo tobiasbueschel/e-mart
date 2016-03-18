@@ -24,6 +24,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookie
             }
         });
     })();
+    console.log($cookies);
 
     $scope.data.createBid = function () {
         var bidprice;
@@ -46,7 +47,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookie
                 data: {
                     bidPrice: $scope.data.bidPrice,
                     auctionID: $stateParams.id,
-                    bidderID: $cookies.userID
+                    bidderID: $cookies.get('userID')
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });
@@ -63,7 +64,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookie
                     })
                     sendemailtobuyer();
                     sendemailtoseller();
-                    $state.go('auctionList');
+                    $state.go('ecommerce.grid');
 
                 }
                 else {

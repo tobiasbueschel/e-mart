@@ -151,9 +151,9 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             templateUrl: "views/common/content.html",
             data: { mainState: 'buyer.bids', mainStateName: 'My Bids', name: 'Buyer Dashboard' }
         })
-        .state('buyer.bids', {
-            url: "/bids",
-            templateUrl: "views/buyer/bids.html",
+        .state('buyer.mybids', {
+            url: "/bybids",
+            templateUrl: "views/buyer/mybids.html",
             data: { pageTitle: 'Buyer Dashboard | My Bids' }
         })
         .state('buyer.boughtItems', {
@@ -175,14 +175,6 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
                 return "views/buyer/createbid.html?id="+param.id +"&other="+param.other
             },
             data: {pageTitle: "Create Bid"}
-        })
-        .state('viewbid', {
-            parent: "root",
-            url: "/viewbid?:id&{other}",
-            templateUrl: function (param){
-                return "views/viewbid.html?id="+param.id +"&other="+param.other
-            },
-            data: { pageTitle: 'View Bid' }
         })
         .state('cart', {
             parent: "root",
@@ -213,6 +205,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         })
         .state('ecommerce.grid', {
             url:"/ecommerce?:categoryid",
+            controller: "auctionListCtrl",
             templateUrl: function (param){
                 return "views/ecommerce/products_grid.html?categoryid="+param.id;
             },
@@ -238,6 +231,14 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
                 return "views/ecommerce/auctionList.html?categoryid="+param.id;
             },
             data: { pageTitle: 'E-commerce | Product List', subStateName: 'Product List' }
+        })
+        .state('viewbid', {
+            parent: "root",
+            url: "/viewbid?:id&{other}",
+            templateUrl: function (param){
+                return "views/ecommerce/viewbid.html?id="+param.id +"&other="+param.other
+            },
+            data: { pageTitle: 'View Bid' }
         })
 
         //-----------------------------------------------------

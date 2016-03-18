@@ -1,0 +1,52 @@
+<div  ng-controller="BuyerDashboardCtrl" class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-content">
+
+                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                    <thead>
+                    <tr>
+                        <th data-toggle="true">Auction Name</th>
+                        <th>Description</th>
+                        <th>Item</th>
+                        <th>End Date</th>
+                        <th>Instance Price</th>
+                        <th class="text-right" data-sort-ignore="true">Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody >
+
+                    <tr ng-repeat="auction in data.auctions track by auction.auctionID">
+                        <td>{{auction.name}}</td>
+                        <td>{{auction.description}}</td>
+                        <td>{{data.getItemNamebyID(auction.itemID)}}</td>
+                        <td>{{auction.endDate}}</td>
+                        <td>{{auction.instantPrice}}</td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button class="btn-white btn btn-xs" ui-sref="viewbid({id:{{auction.auctionID}}, other:'{{auction.name}}'})">View bids</button>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-lg-12">
+    <button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>
+</div>
