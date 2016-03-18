@@ -3,7 +3,7 @@
  */
 emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $cookies) {
     $scope.data = {}; //creating new scope that can be used inside tabset
-
+    $scope.data.slideInterval = 2000;
     //Add image
     $scope.data.imageStrings = [];
     $scope.data.imagesSaved = false;

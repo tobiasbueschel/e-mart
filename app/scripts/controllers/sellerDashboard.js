@@ -20,6 +20,43 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         return $scope.data.hashedItems[itemID].name;
     };
 
+    $scope.data.deleteItem = function (itemID) {
+        console.log("Delete item", itemID);
+        var deleteItem = $http({
+            method: 'post',
+            url: "/scripts/php/editRowsBySQL.php",
+            data: {
+                sql: "DELETE FROM item WHERE itemID="+itemID
+            }
+        });
+
+        deleteItem.success(function (data) {
+            console.log("response" ,data);
+            if (data==1) {
+                //Item deleted
+                $state.reload();
+                toaster.pop({
+                    type: 'message',
+                    title: 'Delete complete',
+                    body: 'Item has been deleted',
+                    showCloseButton: false,
+                    timeout: 2000
+                });
+
+
+            }
+            else {
+                toaster.pop({
+                    type: 'error',
+                    title: 'Delete failed',
+                    body: 'Only non-auctioned items can be deleted',
+                    showCloseButton: false,
+                    timeout: 2000
+                });
+            }
+        })
+    }
+
 
     //Get items of the current user
     var sellerItemsPromise = dataService.getSellerItems($cookies.userID);

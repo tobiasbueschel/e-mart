@@ -26,6 +26,7 @@
                                                     <th>Description</th>
                                                     <th>Category</th>
                                                     <th>Condition</th>
+                                                    <th data-sort-ignore="true">Delete</th>
                                                     <th class="text-right" data-sort-ignore="true">Action</th>
                                                 </tr>
                                                 </thead>
@@ -36,6 +37,7 @@
                                                     <td>{{i.description}}</td>
                                                     <td>{{data.getCategoryOfItem(i)}}</td>
                                                     <td>{{data.getConditionOfItem(i)}}</td>
+                                                    <td><button ng-click="data.deleteItem(i.itemID)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                                                     <td class="text-right">
                                                         <div class="btn-group">
                                                             <button class="btn-white btn btn-xs" ui-sref="edititem({itemid:i.itemID})">View/Edit</button>
@@ -83,6 +85,7 @@
                                                     <th>Reserve Price</th>
                                                     <th>Instance Price</th>
                                                     <th class="text-right" data-sort-ignore="true">Action</th>
+
                                                 </tr>
                                                 </thead>
                                                 <tbody >

@@ -214,6 +214,12 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             templateUrl: "views/other/tos.html",
             data: { pageTitle: 'Terms & Conditions', name: 'Help', mainStateName: 'Terms & Conditions' }
         })
+        .state('search', {
+            parent: "root",
+            url:"/search",
+            templateUrl: "views/search.html",
+            data: {pageTitle: "Search auctions"}
+        })
 }
 
 angular
