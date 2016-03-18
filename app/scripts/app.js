@@ -12,7 +12,6 @@ var emart = angular.module('emart', [
 ]);
 
 emart.run(function($rootScope, $state, dataService) {
-
     $rootScope.$state = $state;
 
     //Get categories and conditions data from dataService
@@ -22,5 +21,4 @@ emart.run(function($rootScope, $state, dataService) {
         $scope.data.categories = result.categories;
         $scope.data.conditions = result.conditions;
     });
-
 });

@@ -11,5 +11,4 @@ emart.service('searchService', ['$rootScope', '$http', function ($rootScope, $ht
         searchServiceScope.currentSearchTerm = term;
         $rootScope.$broadcast('navSearchChanged', { newterm: term });
     }
-
 }]);
