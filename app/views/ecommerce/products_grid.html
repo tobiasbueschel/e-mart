@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-md-3" ng-repeat="(key,auction) in data.auctions track by $index">
     <div class="ibox">
         <div class="ibox-content product-box">
 
@@ -6,101 +6,33 @@
                 [ INFO ]
             </div>
             <div class="product-desc">
-                        <span class="product-price">
-                            $10
+                        <span class="product-bookmark">
+                             <button type="button" data-ng-click="data.addBookmark( auction.auctionID )"><i class="fa fa-bookmark-o"></i></button>
                         </span>
+
+                        <span class="product-price">
+                            £{{auction.bidPrice}}
+                        </span>
+                        <span class="product-bid">
+                            2 bids
+                        </span>
+
+
                 <small class="text-muted">Category</small>
-                <a href="#" class="product-name"> Product</a>
+                <a class="product-name">{{auction.name}}</a>
 
 
 
                 <div class="small m-t-xs">
-                    Many desktop publishing packages and web page editors now.
+                    {{auction.description}}
                 </div>
-                <div class="m-t text-righ">
-
-                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-md-3">
-    <div class="ibox">
-        <div class="ibox-content product-box">
-
-            <div class="product-imitation">
-                [ INFO ]
-            </div>
-            <div class="product-desc">
-                        <span class="product-price">
-                            $10
-                        </span>
-                <small class="text-muted">Category</small>
-                <a href="#" class="product-name"> Product</a>
-
-
-
                 <div class="small m-t-xs">
-                    Many desktop publishing packages and web page editors now.
+                    End Date: {{auction.endDate}}
                 </div>
                 <div class="m-t text-righ">
 
-                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-md-3">
-    <div class="ibox">
-        <div class="ibox-content product-box active">
-
-            <div class="product-imitation">
-                [ INFO ]
-            </div>
-            <div class="product-desc">
-                        <span class="product-price">
-                            $10
-                        </span>
-                <small class="text-muted">Category</small>
-                <a href="#" class="product-name"> Product</a>
-
-
-
-                <div class="small m-t-xs">
-                    Many desktop publishing packages and web page editors now.
-                </div>
-                <div class="m-t text-righ">
-
-                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-md-3">
-    <div class="ibox">
-        <div class="ibox-content product-box">
-
-            <div class="product-imitation">
-                [ INFO ]
-            </div>
-            <div class="product-desc">
-                        <span class="product-price">
-                            $10
-                        </span>
-                <small class="text-muted">Category</small>
-                <a href="#" class="product-name"> Product</a>
-
-
-
-                <div class="small m-t-xs">
-                    Many desktop publishing packages and web page editors now.
-                </div>
-                <div class="m-t text-righ">
-
-                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                    <a data-ui-sref="viewbid({id:{{auction.auctionID}}, other:'{{auction.name}}'})" class="btn btn-xs btn-outline btn-primary">Bid History </a>
+                    <a data-ui-sref="buyer.createbid({id:{{auction.auctionID}}, other:'{{auction.name}}'})" class="btn btn-xs btn-outline btn-primary">Create Bid </a>
                 </div>
             </div>
         </div>

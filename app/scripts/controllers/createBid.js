@@ -1,4 +1,4 @@
-emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $state, toaster) {
+emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookies, $state, toaster) {
     $scope.data = {}; //creating new scope that can be used inside tabset
     $scope.data.auctionname = $stateParams.other;
     var currentbidPrice;
@@ -24,6 +24,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $state,
             }
         });
     })();
+    console.log($cookies);
 
     $scope.data.createBid = function () {
         var bidprice;
@@ -45,7 +46,8 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $state,
                 url: "/scripts/php/createBidCtrl.php",
                 data: {
                     bidPrice: $scope.data.bidPrice,
-                    auctionID: $stateParams.id
+                    auctionID: $stateParams.id,
+                    bidderID: $cookies.get('userID')
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });
@@ -62,6 +64,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $state,
                     })
                     sendemailtobuyer();
                     sendemailtoseller();
+                    $state.go('ecommerce.grid');
 
                 }
                 else {
@@ -99,6 +102,25 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $state,
     }
 
     function sendemailtoseller() {
+        var request = $http({
+            method: "post",
+            url: "/scripts/php/message.php",
+            data: {
+                auctionID: $stateParams.id
+            },
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
+        /* Successful HTTP post request or not */
+        request.success(function (data) {
+            if (data == true) {
+                console.log("Email sent to seller")
+            }
+            else {
+                console.log("Unexpected error has occurred :(")
+            }
+        })
+    };
+    function sendemessagetoseller() {
         var request = $http({
             method: "post",
             url: "/scripts/php/sendEmailtoSeller.php",

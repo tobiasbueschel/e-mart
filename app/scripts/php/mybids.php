@@ -13,9 +13,12 @@ if(isset($_POST)) {
     // STORE POSTED VALUES IN VARIABLES
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
-
+    $table_data = []; //declare empty array where pulled data will be stored
+    $bidderID = $request->bidderID;
+    //loop through each table in the tables array
     // DATABASE QUERY
-    $sql = $request->sql;
+    $current_rows = [];
+    $sql = "select a.auctionID, itemID, name, description, instantPrice, isActive, endDate, bidID, bidderID, bidPrice from auction a LEFT JOIN bid b ON a.auctionID = b.auctionID WHERE bidderID = $bidderID GROUP BY a.auctionID";
     if ($result = $connection->query($sql) ) {
         //convert the results to an array of rows
         while ($row = mysqli_fetch_array($result)) {
@@ -42,3 +45,5 @@ else {
 dbClose();
 ob_end_flush();
 ?>
+
+
