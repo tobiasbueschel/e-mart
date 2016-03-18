@@ -73,9 +73,20 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
         })
         .state('profile.rating', {
             url: "/profile",
-            templateUrl: "views/profile/profile_rating.html",
+            templateUrl: "views/profile/ratings.html",
             data: { pageTitle: 'My Account | Profil Rating', subStateName: 'Rating' }
         })
+        .state('profile.messages', {
+            url: "/messages",
+            templateUrl: "views/profile/messages.html",
+            data: { pageTitle: 'My Account | Messages', subStateName: 'Messages' }
+        })
+        .state('profile.settings', {
+            url: "/settings",
+            templateUrl: "views/profile/settings.html",
+            data: { pageTitle: 'My Account | Settings', subStateName: 'Settings' }
+        })
+
 
 
         //-----------------------------------------------------
@@ -86,7 +97,7 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             parent: "root",
             templateUrl: "views/buyer/ending_soon.html",
             //controller: "profileCtrl",
-            data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon' }
+            data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon', hide: true, toggleView: true }
         })
 
         //-----------------------------------------------------
@@ -96,6 +107,12 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             templateUrl: "views/common/content.html",
             controller: "sellerDashboardCtrl",
             data: { mainState: 'profile.rating', mainStateName: 'Profile', name: 'Seller Dashboard', toggleView: true }
+        })
+        .state('seller.additem', {
+            url:"/additem",
+            templateUrl: "views/seller/additem.html",
+            controller: 'addItemCtrl',
+            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item' }
         })
         .state('seller.draft', {
             url: "/seller-draft",
@@ -113,13 +130,7 @@ function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
             data: { pageTitle: 'Seller Dashboard | Items Sold', subStateName: 'Items On Sale' }
         })
 
-        //TODO: NEED WORK
-        .state('seller.additem', {
-            url:"/additem",
-            templateUrl: "views/seller/additem.html",
-            controller: 'addItemCtrl',
-            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item' }
-        })
+
         .state('edititem', {
             parent: "root",
             url:"/edititem?:itemid",
