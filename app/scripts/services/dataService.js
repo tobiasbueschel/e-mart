@@ -88,6 +88,28 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     //call it
     dataServiceScope.getData();
 
+    //All live auctions
+    dataServiceScope.getAllLiveAuctions = function () {
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowsGeneric.php",
+            data: {
+                table:'auction',
+                where:'WHERE isActive=1'
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+                items = response;
+                return items;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    }
+
     dataServiceScope.getSellerItems = function (userID) {
         var items = null;
         return request = $http({
@@ -110,6 +132,8 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             }
         });
     };
+
+
 
     dataServiceScope.getSellerAuctions = function (auctioneerID) {
         var auctions = null;
@@ -147,18 +171,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         }).then(function (response) {
             console.log("Response", response);
             if (response!==0) { //if no error when fetching database rows
-
-                console.log("Images returned", data);
-                $scope.data.imageObject = data;
-                data.forEach(function (image) {
-                    $scope.data.imageStrings.push(image.image);
-                });
-                console.log($scope.data.imageStrings);
-                console.log($scope.data.imageObject);
-
-                console.log(response);
-                image = response.data.image;
-                return image;
+                return response;
             }
             else {
                 console.log("Error response from database");
