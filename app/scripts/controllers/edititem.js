@@ -1,9 +1,44 @@
 /**
  * Created by kimeshan on 07/03/2016.
  */
-emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $cookies) {
+emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, dataService, $cookies) {
     $scope.data = {}; //creating new scope that can be used inside tabset
+    $scope.data.itemid = $stateParams.itemid;
+    console.log("ITEM ID", $scope.data.itemid);
+    //Set default values
+    var reqItem = $http({
+        method: "post",
+        url: "/scripts/php/selectRowsGeneric.php",
+        data: {
+            table: 'item',
+            where: 'WHERE itemID='+$scope.data.itemid
+        },
+        headers: { 'Content-Type': 'application/json' }
+    });
 
+    reqItem.success(function (data) {
+        if (data) {
+            console.log("Item returned", data);
+            var currentItem = $scope.data.category = $scope.data.condition = data[0];
+            $scope.data.name = currentItem.name;
+            $scope.data.description = currentItem.description;
+           //$scope.data.imageStrings = ;
+        }
+    });
+
+    reqItem.success(function (data) {
+        if (data) {
+            console.log("Item returned", data);
+            var currentItem = $scope.data.category = $scope.data.condition = data[0];
+            $scope.data.name = currentItem.name;
+            $scope.data.description = currentItem.description;
+            //$scope.data.imageStrings = ;
+        }
+    });
+
+
+
+    $scope.data.select = "selected";
     //Add image
     $scope.data.imageStrings = [];
     $scope.data.imagesSaved = false;
@@ -45,8 +80,8 @@ emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $c
             data: {
                 itemname: $scope.data.name,
                 description: $scope.data.description,
-                category: $scope.data.category,
-                condition: $scope.data.condition,
+                category: $scope.data.category.categoryID,
+                condition: $scope.data.condition.conditionID,
                 ownerID: $cookies.userID
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

@@ -3,7 +3,20 @@
  * Each view are defined as state.
  * Initial there are written stat for all view in theme.
  ************************************************************************/
-function config($stateProvider, $urlRouterProvider) {
+function config($stateProvider, $urlRouterProvider, flowFactoryProvider) {
+
+    //Flow factory for file uploads
+    flowFactoryProvider.defaults = {
+        target: 'php/upload.php',
+        permanentErrors: [404, 500, 501],
+        maxChunkRetries: 1,
+        chunkRetryInterval: 5000,
+        simultaneousUploads: 4
+    };
+    flowFactoryProvider.on('catchAll', function (event) {
+        console.log('catchAll', arguments);
+    });
+
     $urlRouterProvider.otherwise("/main");
 
     $stateProvider
@@ -61,6 +74,18 @@ function config($stateProvider, $urlRouterProvider) {
         })
 
         //-----------------------------------------------------
+        // EDIT ITEM
+        //-----------------------------------------------------
+        .state('edititem', {
+            parent: "root",
+            url:"/edititem?:itemid",
+            templateUrl: function (param){
+                return "views/seller/edititem.html?itemid="+param.id;
+            },
+            data: {pageTitle: "Edit Item"}
+        })
+
+        //-----------------------------------------------------
         // ADD AUCTION
         //-----------------------------------------------------
         .state('addauction', {
@@ -71,7 +96,7 @@ function config($stateProvider, $urlRouterProvider) {
         })
 
         //-----------------------------------------------------
-        // ADD AUCTION
+        // SELLER DASHBOARD
         //-----------------------------------------------------
         .state('sellerdashboard', {
             parent: "root",
@@ -186,6 +211,7 @@ function config($stateProvider, $urlRouterProvider) {
 
 
 }
+
 angular
     .module('emart')
     .config(config)

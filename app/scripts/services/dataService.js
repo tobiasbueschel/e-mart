@@ -4,7 +4,7 @@
  */
 emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     var dataServiceScope = this;
-
+    console.log($cookies.userID);
     //Store categories and conditions here
     dataServiceScope.categories = null;
     dataServiceScope.conditions = null;
