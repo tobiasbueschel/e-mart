@@ -7,7 +7,7 @@
             </h2>
             <small>{{ user.userName }}</small>
         </div>
-        <img src="{{ user.twProfileImage }}" class="img-circle circle-border m-b-md" alt="profile">
+        <img data-ng-if="user.twProfileImage" src="{{ user.twProfileImage }}" class="img-circle circle-border m-b-md" alt="profile">
         <div>
             <p><i class="fa fa-calendar m-r-sm"></i>{{ user.userType }} since {{ user.dateRegistered | date:"MMMM yyyy" }}
         </div>
@@ -19,7 +19,7 @@
                 <div star-rating rating-value="rating.current" max="rating.max" rating-total="rating.total"></div>
             </div>
             <div class="text-center">
-                <a data-ui-sref="profile.rating" ">View All Ratings</a>
+                <a data-ui-sref="profile.rating">View All Ratings</a>
             </div>
             <hr>
             <h4><strong>About me</strong></h4>
