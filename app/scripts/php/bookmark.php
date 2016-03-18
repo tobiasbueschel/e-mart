@@ -7,8 +7,8 @@ if(isset($_POST)) {
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
     $auctionID = $request->auctionID;
-    $bidderID = $request->bidderID;
-    $sql1 = "insert into bookmark (auctionID, bidderID) values($auctionID, $bidderID)";
+    $userID = $request->userID;
+    $sql1 = "insert into bookmark (auctionID, userID) values($auctionID, $userID)";
     try {
         $connection->autocommit(FALSE);
         $connection->query($sql1);
