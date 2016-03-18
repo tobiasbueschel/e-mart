@@ -19,7 +19,6 @@ emart.controller('MainCtrl', function ($scope, $http, $state, $cookies, dataServ
     $scope.user.city = $cookies.city;
     $scope.user.dateRegistered = $cookies.dateRegistered ? new Date($cookies.dateRegistered.replace(/-/g,"/")) : null;
 
-
     //Get categories and conditions data from dataService
     var myDataPromise = dataService.getData();
     myDataPromise.then(function(result) {
