@@ -128,10 +128,17 @@
                                             <span class="product-price">
                                                 £10
                                             </span>
-
-                                            <small class="text-muted">{{ data.getCategoryOfItem(i) }}</small>
-                                            <a href="#" class="product-name">{{ i.name }}</a>
-
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <small class="text-muted">{{ data.getCategoryOfItem(i) }}</small>
+                                                    <a href="#" class="product-name">{{ i.name }}</a>
+                                                </div>
+                                                <div class="col-lg-6 text-right">
+                                                    <timer data-ng-if="true" countdown="100410" max-time-unit="'hour'" interval="1000">{{hhours}} hour{{hoursS}}, {{mminutes}} minute{{minutesS}}</timer>
+                                                    <timer data-ng-if="false" countdown="100410" max-time-unit="'minute'" interval="1000">{{mminutes}} minute{{minutesS}}, {{sseconds}} second{{secondsS}}</timer>
+                                                    <timer data-ng-if="false" countdown="100410000" max-time-unit="'day'" interval="1000">{{ddays}} day{{daysS}}, {{hhours}} hour{{hoursS}}</timer>
+                                                </div>
+                                            </div>
                                             <!--<tr ng-repeat="i in data.items track by i.itemID">-->
                                                 <!--<td>{{i.name}}</td>-->
                                                 <!--<td>{{i.description}}</td>-->
@@ -141,17 +148,15 @@
                                                 {{ i.description }}
                                             </div>
 
-                                            <timer />
-
-
                                             <div class="m-t text-left">
-
-                                                <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                                <a href="#" class="btn btn-xs btn-outline btn-primary m-r-xs">View <i class="fa fa-long-arrow-right"></i> </a>
+                                                <a href="#" class="btn btn-xs btn-outline btn-success">Bookmark <i class="fa fa-bookmark"></i> </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     <button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>
                 </div>
@@ -166,7 +171,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" ng-repeat="i in data.items track by i.itemID">
                             <div class="ibox">
                                 <div class="ibox-content product-box">
 
@@ -174,20 +179,29 @@
                                         [ INFO ]
                                     </div>
                                     <div class="product-desc">
-                                <span class="product-sold">
-                                    Sold for $10
-                                </span>
-                                        <small class="text-muted">Category</small>
-                                        <a href="#" class="product-name"> Product</a>
-
-
-
-                                        <div class="small m-t-xs">
-                                            Many desktop publishing packages and web page editors now.
+                                            <span class="product-bid-sold">
+                                                0 bids
+                                            </span>
+                                            <span class="product-sold">
+                                                Sold for £10
+                                            </span>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <small class="text-muted">{{ data.getCategoryOfItem(i) }}</small>
+                                                <a href="#" class="product-name">{{ i.name }}</a>
+                                            </div>
                                         </div>
-                                        <div class="m-t text-righ">
+                                        <!--<tr ng-repeat="i in data.items track by i.itemID">-->
+                                        <!--<td>{{i.name}}</td>-->
+                                        <!--<td>{{i.description}}</td>-->
+                                        <!--<td>{{data.getCategoryOfItem(i)}}</td>-->
+                                        <!--<td>{{data.getConditionOfItem(i)}}</td>-->
+                                        <div class="small m-t-xs">
+                                            {{ i.description }}
+                                        </div>
 
-                                            <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                        <div class="m-t text-left">
+                                            <a href="#" class="btn btn-xs btn-outline btn-primary m-r-xs">View <i class="fa fa-long-arrow-right"></i> </a>
                                         </div>
                                     </div>
                                 </div>

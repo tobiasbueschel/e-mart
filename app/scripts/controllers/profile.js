@@ -32,7 +32,6 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
         return $scope.data.hashedItems[itemID].name;
     };
 
-
     //Get items of the current user
     var sellerItemsPromise = dataService.getSellerItems($cookies.userID);
     sellerItemsPromise.then(function(result) {
@@ -47,5 +46,7 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
         console.log(result.data);
         $scope.data.auctions = result.data;
     });
+
+
 
 });
