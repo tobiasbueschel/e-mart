@@ -15,7 +15,7 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
 
 
     //Get items of the current users
-    var sellerItemsPromise = dataService.getSellerItems($cookies.userID);
+    var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));
     sellerItemsPromise.then(function(result) {
             //inside promise then
             $scope.data.items = result.data;
@@ -62,7 +62,7 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
                 console.log("Response: ", data);
                 if (data == 1) {
                     $scope.data.responseMessage = "ITEM ADDED SUCCESSFULLY!";
-                    $state.go('main');
+                    $state.go('seller.onsale');
                 }
                 else {
                     $scope.data.responseMessage = "Couldn't write to DB!";
