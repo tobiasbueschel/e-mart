@@ -1,7 +1,7 @@
 emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookies, $state, toaster) {
     $scope.data = {}; //creating new scope that can be used inside tabset
     $scope.data.auctionname = $stateParams.other;
-    var currentbidPrice;
+    $scope.data.currentbidPrice;
 
     (function () {
         return request = $http({
@@ -15,8 +15,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookie
             console.log(response);
             if (response !== 0) { //if no error when fetching database rows
                 console.log(response);
-                currentbidPrice = response.data[0].bidPrice;
-                $scope.data.currentBidPrice = currentbidPrice;
+                $scope.data.currentbidPrice = response.data[0].bidPrice;
                 $scope.data.previousBidderID = response.data[0].bidderID;
             }
             else {
@@ -27,12 +26,8 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookie
     console.log($cookies);
 
     $scope.data.createBid = function () {
-        var bidprice;
-        console.log(currentbidPrice);
-        bidprice = document.getElementById("bidPrice").value;
-
         // If x is Not a Number or less than one or greater than 10
-        if (bidprice <= currentbidPrice) {
+        if ($scope.data.bidPrice <= currentbidPrice) {
             toaster.pop({
                 type: 'error',
                 title: 'Error',
@@ -64,7 +59,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookie
                     })
                     sendemailtobuyer();
                     sendemailtoseller();
-                    $state.go('ecommerce.grid');
+                    $state.go('buyer.mybids');
 
                 }
                 else {
