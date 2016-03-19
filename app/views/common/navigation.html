@@ -50,9 +50,7 @@
             <li ng-class="{active: $state.includes('charts')}">
                 <a href=""><i class="fa fa-list"></i> <span class="nav-label">{{ 'CATEGORIES' }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('charts')}">
-
-                    <li ui-sref-active="active" data-ui-sref="ecommerce.grid" data-ng-repeat="category in maindata.categories"><a data-ui-sref="ecommerce.grid({categoryid:{{category.categoryID}}})">{{ category.name }}</a></li>
-
+                    <li ui-sref-active="active" data-ng-repeat="category in maindata.categories"><a data-ui-sref="ecommerce.grid({categoryid:{{category.categoryID}}})">{{ category.name }}</a></li>
                 </ul>
             </li>
 

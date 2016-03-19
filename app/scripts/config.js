@@ -222,9 +222,9 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             data: { pageTitle: 'E-commerce | Product List', subStateName: 'Product List' }
         })
         .state('ecommerce.details', {
-            url: "/ecommerce-details?:itemid",
+            url: "/ecommerce-details?:auctionid",
             templateUrl: function (param){
-                return "views/ecommerce/ecommerce_product_details.html?itemid="+param.id;
+                return "views/ecommerce/ecommerce_product_details.html?auctionid="+param.id;
             },
             data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
         })

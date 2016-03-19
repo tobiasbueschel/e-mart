@@ -4,7 +4,7 @@
         <div class="ibox">
             <div class="ibox-content">
 
-                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="10">
                     <thead>
                     <tr>
                         <th data-toggle="true">Auction Name</th>
@@ -30,25 +30,28 @@
                         <td>£ {{auction[6]}}</td>
                         <td>£ {{auction[7]}}</td>
                         <td>£ {{auction[8]}}</td>
-                        <td><button ng-click="data.viewAuction()" class="btn btn-primary"><i class="fa fa-eye"></i></button></td>
+                        <td>
+                            <a data-ui-sref="ecommerce.details({auctionid:{{auction.auctionID}}})" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                        </td>
                     </tr>
 
                     </tbody>
+
                     <tfoot>
                     <tr>
-                        <td colspan="6">
+                        <td colspan="12">
                             <ul class="pagination pull-right"></ul>
                         </td>
                     </tr>
                     </tfoot>
+
                 </table>
 
             </div>
         </div>
     </div>
 </div>
-</div>
 
-<div class="col-lg-12">
-    <button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>
-</div>
+<!--<div class="col-lg-12">-->
+    <!--<button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>-->
+<!--</div>-->
