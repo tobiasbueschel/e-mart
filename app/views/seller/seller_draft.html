@@ -1,18 +1,15 @@
-<div class="row">
     <div ng-controller="sellerDashboardCtrl" class="col-lg-12">
         <div class="ibox">
             <div class="ibox-content">
 
-                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                <table class="footable table table-stripped toggle-arrow-tiny no-paging m-0" data-page-size="10">
                     <thead>
                     <tr>
                         <th data-toggle="true">Item Name</th>
                         <th>Description</th>
                         <th>Category</th>
                         <th>Condition</th>
-                        <th data-sort-ignore="true">Delete</th>
-                        <th data-sort-ignore="true">Edit</th>
-                        <th>Create Auction</th>
+                        <th data-sort-ignore="true" class="text-right">Actions</th>
                     </tr>
                     </thead>
                     <tbody >
@@ -22,18 +19,19 @@
                         <td>{{i.description}}</td>
                         <td>{{data.getCategoryOfItem(i)}}</td>
                         <td>{{data.getConditionOfItem(i)}}</td>
-                        <td><button ng-click="data.deleteItem(i.itemID)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-                        <td><button ui-sref="seller.edititem({itemid:i.itemID})" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></button></td>
-                        <td><button ng-click="data.createAuction()" class="btn btn-primary"><i class="fa fa-plus"></i></button></td>
-
+                        <td class="text-right"><button ng-click="data.deleteItem(i.itemID)" class="btn btn-danger m-xs"><i class="fa fa-trash"></i></button>
+                            <button ui-sref="seller.edititem({itemid:i.itemID})" class="btn btn-warning m-xs"><i class="fa fa-pencil-square-o"></i></button>
+                            <button ng-click="data.createAuction()" class="btn btn-success m-xs"><i class="fa fa-gavel"></i></button>
+                            <button data-ui-sref="ecommerce.details({itemid:{{i.itemID}}})" class="btn btn-primary m-xs"><i class="fa fa-eye"></i></button>
+                        </td>
                     </tr>
 
 
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="6">
-                            <ul class="pagination pull-right"></ul>
+                        <td colspan="6" class="text-center">
+                            <ul class="pagination"></ul>
                         </td>
                     </tr>
                     </tfoot>
@@ -42,7 +40,3 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col-lg-12">
-    <button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>
-</div>

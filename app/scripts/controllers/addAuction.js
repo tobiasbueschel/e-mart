@@ -31,7 +31,6 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
 
         if ($scope.data.auctionForm.name.$valid &&
             $scope.data.auctionForm.description.$valid &&
-            $scope.data.auctionForm.item.$valid &&
             $scope.data.auctionForm.startdate.$valid &&
             $scope.data.auctionForm.enddate.$valid &&
             $scope.data.auctionForm.startprice.$valid &&
@@ -39,6 +38,7 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
             $scope.data.auctionForm.instantprice.$valid
         ) {
 
+            console.log("hello", $scope.data.item);
             var request = $http({
                 method: "post",
                 url: "/scripts/php/addauction.php",

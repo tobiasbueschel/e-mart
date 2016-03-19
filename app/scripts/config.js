@@ -105,7 +105,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         .state('seller', {
             templateUrl: "views/common/content.html",
             controller: "sellerDashboardCtrl",
-            data: { mainState: 'seller.onsale', mainStateName: 'On Sale', name: 'Seller Dashboard', toggleView: true }
+            data: { mainState: 'seller.onsale', mainStateName: 'On Sale', name: 'Seller Dashboard', toggleView: false }
         })
         .state('seller.additem', {
             url:"/additem",
@@ -222,10 +222,13 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             data: { pageTitle: 'E-commerce | Product List', subStateName: 'Product List' }
         })
         .state('ecommerce.details', {
-            url: "/ecommerce-details?:auctionid",
-            templateUrl: function (param){
-                return "views/ecommerce/ecommerce_product_details.html?auctionid="+param.id;
+            url: "/ecommerce-details",
+            params: {
+                itemid: null,
+                auctionid: null
             },
+            controller: "productDetailsCtrl",
+            templateUrl: "views/ecommerce/ecommerce_product_details.html",
             data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
         })
         .state('viewbid', {

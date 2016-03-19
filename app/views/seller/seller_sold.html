@@ -1,44 +1,40 @@
-<div class="row">
-    <div ng-controller="sellerDashboardCtrl" class="col-lg-12">
-        <div class="ibox">
-            <div class="ibox-content">
+<div ng-controller="sellerDashboardCtrl" class="col-lg-12">
+    <div class="ibox">
+        <div class="ibox-content">
 
-                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                    <thead>
-                    <tr>
-                        <th data-toggle="true">Auction Name</th>
-                        <th>Description</th>
-                        <th>Item</th>
-                        <th>Winning Bid</th>
-                        <th>Amount Sold</th>
-                        <th data-sort-ignore="true">View</th>
-                    </tr>
-                    </thead>
-                    <tbody >
+            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="10" style="margin-bottom: 0;">
+                <thead>
+                <tr>
+                    <th data-toggle="true">Auction Name</th>
+                    <th>Description</th>
+                    <th>Item</th>
+                    <th>Winning Bid</th>
+                    <th>Buyer</th>
+                    <th data-sort-ignore="true">View</th>
+                </tr>
+                </thead>
+                <tbody >
 
-                    <tr ng-repeat="a in data.auctions track by a.auctionID">
-                        <td>{{a.name}}</td>
-                        <td>{{a.description}}</td>
-                        <td>{{a.itemID}}</td>
-                        <td><button ng-click="data.deleteItem(i.itemID)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-                        <td><button ng-click="data.createAuction()" class="btn btn-primary"><i class="fa fa-plus"></i></button></td>
-                    </tr>
+                <tr ng-repeat="a in data.auctions track by a.auctionID">
+                    <td>{{a.name}}</td>
+                    <td>{{a.description}}</td>
+                    <td>{{a.itemID}}</td>
+                    <td> $ 200 </td>
+                    <td>John Doe</td>
+                    <td>
+                        <a data-ui-sref="ecommerce.details({auctionid:{{a.auctionID}}})" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="6" class="text-center">
+                        <ul class="pagination"></ul>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
 
-
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="6">
-                            <ul class="pagination pull-right"></ul>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-
-            </div>
         </div>
     </div>
-</div>
-<div class="col-lg-12">
-    <button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>
 </div>

@@ -34,6 +34,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             }
         });
     })();
+
     $scope.data.addBookmark = function (auctionID) {
         return request = $http({
             method: "post",

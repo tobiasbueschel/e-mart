@@ -21,13 +21,9 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
         return $scope.data.hashedItems[itemID].name;
     };
 
-
-    //Get items of the current user
+    //Get ratings of the current user
     var userRatingsPromise = dataService.getUserRatings($cookies.get('userID'));
     userRatingsPromise.then(function(result) {
-        //inside promise then
-        console.log("hello");
-        console.log(result);
         $scope.data.ratings = result.data;
     });
 
