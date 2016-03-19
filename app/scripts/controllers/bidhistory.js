@@ -9,7 +9,7 @@ emart.controller('viewBidCtrl', function ($scope, $stateParams, $http, $state, $
         console.log($stateParams);
         return request = $http({
             method: "post",
-            url: "/scripts/php/viewbid.php",
+            url: "/scripts/php/bidhistory.php",
             data: {
                 auctionID: $stateParams.id
             },

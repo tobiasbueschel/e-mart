@@ -5,7 +5,7 @@
             <div class="text-center p-lg">
                 <h2>If you don't find the answer to your question</h2>
                 <span>Please</span>
-                <button title="Create new cluster" class="bbtn btn-primary btn-sm" ui-sref="contactUs"> <span class="bold">Contact us</span></button>
+                <button title="Create new cluster" class="bbtn btn-primary btn-sm" ui-sref="contact"> <span class="bold">Contact us</span></button>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
                     <div collapse="faq1" class="panel-collapse collapse">
                         <div class="faq-answer">
                             <p>
-                                To register, go to the <a href="register">registration page,</a> and follow these steps:<br>
+                                To register, go to the <a ui-sref="register1">registration page,</a> and follow these steps:<br>
                                 1.	Enter your information.<br>
                                 You'll be asked to enter your name and email address, and to choose a password. If you're attempting to buy, sell, or contact a member, we may also ask you to provide contact information.  When you click Submit, your account will be created.<br>
                                 2.	Review your confirmation.<br>
@@ -69,8 +69,8 @@
                     <div collapse="faq2" class="panel-collapse collapse">
                         <div class="faq-answer">
                             <p>
-                                You can find your password <a href="forgotPassword">here</a>. We'll send you an email with instructions on how to reset your password to the email address listed on your account.
-                                If you can't access your email address or can't remember which email is registered on e-mart, contact us.
+                                You can find your password <a ui-sref="forgot_password">here</a>. We'll send you an email with instructions on how to reset your password to the email address listed on your account.
+                                If you can't access your email address or can't remember which email is registered on e-mart, please contact us.
                             </p>
                         </div>
                     </div>
@@ -102,8 +102,7 @@
                     <div collapse="faq3" class="panel-collapse collapse">
                         <div class="faq-answer">
                             <p>
-                                If you are a seller, you can see your rating at <a href="sellerDashboard">Seller Dashboard</a>.<br>
-                                If you are a buyer, you can see your rating at <a href="buyerDashboard">Buyer Dashboard</a>.
+                                You can see your rating at <a ui-sref="profile.rating">Profie</a>.<br>
                             </p>
                         </div>
                     </div>
@@ -134,7 +133,7 @@
                     <div collapse="faq4" class="panel-collapse collapse">
                         <div class="faq-answer">
                             <p>
-                                In order to create an auction, you must first have a e-mart account. Once you are registered you can create an auction <a href="addListing">here</a>.
+                                In order to create an auction, you must first have a e-mart sellr account. Once you are registered you can add your item and then create auction.
                             </p>
                         </div>
                     </div>

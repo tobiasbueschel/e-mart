@@ -235,7 +235,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             parent: "root",
             url: "/viewbid?:id&{other}",
             templateUrl: function (param){
-                return "views/ecommerce/viewbid.html?id="+param.id +"&other="+param.other
+                return "views/ecommerce/bidhistory.html?id="+param.id +"&other="+param.other
             },
             data: { pageTitle: 'View Bid' }
         })

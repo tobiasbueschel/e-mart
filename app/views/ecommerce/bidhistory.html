@@ -34,21 +34,16 @@
                         <thead>
                         <tr>
 
-                            <th>Bid ID</th>
                             <th data-hide="phone">Bidder ID</th>
                             <th data-hide="phone">Bid Price</th>
                             <th>Bid Date</th>
-                            <th>Info</th>
 
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="cat in data.bids track by cat.bidID">
                             <td>
-                                {{cat.bidID}}
-                            </td>
-                            <td>
-                                {{cat.bidderID}}
+                                {{cat.userName}}
                             </td>
                             <td>
                                 {{cat.bidPrice}}
@@ -56,13 +51,9 @@
                             <td>
                                 {{data.formatDate(cat.dateOfBid)}}
                             </td>
-                            <td>
-                                <span class="label label-primary">Current Bid</span>
-                            </td>
                         </tr>
 
-
-
+                               <!-- <span class="label label-primary">Current Bid</span>-->
 
                         </tbody>
                         <tfoot>

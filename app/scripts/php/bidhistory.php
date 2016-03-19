@@ -18,7 +18,7 @@ if(isset($_POST)) {
     //loop through each table in the tables array
         // DATABASE QUERY
         $current_rows = [];
-        $sql = "SELECT * FROM bid WHERE auctionID = $auctionID";
+        $sql = "SELECT bidID, bidPrice, dateOfBid, userName FROM bid  LEFT JOIN user on bidderID = userID WHERE auctionID = $auctionID ORDER BY bidPrice DESC";
         if ($result = $connection->query($sql) ) {
             //convert the results to an array of rows
             while ($row = mysqli_fetch_array($result)) {
