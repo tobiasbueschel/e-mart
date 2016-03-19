@@ -1,6 +1,6 @@
-/**
- * Created by kimeshan on 07/03/2016.
- */
+/*****************************************************************************************
+ * ADD ITEM CONTROLLER
+ *****************************************************************************************/
 emart.controller('addItemCtrl', function ($scope, $http, $state, dataService, $cookies) {
     $scope.data = {}; //creating new scope that can be used inside tabset
     $scope.data.slideInterval = 2000;

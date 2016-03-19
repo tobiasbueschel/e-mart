@@ -111,7 +111,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             url:"/additem",
             templateUrl: "views/seller/additem.html",
             controller: 'addItemCtrl',
-            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item' }
+            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item', toggleView: false }
         })
         .state('seller.draft', {
             url: "/seller-draft",
@@ -214,26 +214,19 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             },
             data: { pageTitle: 'E-commerce | Product Grid', subStateName: 'Product Grid' }
         })
-        .state('ecommerce.product', {
-            url: "/ecommerce-product?:categoryid",
-            templateUrl: function (param){
-                return "views/ecommerce/ecommerce_product.html?categoryid="+param.id;
-            },
-            data: { pageTitle: 'E-commerce | Product', subStateName: 'Product' }
-        })
-        .state('ecommerce.details', {
-            url: "/ecommerce-details?:categoryid",
-            templateUrl: function (param){
-                return "views/ecommerce/ecommerce_product_details.html?categoryid="+param.id;
-            },
-            data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
-        })
         .state('ecommerce.list', {
             url: "/ecommerce-list?:categoryid",
             templateUrl: function (param){
-                return "views/ecommerce/auctionList.html?categoryid="+param.id;
+                return "views/ecommerce/ecommerce_product_list.html?categoryid="+param.id;
             },
             data: { pageTitle: 'E-commerce | Product List', subStateName: 'Product List' }
+        })
+        .state('ecommerce.details', {
+            url: "/ecommerce-details?:auctionid",
+            templateUrl: function (param){
+                return "views/ecommerce/ecommerce_product_details.html?auctionid="+param.id;
+            },
+            data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
         })
         .state('viewbid', {
             parent: "root",

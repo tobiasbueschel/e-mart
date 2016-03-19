@@ -20,7 +20,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
 
     $scope.data.createAuction = function () {
         $state.go('addauction');
-    }
+    };
 
     $scope.data.deleteItem = function (itemID) {
         console.log("Delete item", itemID);
