@@ -160,6 +160,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         .state('buyer.boughtItems', {
             url: "/bought-items",
             templateUrl: "views/buyer/boughtItems.html",
+            controller: "boughtItemsCtrl",
             data: { pageTitle: 'Buyer Dashboard | Bought Items', subStateName: "Bought Items" }
         })
         .state('buyer.bookmarks', {

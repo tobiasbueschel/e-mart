@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                    <thead>
+                    <tr>
+                        <th data-toggle="true">Item</th>
+                        <th>Description</th>
+                        <th>Sold by</th>
+                        <th>Auction</th>
+                        <th>Auction ended</th>
+                        <th>Winning bid</th>
+                        <th>Bid price</th>
+                        <th data-sort-ignore="true">View</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <tr ng-repeat="i in data.boughtitems track by i.itemID">
+                        <td>{{i[0]}}</td>
+                        <td>{{i[1]}}</td>
+                        <td>{{i[4]}}</td>
+                        <td>{{i[5]}}</td>
+                        <td>{{i[7]}}</td>
+                        <td>{{i[8]}}</td>
+                        <td>{{i[9]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>
+</div>

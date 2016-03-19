@@ -9,8 +9,8 @@ if(isset($_POST)) {
     $bidPrice = $request->bidPrice;
     $auctionID = $request->auctionID;
     $bidderID = $request->bidderID;
-    $sql1 = "INSERT INTO bid (bidderID, auctionID, bidPrice)
-            VALUES ($bidderID, $auctionID, $bidPrice)";
+    $sql1 = "INSERT INTO bid (bidderID, auctionID, bidPrice, dateOfBid)
+            VALUES ($bidderID, $auctionID, $bidPrice, CURRENT_TIMESTAMP)";
     $sql2 = "UPDATE auction a LEFT JOIN (select bidPrice,bidID,auctionID from bid natural join auction where bidPrice = (select max(bidPrice) from bid WHERE auctionID= $auctionID)) b on a.auctionID = b.auctionID set currentBidID=b.bidID where a.auctionID = $auctionID and endDate > curDate()";
     try {
         $connection->autocommit(FALSE);
