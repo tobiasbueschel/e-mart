@@ -25,6 +25,29 @@ emart.controller('BuyerDashboardCtrl', function ($scope, $http, $state, $cookies
         });
     })();
     console.log($cookies);
-});
+})
 
+.controller('bookmarkCtrl', function ($scope, $http, $state, $cookies, toaster, dataService) {
+    $scope.data = {}; //creating new scope that can be used inside tabset
+    (function () {
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/bookmarklist.php",
+            data: {
+                userID: $cookies.get('userID')
+            },
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (response) {
+            console.log(response);
+            if (response !== 0) { //if no error when fetching database rows
+                console.log(response);
+                $scope.data.auctions = response.data;
+                console.log($scope.data.auctions);
+            }
+            else {
+                console.log("Error loading drop down menu conditions and categories from database");
+            }
+        });
+    })();
+});
 

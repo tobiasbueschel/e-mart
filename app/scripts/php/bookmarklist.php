@@ -14,11 +14,11 @@ if(isset($_POST)) {
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
     $table_data = []; //declare empty array where pulled data will be stored
-    $bidderID = $request->bidderID;
+    $userID = $request->userID;
     //loop through each table in the tables array
     // DATABASE QUERY
     $current_rows = [];
-    $sql = "select a.auctionID, itemID, name, description, instantPrice, isActive, endDate, bidID, bidderID, bidPrice from auction a LEFT JOIN bid b ON a.auctionID = b.auctionID WHERE bidderID = $bidderID AND a.isActive=true GROUP BY a.auctionID";
+    $sql = "SELECT a.auctionID as auctionID, name, description, instantPrice, isActive, endDate, bidPrice from((auction a LEFT JOIN bid b ON a.auctionID = b.auctionID) JOIN bookmark d ON a.auctionID = d.auctionID) WHERE d.userID = $userID AND a.isActive = true GROUP BY a.auctionID";
     if ($result = $connection->query($sql) ) {
         //convert the results to an array of rows
         while ($row = mysqli_fetch_array($result)) {
