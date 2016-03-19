@@ -13,13 +13,16 @@ if(isset($_POST)) {
     // STORE POSTED VALUES IN VARIABLES
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
+    $current_rows = [];
 
     // DATABASE QUERY
     $sql = $request->sql;
     if ($result = $connection->query($sql) ) {
         //convert the results to an array of rows
-        while ($row = mysqli_fetch_array($result)) {
-            $current_rows[] = $row; //push each row to current_rows array
+        if ($result->num_rows > 0) {
+            while ($row = mysqli_fetch_array($result)) {
+                $current_rows[] = $row; //push each row to current_rows array
+            }
         }
         //push the array to our hash map using the table name as the key
     }

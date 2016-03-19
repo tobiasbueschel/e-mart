@@ -111,6 +111,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     };
 
     dataServiceScope.getSellerItems = function (userID) {
+        console.log(userID);
         var items = null;
         return request = $http({
             method: "post",
@@ -166,7 +167,8 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             data: {
                 sql: "SELECT auction.auctionID, auction.name, auction.description, auction.auctioneerID, "+
                 "auction.startDate, auction.endDate, auction.startingPrice, auction.instantPrice, auction.reservePrice, item.itemID, item.name FROM auction, item "+
-                "WHERE auctioneerID=1471 AND auction.itemID= item.itemID GROUP BY auction.auctionID;"
+                "WHERE auctioneerID="+$cookies.get('userID')+
+                " AND auction.itemID= item.itemID GROUP BY auction.auctionID;"
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
