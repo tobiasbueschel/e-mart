@@ -444,9 +444,10 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
 
         var request = $http({
             method: "post",
-            url: "/scripts/php/forgotPassword.php",
+            url: "/scripts/php/sendEmail.php",
             data: {
-                email: $scope.email
+                email: $scope.email,
+                emailtype: "forgotPassword"
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });

@@ -143,7 +143,7 @@ emart.controller('editItemCtrl', function ($scope, $http, $state, $stateParams, 
                             console.log("Image insertion response from database", data);
                             if (data == 1) {
                                  $scope.data.responseMessage = "ITEM AND IMAGES SUCCESSFULLY UPDATED!";
-                                $state.go('sellerdashboard');
+                                $state.go('seller.draft');
                             }
                          });
                     }
