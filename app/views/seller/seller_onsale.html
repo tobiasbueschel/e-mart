@@ -13,30 +13,25 @@
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Starting Price</th>
+                        <th>Instant Price</th>
                         <th>Reserve Price</th>
-                        <th>Instance Price</th>
-                        <th class="text-right" data-sort-ignore="true">Action</th>
+                        <th class="text-right" data-sort-ignore="true">View</th>
 
                     </tr>
                     </thead>
                     <tbody >
 
                     <tr ng-repeat="auction in data.auctions track by auction.auctionID">
-                        <td>{{auction.name}}</td>
-                        <td>{{auction.description}}</td>
-                        <td>{{data.getItemNamebyID(auction.itemID)}}</td>
-                        <td>{{auction.startDate}}</td>
-                        <td>{{auction.endDate}}</td>
-                        <td>{{auction.startingPrice}}</td>
-                        <td>{{auction.reservePrice}}</td>
-                        <td>{{auction.instantPrice}}</td>
-                        <td class="text-right">
-                            <div class="btn-group">
-                                <button class="btn-white btn btn-xs" ui-sref="sellerdashboard">View/Edit</button>
-                            </div>
-                        </td>
+                        <td>{{auction[1]}}</td>
+                        <td>{{auction[2]}}</td>
+                        <td>{{auction[10]}}</td>
+                        <td>{{auction[4]}}</td>
+                        <td>{{auction[5]}}</td>
+                        <td>{{auction[6]}}</td>
+                        <td>{{auction[7]}}</td>
+                        <td>{{auction[8]}}</td>
+                        <td><button ng-click="data.viewAuction()" class="btn btn-primary"><i class="fa fa-eye"></i></button></td>
                     </tr>
-
 
                     </tbody>
                     <tfoot>

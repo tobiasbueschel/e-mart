@@ -162,16 +162,16 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
         var auctions = null;
         return request = $http({
             method: "post",
-            url: "/scripts/php/selectRowsGeneric.php",
+            url: "/scripts/php/selectRowBysql.php",
             data: {
-                table:'auction',
-                where:'WHERE auctioneerID='+auctioneerID
+                sql: "SELECT auction.auctionID, auction.name, auction.description, auction.auctioneerID, "+
+                "auction.startDate, auction.endDate, auction.startingPrice, auction.instantPrice, auction.reservePrice, item.itemID, item.name FROM auction, item "+
+                "WHERE auctioneerID=1471 AND auction.itemID= item.itemID GROUP BY auction.auctionID;"
             },
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
-            console.log("Response", response);
+            console.log("Reponse from PHP getting seller items", response);
             if (response!==0) { //if no error when fetching database rows
-                console.log("auctions from db", response);
                 return response;
             }
             else {

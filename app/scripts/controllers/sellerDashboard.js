@@ -72,31 +72,34 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         });
     };
 
+    (function () {
+        //Get items of the current user
+        var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));
+        sellerItemsPromise.then(function(result) {
+            //inside promise then
+            console.log("got seller items...");
+            $scope.data.items = result.data;
+            $scope.data.hashedItems = dataService.generateHashTable($scope.data.items, "itemID");
+            $scope.$broadcast('sellerItemsObtains');
+        });
 
-    //Get items of the current user
-    var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));
-    sellerItemsPromise.then(function(result) {
-        //inside promise then
-        $scope.data.items = result.data;
-        $scope.data.hashedItems = dataService.generateHashTable($scope.data.items, "itemID");
-        $scope.$broadcast('sellerItemsObtains');
-    });
+        //Get sold items of user
+        var sellerSoldItemsPromise = dataService.getSellerSoldItems($cookies.get('userID'));
+        sellerSoldItemsPromise.then(function(result) {
+            //inside promise then
+            $scope.data.soldItems = result.data;
+            $scope.data.soldHashedItems = dataService.generateHashTable($scope.data.items, "itemID");
+        });
 
-    //Get sold items of user
-    var sellerSoldItemsPromise = dataService.getSellerSoldItems($cookies.get('userID'));
-    sellerSoldItemsPromise.then(function(result) {
-        //inside promise then
-        $scope.data.soldItems = result.data;
-        $scope.data.soldHashedItems = dataService.generateHashTable($scope.data.items, "itemID");
-    });
+        //Get the auctions of the current user
+        var sellerAuctionsPromise = dataService.getSellerAuctions($cookies.get('userID'));
+        sellerAuctionsPromise.then(function(result) {
+            //inside promise then
+            $scope.data.auctions = result.data;
+            console.log(result.data);
+        });
+    })();
 
-    //Get the auctions of the current user
-    var sellerAuctionsPromise = dataService.getSellerAuctions($cookies.get('userID'));
-    sellerAuctionsPromise.then(function(result) {
-        //inside promise then
-        $scope.data.auctions = result.data;
-        console.log(result.data);
-    });
 
 });
 

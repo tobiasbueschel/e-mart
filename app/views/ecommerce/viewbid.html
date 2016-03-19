@@ -21,7 +21,7 @@
     <div ng-controller="viewBidCtrl" class="row">
 
     <div class="ibox-content m-b-sm border-bottom">
-        <h2>Acution name: {{data.auctionname}}</h2>
+        <h2>Auction name: {{data.auctionname}}</h2>
 
     </div>
 
@@ -36,7 +36,9 @@
 
                             <th>Bid ID</th>
                             <th data-hide="phone">Bidder ID</th>
-                            <th data-hide="phone">Bid Pirce</th>
+                            <th data-hide="phone">Bid Price</th>
+                            <th>Bid Date</th>
+                            <th>Info</th>
 
                         </tr>
                         </thead>
@@ -50,6 +52,9 @@
                             </td>
                             <td>
                                 {{cat.bidPrice}}
+                            </td>
+                            <td>
+                                {{data.formatDate(cat.dateOfBid)}}
                             </td>
                             <td>
                                 <span class="label label-primary">Current Bid</span>
