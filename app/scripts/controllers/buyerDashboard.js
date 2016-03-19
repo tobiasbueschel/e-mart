@@ -34,7 +34,7 @@ emart.controller('BuyerDashboardCtrl', function ($scope, $http, $state, $cookies
             method: "post",
             url: "/scripts/php/bookmarklist.php",
             data: {
-                bidderID: $cookies.get('userID')
+                userID: $cookies.get('userID')
             },
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
