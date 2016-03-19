@@ -23,7 +23,7 @@
             </div>
             <hr>
             <h4><strong>About me</strong></h4>
-            <p><i class="fa fa-map-marker m-r-sm"></i>&nbsp;{{ user.city }}</p>
+            <p><i class="fa fa-map-marker m-r-sm"></i><a target="_blank" href="{{ 'https://www.google.co.uk/maps/place/' + user.city }}">&nbsp;{{ user.city }}</a></p>
             <p><i class="fa fa-calendar m-r-sm"></i>{{ user.userType }} since {{ user.dateRegistered | date:"MMMM yyyy" }}</p>
             <hr>
             <div class="user-button">
@@ -49,28 +49,27 @@
             <h5>User Ratings</h5>
         </div>
         <div class="ibox-content">
-
             <div>
                 <div class="feed-activity-list">
-                    <div class="feed-element">
+                    <div class="feed-element" ng-repeat="r in data.ratings">
                         <a href="" class="pull-left">
-                            <img alt="image" class="img-circle" src="img/a5.jpg">
+                            <img alt="image" class="img-circle" src="{{ r.twProfileImage ? r.twProfileImage : 'photo.png' }}">
                         </a>
 
                         <div class="media-body ">
-                            <small class="pull-right">2h ago</small>
-                            <strong>Kim Smith</strong> rated a product from <strong>Monica Smith</strong> with 5 stars. <br>
-                            <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                            <small class="pull-right">
+                                <span ng-repeat="rating in r.starRating" class="text-center">
+                                    <div star-rating2 rating-value="r.starRating" max="5"></div>
+                                </span>
+                            </small>
+                            <strong>{{ r.userName }}</strong> rated a product from <strong>{{ user.userName }}</strong> with {{ r.starRating }} stars. <br>
+                            <small class="text-muted">{{ r.created }}</small>
                             <div class="well">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                {{ r.description }}
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Show More</button>
-
             </div>
 
         </div>

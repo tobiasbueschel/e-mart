@@ -4,13 +4,6 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
  * PROFILE CONTROLLER
  ************************************************************************/
 
-
-    $scope.ratings = [{
-        current: 4,
-        total: 232,
-        max: 5
-    }];
-
     $scope.data = {}; //creating new scope that can be used inside tabset
     $scope.data.categories = dataService.hashedCategories;
     $scope.data.conditions = dataService.hashedConditions;
@@ -27,6 +20,16 @@ emart.controller('profileCtrl', function ($scope, $http, $state, toaster, $cooki
     $scope.data.getItemNamebyID = function (itemID) {
         return $scope.data.hashedItems[itemID].name;
     };
+
+
+    //Get items of the current user
+    var userRatingsPromise = dataService.getUserRatings($cookies.get('userID'));
+    userRatingsPromise.then(function(result) {
+        //inside promise then
+        console.log("hello");
+        console.log(result);
+        $scope.data.ratings = result.data;
+    });
 
     //Get items of the current user
     var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));

@@ -56,7 +56,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     };
 
     dataServiceScope.getData = function() {
-        console.log("GETTING CONDITIONS AND CAT DATA");
+        console.log("GETTING CONDITIONS AND CATEGORIES DATA");
         // Angular $http() and then() both return promises themselves
         //Let's pull categories
         var data = {};
@@ -103,6 +103,28 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             if (response!==0) { //if no error when fetching database rows
                 items = response;
                 return items;
+            }
+            else {
+                console.log("Error response from database");
+            }
+        });
+    };
+
+    dataServiceScope.getUserRatings = function (userID) {
+        var ratings = null;
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/selectRowBySql.php",
+            data: {
+                sql:'SELECT rating.description, rating.starRating, rating.created, user.userName, user.twProfileImage FROM rating INNER JOIN user ON rating.userID = '+userID+' AND rating.raterID=user.userID'
+            },
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            console.log("Response", response);
+            if (response!==0) { //if no error when fetching database rows
+                console.log(response);
+                ratings = response;
+                return ratings;
             }
             else {
                 console.log("Error response from database");

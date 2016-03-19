@@ -111,7 +111,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             url:"/additem",
             templateUrl: "views/seller/additem.html",
             controller: 'addItemCtrl',
-            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item' }
+            data: { pageTitle: 'Seller Dashboard | Add Item', subStateName: 'Add Item', toggleView: false }
         })
         .state('seller.draft', {
             url: "/seller-draft",
