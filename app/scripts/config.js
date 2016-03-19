@@ -268,4 +268,14 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             controller: "searchCtrl",
             data: { pageTitle: 'Search Results', name: 'Search Results', hide: true }
         })
+
+        //-----------------------------------------------------
+        // VIDEO
+        //-----------------------------------------------------
+        .state('video', {
+            parent: "root",
+            url: "/video",
+            templateUrl: "views/other/video.html",
+            data: { pageTitle: 'Video', name: 'Video', hide: true }
+        })
 });
