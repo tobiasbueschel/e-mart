@@ -31,9 +31,6 @@ if(isset($_POST)) {
     $request = json_decode($postdata);
     $bidderID = $request->bidderID;
     $sql1 = "SELECT emailAddress FROM user WHERE userID = $bidderID ";
-
-    /*
-     * */
     if ($result = $connection->query($sql1)) {
         while ($row = $result->fetch_assoc()) {
             $email = $row['emailAddress'];

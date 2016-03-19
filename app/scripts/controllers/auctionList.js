@@ -51,8 +51,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             console.log(response);
             if (response !== 0) { //if no error when fetching database rows
                 console.log(response);
-                $scope.data.auctions = response.data;
-                console.log($scope.data.auctions);
+                alert("Bookmark is added!")
             }
             else {
                 console.log("Error loading drop down menu conditions and categories from database");

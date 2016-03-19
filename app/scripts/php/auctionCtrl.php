@@ -4,8 +4,105 @@ set_time_limit(0);
 require_once("dbConnection.php");
 ob_start();
 dbConnect();
-    // DATABASE QUERY
-    $sql1 = "SELECT auctionID, name, auctioneerID FROM auction WHERE endDate < curDate() AND isActive=true";
+// AZURE SENDGRID AUTHENTICATION
+$url = 'https://api.sendgrid.com/';
+$user = 'azure_4a08c7d5b58920cfcdd7e5390945734c@azure.com';
+$pass = 'emart1234';
+
+function emailtoseller($emailTO) {
+    global $url, $user, $pass;
+
+    $params = array(
+        'api_user' => $user,
+        'api_key' => $pass,
+        'to' => $emailTO,
+        'subject' => 'E-Mart: Your auction ended',
+        'html' =>   "<html>
+                            <head></head>
+                            <body>
+                                <p>Your auction ended.
+                    Please click on the link below to check:<br>
+                                <span><a href=\"www.e-mart.azurewebsites.net\">URL</a></span>
+                                </p>
+                            </body>
+                        </html>",
+        'text' => 'testing body',
+        'from' => 'info@emart.com'
+    );
+    $request = $url.'api/mail.send.json';
+
+
+// Generate curl request
+$session = curl_init($request);
+
+// Tell curl to use HTTP POST
+curl_setopt ($session, CURLOPT_POST, true);
+
+// Tell curl that this is the body of the POST
+curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+
+// Tell curl not to return headers, but do return the response
+curl_setopt($session, CURLOPT_HEADER, false);
+curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+// obtain response
+$response = curl_exec($session);
+curl_close($session);
+
+// print everything out
+// print_r($response);
+
+echo true;
+}
+function emailtowinner($emailTO) {
+    global $url, $user, $pass;
+
+    $params = array(
+        'api_user' => $user,
+        'api_key' => $pass,
+        'to' => $emailTO,
+        'subject' => 'E-Mart: You won an auction',
+        'html' =>   "<html>
+                            <head></head>
+                            <body>
+                                <p>Congratulations! You won an auction.
+                    Please click on the link below to bid check:<br>
+                                <span><a href=\"www.e-mart.azurewebsites.net\">URL</a></span>
+                                </p>
+                            </body>
+                        </html>",
+        'text' => 'testing body',
+        'from' => 'info@emart.com'
+    );
+    $request = $url.'api/mail.send.json';
+
+
+// Generate curl request
+    $session = curl_init($request);
+
+// Tell curl to use HTTP POST
+    curl_setopt ($session, CURLOPT_POST, true);
+
+// Tell curl that this is the body of the POST
+    curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+
+// Tell curl not to return headers, but do return the response
+    curl_setopt($session, CURLOPT_HEADER, false);
+    curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+// obtain response
+    $response = curl_exec($session);
+    curl_close($session);
+
+// print everything out
+// print_r($response);
+
+    echo true;
+
+}
+
+// DATABASE QUERY
+$sql1 = "SELECT auctionID, name, auctioneerID FROM auction WHERE endDate < curDate() AND isActive=true";
 
 if ($result1 = $connection->query($sql1) ) {
         //convert the results to an array of rows
@@ -16,8 +113,8 @@ if ($result1 = $connection->query($sql1) ) {
             if ($result2 = $connection->query($sql2) ) {
                 while ($row2= mysqli_fetch_array($result2)){
                     $email = $row2['emailAddress'];
+                    emailtoseller($email);
                 }
-                emailtoAuctioneer($email);
                 }
             else{
                 error_log("error" . $sql2 . $connection->error);
@@ -27,8 +124,9 @@ if ($result1 = $connection->query($sql1) ) {
             if($result3 = $connection->query($sql3)){
                 while ($row2= mysqli_fetch_array($result3)){
                     $email = $row2['emailAddress'];
+                    emailtowinner($email);
                 }
-                emailtoBidder($email);
+
             }
             else{
                 error_log("error" . $sql3 . $connection->error);
@@ -42,7 +140,7 @@ if ($result1 = $connection->query($sql1) ) {
         $connection->query($sql4);
         $connection->query($sql5);
         $connection->commit();
-        echo true;
+        //echo true;
     } catch (Exception $e) {
         $connection->rollback();
         echo false;
@@ -55,40 +153,13 @@ if ($result1 = $connection->query($sql1) ) {
         echo false;
     }
 
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-$headers .= 'From: <emart.noreply@gmail.com>' . "\r\n";
 
-function emailtoauctioneer($emailTO) {
-    global $headers;
 
-    $message =  '<html>
-                    <h3>Hi</h3>
-                    <br>
-                    Your auction ended.
-                    Please click on the link below to bid check:
-                    <br><br>
-                    http://www.e-mart.azurewebsites.net/
-                    <br>
-                </html>';
-    mail($emailTO, 'E-Mart: You have been outbid', $message, $headers);
-    echo true;
-}
-function emailtobidder($emailTO) {
-    global $headers;
+//Send email to seller and winner
 
-    $message =  '<html>
-                    <h3>Hi</h3>
-                    <br>
-                    Congratulations! You won an auction.
-                    Please click on the link below to bid check:
-                    <br><br>
-                    http://www.e-mart.azurewebsites.net/
-                    <br>
-                </html>';
-    mail($emailTO, 'E-Mart: You have been outbid', $message, $headers);
-    echo true;
-}
+
+
+
 
 
 
