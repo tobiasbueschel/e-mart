@@ -1,0 +1,8 @@
+<figure responsive-video class="text-center">
+    <iframe src="http://www.youtube.com/embed/bwj2s_5e12U" frameborder="0" allowfullscreen style="width: 80%; height:60vh"></iframe>
+</figure>
+<script>
+    $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function (e){
+        $('body').hasClass('fullscreen-video') ? $('body').removeClass('fullscreen-video') : $('body').addClass('fullscreen-video')
+    });
+</script>

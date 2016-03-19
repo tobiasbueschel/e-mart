@@ -219,7 +219,6 @@ module.exports = function (grunt) {
         'watch'             // Any other watch tasks you want to run
     ]);
 
-
     // Run build version of app
     grunt.registerTask('server', [
         'build',
@@ -239,6 +238,10 @@ module.exports = function (grunt) {
         'filerev',
         'usemin',
         'htmlmin'
+    ]);
+    
+    grunt.registerTask('default', [
+       'live' 
     ]);
 
 

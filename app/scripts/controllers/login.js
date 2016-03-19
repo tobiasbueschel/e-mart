@@ -418,7 +418,7 @@ emart.controller('loginCtrl', function ($scope, $http, $state, toaster, dataServ
             if(data == true){
                 //Set user email in data service so it can be accessed from other parts of the app
                 dataService.setCurrentUser($scope.register.email, $scope.register.id);
-                $state.go('main');
+                $state.go('profile');
                 toaster.pop({
                     type: 'success',
                     title: 'Success',

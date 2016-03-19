@@ -236,7 +236,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             parent: "root",
             url: "/viewbid?:id&{other}",
             templateUrl: function (param){
-                return "views/ecommerce/viewbid.html?id="+param.id +"&other="+param.other
+                return "views/ecommerce/bidhistory.html?id="+param.id +"&other="+param.other
             },
             data: { pageTitle: 'View Bid' }
         })
@@ -268,5 +268,15 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             templateUrl: "views/other/search.html",
             controller: "searchCtrl",
             data: { pageTitle: 'Search Results', name: 'Search Results', hide: true }
+        })
+
+        //-----------------------------------------------------
+        // VIDEO
+        //-----------------------------------------------------
+        .state('video', {
+            parent: "root",
+            url: "/video",
+            templateUrl: "views/other/video.html",
+            data: { pageTitle: 'Video', name: 'Video', hide: true }
         })
 });
