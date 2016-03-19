@@ -16,9 +16,13 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             url: "/scripts/php/selectRowBysql.php",
             data: {
                 sql: "SELECT auction.auctionID, item.itemID, auction.name, auction.description, auction.instantPrice, "+
-                "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, bid.bidPrice "+
-                "FROM auction,item,bid "+
+                "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, image.imageID, "+
+                "image.image, image.itemID, "+
+                "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID),auction.startingPrice) "+
+                "as auctionPrice "+
+                "FROM auction,item,bid,image "+
                 "WHERE auction.itemID = item.itemID AND item.categoryID="+$scope.data.categoryID+" AND auction.isActive=1 "+
+                "AND image.itemID=auction.itemID "+
                 "GROUP BY auction.auctionID;"
             },
             headers: {'Content-Type': 'application/json'}
