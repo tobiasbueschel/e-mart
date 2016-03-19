@@ -3,7 +3,7 @@
  * Manages login(), registerUser(), forgotPassword() function.
  ************************************************************************/
 
-emart.controller('ecommerceCtrl', function ($scope, $http, $state, $cookies, dataService, toaster) {
+emart.controller('ecommerceCtrl', function ($scope, $http, $state, $cookies, dataService, toaster, $stateParams) {
 
     $scope.products = {
         itemID: 1,
