@@ -77,17 +77,6 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             templateUrl: "views/profile/ratings.html",
             data: { pageTitle: 'My Account | Profil Rating', subStateName: 'Rating' }
         })
-        .state('profile.messages', {
-            url: "/messages",
-            templateUrl: "views/profile/messages.html",
-            data: { pageTitle: 'My Account | Messages', subStateName: 'Messages' }
-        })
-        .state('profile.settings', {
-            url: "/settings",
-            templateUrl: "views/profile/settings.html",
-            data: { pageTitle: 'My Account | Settings', subStateName: 'Settings' }
-        })
-
 
         //-----------------------------------------------------
         // ENDING SOON
