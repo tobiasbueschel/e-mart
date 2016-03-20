@@ -7,6 +7,7 @@
 emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
 
     //Flow factory for file uploads
+
     flowFactoryProvider.defaults = {
         target: 'php/upload.php',
         permanentErrors: [404, 500, 501],
@@ -17,6 +18,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
     flowFactoryProvider.on('catchAll', function (event) {
         console.log('catchAll', arguments);
     });
+
 
     $urlRouterProvider.otherwise("/endingsoon");
 

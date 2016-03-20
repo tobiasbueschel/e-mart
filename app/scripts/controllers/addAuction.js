@@ -37,8 +37,6 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
             $scope.data.auctionForm.reserveprice.$valid &&
             $scope.data.auctionForm.instantprice.$valid
         ) {
-
-            console.log("hello", $scope.data.item);
             var request = $http({
                 method: "post",
                 url: "/scripts/php/addauction.php",
@@ -61,11 +59,24 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
             request.success(function (data) {
                 console.log("Response: ", data);
                 if (data == 1) {
-                    $scope.data.responseMessage = "ITEM ADDED SUCCESSFULLY!";
+                    $scope.data.responseMessage = "";
                     $state.go('seller.onsale');
+                    toaster.pop({
+                        type: 'success',
+                        title: 'Auction added',
+                        body: 'Your auction has been added successfully!',
+                        showCloseButton: false,
+                        timeout: 2500
+                    });
                 }
                 else {
-                    $scope.data.responseMessage = "Couldn't write to DB!";
+                    toaster.pop({
+                        type: 'error',
+                        title: 'Error',
+                        body: 'Something went wrong.',
+                        showCloseButton: false,
+                        timeout: 2000
+                    });
                 }
             });
         }
