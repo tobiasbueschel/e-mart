@@ -6,9 +6,6 @@
                     <thead>
                     <tr>
                         <th data-toggle="true">Item</th>
-                        <th>Description</th>
-                        <th>Sold by</th>
-                        <th>Auction</th>
                         <th>Auction ended</th>
                         <th>Winning bid</th>
                         <th>Bid price</th>
@@ -18,12 +15,10 @@
                     <tbody >
                     <tr ng-repeat="i in data.boughtitems track by i.itemID">
                         <td>{{i[0]}}</td>
-                        <td>{{i[1]}}</td>
-                        <td>{{i[4]}}</td>
-                        <td>{{i[5]}}</td>
                         <td>{{i[7]}}</td>
                         <td>{{i[8]}}</td>
                         <td>{{i[9]}}</td>
+                        //ecommerce.details
                     </tr>
                     </tbody>
                 </table>
@@ -32,6 +27,4 @@
         </div>
     </div>
 </div>
-<div class="col-lg-12">
-    <button class="btn btn-primary btn-block"><i class="fa fa-arrow-down"></i> Show More</button>
-</div>
+

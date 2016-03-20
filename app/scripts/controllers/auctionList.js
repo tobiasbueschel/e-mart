@@ -72,7 +72,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
     $scope.data.addBookmark = function (auctionID) {
         return request = $http({
             method: "post",
-            url: "/scripts/php/bookmark.php",
+            url: "/scripts/php/addbookmark.php",
             data: {
                 auctionID: auctionID,
                 userID: $cookies.get('userID')
@@ -90,6 +90,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
 
         })
     }
+
 
 
 });

@@ -223,9 +223,9 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             templateUrl: "views/ecommerce/ecommerce_product_details.html",
             data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
         })
-        .state('viewbid', {
+        .state('bidhistory', {
             parent: "root",
-            url: "/viewbid?:id&{other}",
+            url: "/bidhistory?:id&{other}",
             templateUrl: function (param){
                 return "views/ecommerce/bidhistory.html?id="+param.id +"&other="+param.other
             },
