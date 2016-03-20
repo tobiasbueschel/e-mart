@@ -18,7 +18,7 @@ if(isset($_POST)) {
     //loop through each table in the tables array
     // DATABASE QUERY
     $current_rows = [];
-    $sql = "select a.auctionID, itemID, name, description, instantPrice, isActive, endDate, bidID, bidderID, bidPrice from auction a LEFT JOIN bid b ON a.auctionID = b.auctionID WHERE bidderID = $bidderID AND a.isActive=true GROUP BY a.auctionID";
+    $sql = "select a.auctionID, a.itemID, name, description, instantPrice, isActive, endDate, bidID, bidderID, (select max(bid.bidPrice) from bid WHERE bid.auctionID=a.auctionID) as bidPrice, image from (auction a LEFT JOIN bid b ON a.auctionID = b.auctionID) LEFT JOIN image on a.itemID=image.itemID WHERE bidderID = $bidderID AND a.isActive=true GROUP BY a.auctionID";
     if ($result = $connection->query($sql) ) {
         //convert the results to an array of rows
         while ($row = mysqli_fetch_array($result)) {
@@ -35,7 +35,11 @@ if(isset($_POST)) {
 
     header('Content-Type: application/json');
     //return JSON encoded object to the front end
-    echo json_encode($current_rows);
+    if(json_encode($current_rows)==[]){
+        echo false;
+    }else {
+        echo json_encode($current_rows);
+    }
 }
 
 else {

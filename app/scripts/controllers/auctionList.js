@@ -71,4 +71,5 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
     $scope.data.addBookmark = function (auctionID) {
         dataService.addBookmark(auctionID);
     }
+
 });

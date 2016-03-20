@@ -18,6 +18,9 @@ emart.controller('BuyerDashboardCtrl', function ($scope, $http, $state, $cookies
                 console.log(response);
                 $scope.data.auctions = response.data;
                 console.log($scope.data.auctions);
+                if(($scope.data.auctions).length==0){
+                    alert("You have no bid at the momoent. Why don't you place a bid?" );
+                }
             }
             else {
                 console.log("Error loading drop down menu conditions and categories from database");
@@ -49,6 +52,28 @@ emart.controller('BuyerDashboardCtrl', function ($scope, $http, $state, $cookies
             }
         });
     })();
+    $scope.data.removeBookmark = function (auctionID) {
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/removebookmark.php",
+            data: {
+                auctionID: auctionID,
+                userID: $cookies.get('userID')
+            },
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (response) {
+            console.log(response);
+            if (response !== 0) { //if no error when fetching database rows
+                console.log(response);
+                alert("Bookmark is removed!")
+                $state.go("endingsoon")
+            }
+            else {
+                console.log("Error loading drop down menu conditions and categories from database");
+            }
+
+        })
+    }
 })
 
 .controller('boughtItemsCtrl', function ($scope, $http, $state, $cookies, toaster, dataService) {

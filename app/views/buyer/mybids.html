@@ -3,12 +3,9 @@
         <div class="ibox-content product-box">
 
             <div class="product-imitation">
-                [ INFO ]
+                <img src="{{auction.image}}" width="100%" height="auto">
             </div>
             <div class="product-desc">
-                        <span class="product-bookmark">
-                             <button type="button" data-ng-click="data.addBookmark( auction.auctionID )"><i class="fa fa-bookmark-o"></i></button>
-                        </span>
 
                         <span class="product-price">
                             £{{auction.bidPrice}}
@@ -31,7 +28,7 @@
                 </div>
                 <div class="m-t text-righ">
 
-                    <a data-ui-sref="viewbid({id:{{auction.auctionID}}, other:'{{auction.name}}'})" class="btn btn-xs btn-outline btn-primary">Bid History </a>
+                    <a data-ui-sref="bidhistory({id:{{auction.auctionID}}, other:'{{auction.name}}'})" class="btn btn-xs btn-outline btn-primary">Bid History </a>
                     <a data-ui-sref="buyer.createbid({id:{{auction.auctionID}}, other:'{{auction.name}}'})" class="btn btn-xs btn-outline btn-primary">Create Bid </a>
                 </div>
             </div>

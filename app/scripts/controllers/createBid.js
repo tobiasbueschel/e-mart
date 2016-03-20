@@ -31,7 +31,7 @@ emart.controller('createBidCtrl', function ($scope, $http, $stateParams, $cookie
             toaster.pop({
                 type: 'error',
                 title: 'Error',
-                body: 'Your bid is lower than current bid :(',
+                body: 'Bid needs to be HIGHER than current bid:(',
                 showCloseButton: false,
                 timeout: 2500
             });
