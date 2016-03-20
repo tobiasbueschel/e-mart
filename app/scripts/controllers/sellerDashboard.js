@@ -73,14 +73,19 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
     };
 
     (function () {
-        //Get items of the current user
-        var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));
-        sellerItemsPromise.then(function(result) {
-            //inside promise then
-            console.log("got seller items...");
-            $scope.data.items = result.data;
-            $scope.data.hashedItems = dataService.generateHashTable($scope.data.items, "itemID");
-            $scope.$broadcast('sellerItemsObtains');
+        //Get items that do not have auctions coming up or are already in a live auction
+        var requestDraftItems = $http({
+            method: "post",
+            url: "/scripts/php/selectRowBysql.php",
+            data: {
+               sql:  "SELECT i.* FROM item i LEFT JOIN auction a ON i.itemID = a.itemID AND a.isActive=1 "
+               +"WHERE a.itemID IS NULL AND i.ownerID=1371 AND i.isSold=0 ;"
+            },
+            headers: { 'Content-Type': 'application/json' }
+        });
+        requestDraftItems.success(function (result) {
+            console.log("Response: ", result);
+            $scope.data.items = result;
         });
 
         //Get sold items of user
@@ -88,7 +93,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         sellerSoldItemsPromise.then(function(result) {
             //inside promise then
             $scope.data.soldItems = result.data;
-            $scope.data.soldHashedItems = dataService.generateHashTable($scope.data.items, "itemID");
+            $scope.data.soldHashedItems = dataService.generateHashTable($scope.data.soldItems, "itemID");
         });
 
         //Get the auctions of the current user

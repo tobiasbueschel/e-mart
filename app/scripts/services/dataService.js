@@ -1,7 +1,7 @@
 /************************************************************************************
  * This service provides a singleton for categories and conditions data
  ************************************************************************************/
-emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
+emart.service('dataService', ['$http','$cookies','toaster', function ($http, $cookies, toaster) {
     var dataServiceScope = this;
 
     //Store categories and conditions here
@@ -56,7 +56,6 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
     };
 
     dataServiceScope.getData = function() {
-        console.log("GETTING CONDITIONS AND CATEGORIES DATA");
         // Angular $http() and then() both return promises themselves
         //Let's pull categories
         var data = {};
@@ -188,7 +187,7 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
             url: "/scripts/php/selectRowBysql.php",
             data: {
                 sql: "SELECT auction.auctionID, auction.name, auction.description, auction.auctioneerID, "+
-                "auction.startDate, auction.endDate, auction.startingPrice, auction.instantPrice, auction.reservePrice, item.itemID, item.name FROM auction, item "+
+                "auction.startDate, auction.endDate, auction.startingPrice, auction.instantPrice, auction.reservePrice, item.itemID, item.name, auction.isActive FROM auction, item "+
                 "WHERE auctioneerID="+$cookies.get('userID')+
                 " AND auction.itemID= item.itemID GROUP BY auction.auctionID;"
             },
@@ -247,6 +246,41 @@ emart.service('dataService', ['$http','$cookies', function ($http, $cookies) {
                 console.log("Error response from database");
             }
         });
+    }
+
+    //function to add bookmark
+    dataServiceScope.addBookmark = function (auctionID) {
+        return request = $http({
+            method: "post",
+            url: "/scripts/php/bookmark.php",
+            data: {
+                auctionID: auctionID,
+                userID: $cookies.get('userID')
+            },
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (response) {
+            console.log(response);
+            if (response !== 0) { //if no error when fetching database rows
+                console.log(response);
+                toaster.pop({
+                    type: 'success',
+                    title: 'Bookmark added',
+                    body: 'You are now watching this auction!',
+                    showCloseButton: true,
+                    timeout: 2500
+                });
+            }
+            else {
+                toaster.pop({
+                    type: 'error',
+                    title: 'Error',
+                    body: 'Error adding bookmark. Try again.',
+                    showCloseButton: true,
+                    timeout: 2500
+                });
+            }
+
+        })
     }
 
 }]);

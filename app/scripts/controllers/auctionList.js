@@ -1,4 +1,4 @@
-emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParams, $cookies, dataService) {
+emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParams, $cookies, toaster, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
     console.log($stateParams);
     $scope.data.categoryID = $stateParams.categoryid;
@@ -17,7 +17,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             data: {
                 sql: "SELECT auction.auctionID, item.itemID, auction.name, auction.description, auction.instantPrice, "+
                 "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, image.imageID, "+
-                "image.image, image.itemID, "+
+                "image.image, image.itemID, item.categoryID"+
                 "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID),auction.startingPrice) "+
                 "as auctionPrice "+
                 "FROM auction,item,bid,image "+
@@ -53,8 +53,8 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
                 "WHERE auction.startDate < now() AND auction.endDate > now() AND auction.itemID = item.itemID AND auction.isActive=1 "+
                 "AND image.itemID=auction.itemID "+
                 "GROUP BY auction.auctionID "+
-                "ORDER BY auction.endDate " +
-                "LIMIT 10;"
+                "ORDER BY auction.endDate" +
+                ";"
             },
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
@@ -68,28 +68,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             }
         });
     })();
-
     $scope.data.addBookmark = function (auctionID) {
-        return request = $http({
-            method: "post",
-            url: "/scripts/php/bookmark.php",
-            data: {
-                auctionID: auctionID,
-                userID: $cookies.get('userID')
-            },
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (response) {
-            console.log(response);
-            if (response !== 0) { //if no error when fetching database rows
-                console.log(response);
-                alert("Bookmark is added!")
-            }
-            else {
-                console.log("Error loading drop down menu conditions and categories from database");
-            }
-
-        })
+        dataService.addBookmark(auctionID);
     }
-
-
 });

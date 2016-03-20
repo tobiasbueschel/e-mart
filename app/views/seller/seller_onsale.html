@@ -14,6 +14,7 @@
                         <th>Starting Price</th>
                         <th>Instant Price</th>
                         <th>Reserve Price</th>
+                        <th>Active</th>
                         <th>Views</th>
                         <th class="text-right" data-sort-ignore="true">View</th>
 
@@ -29,6 +30,7 @@
                         <td>£ {{auction[6]}}</td>
                         <td>£ {{auction[7]}}</td>
                         <td>£ {{auction[8]}}</td>
+                        <td>{{auction[11] | yes_no}}</td>
                         <td>172x</td>
                         <td class="text-right">
                             <a data-ui-sref="ecommerce.details({auctionid:{{auction.auctionID}}})" class="btn btn-primary"><i class="fa fa-eye"></i></a>
