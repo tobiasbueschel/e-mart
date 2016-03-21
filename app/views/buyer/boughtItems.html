@@ -6,19 +6,20 @@
                     <thead>
                     <tr>
                         <th data-toggle="true">Item</th>
+                        <th>Sold by</th>
                         <th>Auction ended</th>
-                        <th>Winning bid</th>
-                        <th>Bid price</th>
+                        <th>Fianl price</th>
                         <th data-sort-ignore="true">View</th>
                     </tr>
                     </thead>
                     <tbody >
                     <tr ng-repeat="i in data.boughtitems track by i.itemID">
                         <td>{{i[0]}}</td>
+                        <td>{{i[4]}}</td>
                         <td>{{i[7]}}</td>
-                        <td>{{i[8]}}</td>
-                        <td>{{i[9]}}</td>
-                        //ecommerce.details
+                        <td>£{{i[9]}}</td>
+                        <td data-ui-sref="ecommerce.details({auctionid:{{i[5]}}})" class="btn btn-primary"><i class="fa fa-eye"></i></td>
+                        <td><a href="mailto:{{i[10]}}"  class="btn btn-xs btn-warning">Contact seller </a></td>
                     </tr>
                     </tbody>
                 </table>

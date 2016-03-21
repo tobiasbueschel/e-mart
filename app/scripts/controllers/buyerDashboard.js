@@ -19,7 +19,13 @@ emart.controller('BuyerDashboardCtrl', function ($scope, $http, $state, $cookies
                 $scope.data.auctions = response.data;
                 console.log($scope.data.auctions);
                 if(($scope.data.auctions).length==0){
-                    alert("You have no bid at the momoent. Why don't you place a bid?" );
+                    toaster.pop({
+                        type: 'false',
+                        title: 'No bid',
+                        body: "You have no bid at the momoent. Why don't you place a bid? :)",
+                        showCloseButton: false,
+                        timeout: 2500
+                    })
                 }
             }
             else {
@@ -84,7 +90,7 @@ emart.controller('BuyerDashboardCtrl', function ($scope, $http, $state, $cookies
             url: "/scripts/php/selectRowBysql.php",
             data: {
                 sql: "SELECT item.name, item.description, auction.auctioneerID, user.userID, user.firstName, "+
-                "auction.auctionID, auction.name, auction.endDate, bid.bidID, bid.bidPrice "+
+                "auction.auctionID, auction.name, auction.endDate, bid.bidID, bid.bidPrice, user.emailAddress "+
                 "FROM item, auction, user, bid "+
                 "WHERE item.buyerID="+$cookies.get('userID')+" AND item.itemID=auction.itemID AND "+
                 "user.userID = auction.auctioneerID AND bid.bidID=auction.currentBidID GROUP BY item.itemID;"

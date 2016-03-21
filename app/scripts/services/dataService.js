@@ -210,7 +210,7 @@ emart.service('dataService', ['$http','$cookies','toaster', function ($http, $co
     dataServiceScope.addBookmark = function (auctionID) {
         return request = $http({
             method: "post",
-            url: "/scripts/php/bookmark.php",
+            url: "/scripts/php/addbookmark.php",
             data: {
                 auctionID: auctionID,
                 userID: $cookies.get('userID')
