@@ -6,6 +6,8 @@ emart.controller('MainCtrl', function ($scope, $http, $state, $cookies, dataServ
 
     $scope.user = {};
     $scope.maindata = {};
+
+    //GET USER INFORMATION FROM COOKIE
     $scope.user.userID = $cookies.get('userID');
     $scope.user.userName = $cookies.get('userName');
     $scope.user.twUsername = $cookies.get('twUsername');
@@ -16,14 +18,14 @@ emart.controller('MainCtrl', function ($scope, $http, $state, $cookies, dataServ
     $scope.user.dateRegistered = $cookies.get('dateRegistered') ? new Date($cookies.get('dateRegistered').replace(/-/g,"/")) : null;
     $scope.user.city = $cookies.get('city');
 
+    //GET CATEGORIES AND CONDITIONS USING DATA SERVICE
     var myDataPromise = dataService.getData();
     myDataPromise.then(function(result) {
-        console.log("Result after running data service from main", result);
-        //inside promise then
         $scope.maindata.categories = result.categories;
         $scope.maindata.conditions = result.conditions;
     });
 
+    //LOGOUT FUNCTION
     $scope.logout = function () {
         $timeout(function() {
             var cookies = $cookies.getAll();
@@ -41,6 +43,7 @@ emart.controller('MainCtrl', function ($scope, $http, $state, $cookies, dataServ
         });
     };
 
+    //START EMAILING SERVICE
     (function () {
         return request = $http({
             method: "post",
@@ -52,7 +55,7 @@ emart.controller('MainCtrl', function ($scope, $http, $state, $cookies, dataServ
                 console.log(response);
             }
             else {
-                console.log("Error loading drop down menu conditions and categories from database");
+                console.log("Error");
             }
         });
     })();

@@ -2,11 +2,10 @@
  * Created by kimeshan on 10/03/2016.
  */
 
-emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookies, toaster, dataService) {
+emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $window, $cookies, toaster, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
 
     $scope.data.getCategoryOfItem = function (item) {
-        console.log(item,dataService.categories);
         return dataService.hashedCategories[item.categoryID].name;
     };
 
@@ -22,9 +21,12 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         $state.go('addauction');
     };
 
-    $scope.data.deleteItem = function (itemID) {
-        console.log("Delete item", itemID);
+    //CONTACT BUYER/SELLER
+    $scope.data.goToURL = function (email, subject) {
+        $window.open("mailto:"+email+"?Subject="+subject, "_blank");
+    }
 
+    $scope.data.deleteItem = function (itemID) {
         swal({
             title: "Are you sure?",
             text: "Deleting this item cannot be undone!",
@@ -46,7 +48,6 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
                     }
                 });
                 deleteItem.success(function (data) {
-                    console.log("response" ,data);
                     if (data==1) {
                         //Item deleted
                         $state.reload();
@@ -84,7 +85,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
             headers: { 'Content-Type': 'application/json' }
         });
         requestDraftItems.success(function (result) {
-            console.log("Response: ", result);
+            console.log("DRAFT ITEMS: ", result);
             $scope.data.items = result;
         });
 
@@ -93,7 +94,6 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         sellerSoldItemsPromise.then(function(result) {
             //inside promise then
             $scope.data.soldItems = result.data;
-            $scope.data.soldHashedItems = dataService.generateHashTable($scope.data.soldItems, "itemID");
         });
 
         //Get the auctions of the current user
@@ -101,7 +101,6 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
         sellerAuctionsPromise.then(function(result) {
             //inside promise then
             $scope.data.auctions = result.data;
-            console.log(result.data);
         });
     })();
 

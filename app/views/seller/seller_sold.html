@@ -9,30 +9,27 @@
                     <th>Description</th>
                     <th>Item</th>
                     <th>Winning Bid</th>
-                    <th>Buyer</th>
-                    <th data-sort-ignore="true">View</th>
+                    <th>Buyer Name</th>
+                    <th>Contact Buyer</th>
+                    <th data-sort-ignore="true">View Auction</th>
                 </tr>
                 </thead>
                 <tbody >
 
-                <tr ng-repeat="a in data.auctions track by a.auctionID">
-                    <td>{{a.name}}</td>
+                <tr ng-repeat="a in data.soldItems track by $index">
+                    <td>{{a[1]}}</td>
                     <td>{{a.description}}</td>
-                    <td>{{a.itemID}}</td>
-                    <td> $ 200 </td>
-                    <td>John Doe</td>
+                    <td>{{a[5]}}</td>
+                    <td>£ {{a.bidPrice}}</td>
+                    <td>{{a.firstName}}</td>
                     <td>
-                        <a data-ui-sref="ecommerce.details({auctionid:{{a.auctionID}}})" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                        <button class="btn btn-warning" ng-click="data.goToURL(a.emailAddress, a[1])"><i class="fa fa-envelope"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" data-ui-sref="ecommerce.details({auctionid:{{a.auctionID}}})"><i class="fa fa-eye"></i></button>
                     </td>
                 </tr>
                 </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="6" class="text-center">
-                        <ul class="pagination"></ul>
-                    </td>
-                </tr>
-                </tfoot>
             </table>
 
         </div>
