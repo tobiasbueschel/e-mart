@@ -7,11 +7,19 @@
             <div ng-repeat="result in data.searchResults">
                 <div class="hr-line-dashed"></div>
                 <div class="search-result">
-                    <h3><a href="">{{result.name}}</a></h3>
-                    <a href="" class="search-link">{{result.description}}</a>
-                    <p>
+                    <div class="row">
+                        <h3>
+                            <div class="col-xs-8">
+                                <a data-ui-sref="ecommerce.details({auctionid:{{result[0]}}})">{{result.name}}</a>
+                            </div>
 
-                    </p>
+                            <div class="col-xs-4">
+                                <h2 class="primary">£ {{result.auctionPrice}}</h2>
+                            </div>
+                        </h3>
+                    </div>
+
+                    <p class="text muted">{{result.description}}</p>
                 </div>
             </div>
         </div>
