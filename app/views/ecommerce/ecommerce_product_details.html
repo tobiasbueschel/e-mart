@@ -8,7 +8,7 @@
                     <slick dots="true">
                         <div>
                             <div class="image-imitation">
-                                [IMAGE 1]
+                                <img src="{{auction.image}}" width="100%" height="auto">
                             </div>
                         </div>
                     </slick>
@@ -16,13 +16,14 @@
                 <div class="col-md-7">
 
                     <h2 class="font-bold m-b-xs">
-                        {{ auction.name }}
+                        {{ auction[2]}}
                     </h2>
 
-                    <small>Seller: {{  }}</small>
+                    <small>Seller: {{auction[14]}}</small>
                     <div class="m-t-md">
-                        <h2 class="product-main-price">£ {{  }} <small class="text-muted">Current Price</small> </h2>
+                        <h2 class="product-main-price">£ {{auction.auctionPrice}} <small class="text-muted">Current Price</small> </h2>
                     </div>
+                    <small>Auction started on: <i class="fa fa-clock-o"></i> {{ auction.startDate }}</small>
                     <hr>
 
                     <h4>Description</h4>
@@ -34,9 +35,9 @@
 
                     <div>
                         <div class="btn-group">
-                            <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i> Place Bid</button>
-                            <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Watch Auction </button>
-                            <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact Seller </button>
+                            <button class="btn btn-primary btn-sm" data-ui-sref="buyer.createbid({id:{{auction.auctionID}}, other:'{{auction.name}}'})"><i class="fa fa-cart-plus"></i> Place Bid</button>
+                            <button class="btn btn-{{data.watchButtonColor}} btn-sm" data-ng-disabled="data.watched" data-ng-click="data.addBookmark(auction.auctionID)"><i class="fa fa-star"></i> {{data.watchAction}} </button>
+                            <button class="btn btn-white btn-sm" ng-click="data.goToURL(auction.emailAddress, auction.name)"><i class="fa fa-envelope"></i> Contact Seller </button>
                         </div>
                     </div>
                 </div>
@@ -45,59 +46,8 @@
         </div>
         <div class="ibox-footer">
             <span class="pull-right">
-                Auction created on: <i class="fa fa-clock-o"></i> {{ auction.startDate }}
+
             </span>
-        </div>
-    </div>
-
-</div>
-
-
-
-<div class="col-lg-12" data-ng-if="item">
-
-    <div class="ibox product-detail">
-        <div class="ibox-content">
-
-            <div class="row">
-                <div class="col-md-5">
-                    <slick dots="true">
-                        <div>
-                            <div class="image-imitation">
-                                [IMAGE 1]
-                            </div>
-                        </div>
-                    </slick>
-                </div>
-                <div class="col-md-7">
-
-                    <h2 class="font-bold m-b-xs" data-ng-if="item">
-                        {{ item.name }}
-                    </h2>
-
-                    <small>Seller: {{  }}</small>
-                    <div class="m-t-md">
-                        <h2 class="product-main-price">£ {{  }} <small class="text-muted">Current Price</small> </h2>
-                    </div>
-                    <hr>
-
-                    <h4>Description</h4>
-
-                    <div class="small text-muted">
-                        {{ auction.description }}
-                    </div>
-                    <hr>
-
-                    <div>
-                        <div class="btn-group" data-ng-if="item">
-                            <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i>Start Auction</button>
-                            <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i>Delete Item</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </div>
 

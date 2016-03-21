@@ -15,3 +15,13 @@ emart.run(function($rootScope, $state) {
     $rootScope.$state = $state;
 });
 
+//filters
+emart.filter('yes_no', function() {
+    return function(isActive, length, end) {
+        if (isActive==1) {
+            return 'Yes';
+        }
+        return 'No';
+    }
+});
+

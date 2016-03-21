@@ -2,7 +2,16 @@ emart.controller('viewBidCtrl', function ($scope, $stateParams, $http, $state, $
     $scope.data = {}; //creating new scope that can be used inside tabset
     $scope.data.auctionname = $stateParams.other;
     $scope.data.formatDate = function (phpDateTime) {
-        return new Date(phpDateTime);
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        var date = new Date(phpDateTime);
+        var day = date.getDate();
+        var monthIndex = date.getMonth();
+        var year = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        return day+" "+monthNames[monthIndex]+" "+year+", "+hours+":"+minutes;
     };
 
     (function () {

@@ -2,6 +2,7 @@
  * Created by kimeshan on 10/03/2016.
  */
 
+/*
 emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookies, toaster, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
 
@@ -14,4 +15,6 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $cookie
     });
 
 });
+*/
+
 

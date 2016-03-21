@@ -1,6 +1,5 @@
-emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParams, $cookies, dataService) {
+emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParams, $cookies, toaster, dataService) {
     $scope.data = {}; //creating new scope that can be used inside tabset
-    console.log($stateParams);
     $scope.data.categoryID = $stateParams.categoryid;
 
 
@@ -10,6 +9,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
         $scope.data.conditions = result.conditions;
     });
 
+    //GET AUCTIONS FOR SPECIFIC CATEGORY
     (function () {
         return request = $http({
             method: "post",
@@ -17,8 +17,8 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             data: {
                 sql: "SELECT auction.auctionID, item.itemID, auction.name, auction.description, auction.instantPrice, "+
                 "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, image.imageID, "+
-                "image.image, image.itemID, "+
-                "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID),auction.startingPrice) "+
+                "image.image, image.itemID, item.categoryID, item.conditionID, "+
+                "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID), auction.startingPrice) "+
                 "as auctionPrice "+
                 "FROM auction,item,bid,image "+
                 "WHERE auction.startDate < now() AND auction.endDate > now() AND auction.itemID = item.itemID AND item.categoryID="+$scope.data.categoryID+" AND auction.isActive=1 "+
@@ -27,11 +27,9 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             },
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
-            console.log(response);
             if (response !== 0) { //if no error when fetching database rows
-                console.log("Categories req reponse: ", response.data);
+                //console.log("AUCTIONS FOR THIS CATEGORY ", response.data);
                 $scope.data.auctions = response.data;
-                console.log($scope.data.auctions);
             }
             else {
                 console.log("Error loading drop down menu conditions and categories from database");
@@ -39,6 +37,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
         });
     })();
 
+    //GET AUCTIONS ENDING SOON
     (function () {
         return request = $http({
             method: "post",
@@ -46,21 +45,20 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             data: {
                 sql: "SELECT auction.auctionID, item.itemID, auction.name, auction.description, auction.instantPrice, "+
                 "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, image.imageID, "+
-                "image.image, image.itemID, "+
+                "image.image, image.itemID, item.categoryID, item.conditionID, "+
                 "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID),auction.startingPrice) "+
                 "as auctionPrice "+
                 "FROM auction,item,bid,image "+
                 "WHERE auction.startDate < now() AND auction.endDate > now() AND auction.itemID = item.itemID AND auction.isActive=1 "+
                 "AND image.itemID=auction.itemID "+
                 "GROUP BY auction.auctionID "+
-                "ORDER BY auction.endDate " +
-                "LIMIT 10;"
+                "ORDER BY auction.endDate" +
+                ";"
             },
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
-            console.log(response);
             if (response !== 0) { //if no error when fetching database rows
-                console.log("Ending soon req reponse: ", response.data);
+                //console.log("AUCTIONS ENDING SOON: ", response.data);
                 $scope.data.endingsoon = response.data;
             }
             else {
@@ -70,25 +68,15 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
     })();
 
     $scope.data.addBookmark = function (auctionID) {
-        return request = $http({
-            method: "post",
-            url: "/scripts/php/bookmark.php",
-            data: {
-                auctionID: auctionID,
-                userID: $cookies.get('userID')
-            },
-            headers: {'Content-Type': 'application/json'}
-        }).then(function (response) {
-            console.log(response);
-            if (response !== 0) { //if no error when fetching database rows
-                console.log(response);
-                alert("Bookmark is added!")
-            }
-            else {
-                console.log("Error loading drop down menu conditions and categories from database");
-            }
+        dataService.addBookmark(auctionID);
+    }
 
-        })
+    $scope.data.getCategoryName = function (categoryID) {
+        return dataService.hashedCategories[categoryID].name;
+    }
+
+    $scope.data.getConditionName = function (conditionID) {
+        return dataService.hashedConditions[conditionID].name;
     }
 
 

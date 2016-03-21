@@ -7,6 +7,7 @@
 emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
 
     //Flow factory for file uploads
+
     flowFactoryProvider.defaults = {
         target: 'php/upload.php',
         permanentErrors: [404, 500, 501],
@@ -17,6 +18,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
     flowFactoryProvider.on('catchAll', function (event) {
         console.log('catchAll', arguments);
     });
+
 
     $urlRouterProvider.otherwise("/endingsoon");
 
@@ -194,7 +196,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
         .state('ecommerce', {
             templateUrl: "views/common/content.html",
             controller: "ecommerceCtrl",
-            data: { mainState: 'ecommerce.grid', mainStateName: 'Product Grid', name: 'E-Commerce', toggleView: true }
+            data: { mainState: 'ecommerce.grid', mainStateName: 'Browsing', name: 'Browsing Auctions', toggleView: true }
         })
         .state('ecommerce.grid', {
             url:"/ecommerce?:categoryid",
@@ -202,7 +204,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             templateUrl: function (param){
                 return "views/ecommerce/products_grid.html?categoryid="+param.id;
             },
-            data: { pageTitle: 'E-commerce | Product Grid', subStateName: 'Product Grid' }
+            data: { pageTitle: 'Browsing Auctions | By Category', subStateName: 'By Category' }
         })
         .state('ecommerce.list', {
             url: "/ecommerce-list?:categoryid",
@@ -219,11 +221,11 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             },
             controller: "productDetailsCtrl",
             templateUrl: "views/ecommerce/ecommerce_product_details.html",
-            data: { pageTitle: 'E-commerce | Product Details', subStateName: 'Product Details' }
+            data: { pageTitle: 'Browsing Auctions | Auction Details', subStateName: 'Auction Details' }
         })
-        .state('viewbid', {
+        .state('bidhistory', {
             parent: "root",
-            url: "/viewbid?:id&{other}",
+            url: "/bidhistory?:id&{other}",
             templateUrl: function (param){
                 return "views/ecommerce/bidhistory.html?id="+param.id +"&other="+param.other
             },

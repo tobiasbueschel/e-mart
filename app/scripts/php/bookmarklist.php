@@ -18,7 +18,7 @@ if(isset($_POST)) {
     //loop through each table in the tables array
     // DATABASE QUERY
     $current_rows = [];
-    $sql = "SELECT a.auctionID as auctionID, name, description, instantPrice, isActive, endDate, bidPrice from((auction a LEFT JOIN bid b ON a.auctionID = b.auctionID) JOIN bookmark d ON a.auctionID = d.auctionID) WHERE d.userID = $userID AND a.isActive = true GROUP BY a.auctionID";
+    $sql = "SELECT a.auctionID as auctionID, name, description, instantPrice, isActive, endDate, (select max(bid.bidPrice) from bid WHERE bid.auctionID=a.auctionID) as bidPrice, image from(((auction a LEFT JOIN bid b ON a.auctionID = b.auctionID) JOIN bookmark d ON a.auctionID = d.auctionID))LEFT JOIN image on a.itemID=image.itemID WHERE d.userID = $userID AND a.isActive = true GROUP BY a.auctionID";
     if ($result = $connection->query($sql) ) {
         //convert the results to an array of rows
         while ($row = mysqli_fetch_array($result)) {

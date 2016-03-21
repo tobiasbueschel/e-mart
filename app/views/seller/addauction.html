@@ -47,11 +47,20 @@
                                 </div>
                             </div>
                             <!--ITEM-->
-                            <div class="form-group">
+                            <div class="form-group"
+                                 data-ng-class="{'has-success': data.auctionForm.item.$valid, 'has-error': data.auctionForm.item.$invalid && data.auctionForm.item.$dirty}">
                                 <label class="col-sm-2 control-label">Item :</label>
-                                <div class="col-sm-10" ng-repeat="i in data.items track by $index">
-                                    <div data-ng-model="data.item = i.itemID"></div>
-                                    <input type="text" class="form-control" disabled placeholder="{{i.name}} | {{i.description}}" style="background-color:transparent!important;">
+                                <div class="col-sm-10">
+                                    <select name="item" class="form-control"  data-ng-model="data.item"
+                                            data-ng-minlength="1"
+                                            data-ng-required="true">
+                                        <option ng-repeat="i in data.items track by i.itemID" value="{{i.itemID}}">{{i.name}} | {{i.description}}</option>
+                                    </select>
+                                </div>
+                                <!--VALIDATION -->
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-10">
+                                    <p data-ng-show="data.auctionForm.item.$invalid && data.auctionForm.item.$dirty" class="help-block m-b-none has-error">You must select an item</p>
                                 </div>
                             </div>
                             <!--AUCTION START DATE -->
