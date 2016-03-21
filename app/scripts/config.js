@@ -86,7 +86,7 @@ emart.config(function ($stateProvider, $urlRouterProvider, flowFactoryProvider){
             url: "/endingsoon",
             controller: "auctionListCtrl",
             templateUrl: "views/buyer/ending_soon.html",
-            data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon', hide: true, toggleView: true }
+            data: { mainState: 'endingsoon', mainStateName: 'Buyer', name: 'Ending Soon', hide: true, toggleView: hide }
         })
 
         //-----------------------------------------------------
