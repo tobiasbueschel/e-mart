@@ -20,7 +20,7 @@ emart.controller('productDetailsCtrl', function ($scope, $http, $window, $state,
             data: {
                 sql:"SELECT auction.auctionID, item.itemID, auction.name, auction.description, auction.instantPrice, "+
         "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, image.imageID, "+
-        "image.image, image.itemID, user.userID, user.firstName, user.userName, user.emailAddress, "+
+        "image.image, image.itemID, user.userID, user.firstName, user.userName, user.emailAddress, auction.startDate, "+
         "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID),auction.startingPrice) "+
         "as auctionPrice "+
         "FROM auction,item,bid,image,user "+

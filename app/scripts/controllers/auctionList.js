@@ -17,7 +17,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             data: {
                 sql: "SELECT auction.auctionID, item.itemID, auction.name, auction.description, auction.instantPrice, "+
                 "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, image.imageID, "+
-                "image.image, image.itemID, item.categoryID, "+
+                "image.image, image.itemID, item.categoryID, item.conditionID, "+
                 "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID), auction.startingPrice) "+
                 "as auctionPrice "+
                 "FROM auction,item,bid,image "+
@@ -45,7 +45,7 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
             data: {
                 sql: "SELECT auction.auctionID, item.itemID, auction.name, auction.description, auction.instantPrice, "+
                 "auction.isActive, auction.endDate, auction.currentBidID, bid.bidID, bid.bidderID, image.imageID, "+
-                "image.image, image.itemID, "+
+                "image.image, image.itemID, item.categoryID, item.conditionID, "+
                 "IFNULL((select max(bid.bidPrice) from bid WHERE bid.auctionID=auction.auctionID),auction.startingPrice) "+
                 "as auctionPrice "+
                 "FROM auction,item,bid,image "+
@@ -70,5 +70,14 @@ emart.controller('auctionListCtrl', function ($scope, $http, $state, $stateParam
     $scope.data.addBookmark = function (auctionID) {
         dataService.addBookmark(auctionID);
     }
+
+    $scope.data.getCategoryName = function (categoryID) {
+        return dataService.hashedCategories[categoryID].name;
+    }
+
+    $scope.data.getConditionName = function (conditionID) {
+        return dataService.hashedConditions[conditionID].name;
+    }
+
 
 });

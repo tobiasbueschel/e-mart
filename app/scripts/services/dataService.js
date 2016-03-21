@@ -205,28 +205,6 @@ emart.service('dataService', ['$http','$cookies','toaster', function ($http, $co
         });
     };
 
-    //GET ALL AUCTIONS
-    dataServiceScope.getAuctions = function () {
-
-        var auctiondata = {};
-        return request = $http({
-            method: "post",
-            url: "/scripts/php/getAllRows.php",
-            data: {
-                tables:["auction"]
-            },
-            headers: { 'Content-Type': 'application/json' }
-        }).then(function (response) {
-            if (response!==0) { //if no error when fetching database rows
-                auctiondata.auctions = response.data.auction;
-                return auctiondata;
-            }
-            else {
-                console.log("Error response from database");
-            }
-        });
-    }
-
     //ADD A BOOKMARK
     //function to add bookmark
     dataServiceScope.addBookmark = function (auctionID) {

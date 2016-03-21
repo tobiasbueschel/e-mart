@@ -104,6 +104,14 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $window
         });
     })();
 
+    $scope.data.getCategoryName = function (categoryID) {
+        return dataService.hashedCategories[categoryID].name;
+    }
+
+    $scope.data.getConditionName = function (conditionID) {
+        return dataService.hashedConditions[conditionID].name;
+    }
+
 
 });
 

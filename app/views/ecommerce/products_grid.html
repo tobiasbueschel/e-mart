@@ -13,14 +13,10 @@
                         <span class="product-price">
                             £{{auction.auctionPrice}}
                         </span>
-                        <span class="product-bid">
-                            {{auction.count}}
-                        </span>
 
-
-                <small class="text-muted">{{}}</small>
-                <a class="product-name">{{auction.name}}</a>
-
+                <a class="text-muted" data-ui-sref="ecommerce.grid({categoryid:{{auction.categoryID}}})">{{data.getCategoryName(auction.categoryID)}}</a>
+                <a class="product-name" data-ui-sref="ecommerce.details({auctionid:{{auction.auctionID}}})">{{auction.name}}</a>
+                <small class="label label-warning"> {{data.getConditionName(auction.conditionID)}}</small>
 
 
                 <div class="small m-t-xs">
@@ -29,8 +25,7 @@
                 <div class="small m-t-xs">
                     End Date: {{auction.endDate}}
                 </div>
-                <div class="m-t text-righ">
-
+                <div class="m-t text-right">
                     <a data-ui-sref="bidhistory({id:{{auction.auctionID}}, other:'{{auction.name}}'})" class="btn btn-xs btn-outline btn-primary">See History </a>
                     <a data-ui-sref="buyer.createbid({id:{{auction.auctionID}}, other:'{{auction.name}}'})" class="btn btn-xs btn-outline btn-primary">Place Bid </a>
                 </div>
