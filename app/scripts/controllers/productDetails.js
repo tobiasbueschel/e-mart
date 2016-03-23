@@ -7,6 +7,7 @@ emart.controller('productDetailsCtrl', function ($scope, $http, $window, $state,
 
     // checks if auction ID is set and then gets the auction data
     if ($stateParams.auctionid != null){
+
         $scope.data.auctionid = $stateParams.auctionid;
 
         console.log("this auction is called");

@@ -79,6 +79,15 @@
                                     <p data-ng-show="data.auctionForm.startdate.$invalid && data.auctionForm.startdate.$dirty" class="help-block m-b-none has-error">Start date must be in the future.</p>
                                 </div>
                             </div>
+
+                            <!--AUCTION START TIME -->
+                            <div class="form-group">
+                            <label class="col-sm-2 control-label">Start Time :</label>
+                                <div class="col-sm-10">
+                                    <input name="starttime" type="text" class="form-control" readonly data-ng-model="data.starttime" data-lng-clockpicker data-lng-clockpicker-options='options' placeholder="18:00"></input>
+                                </div>
+                            </div>
+
                             <!--AUCTION END DATE -->
                             <div class="form-group"
                                  data-ng-class="{'has-success': data.auctionForm.enddate.$valid, 'has-error': data.auctionForm.enddate.$invalid && data.auctionForm.enddate.$dirty}">
@@ -94,6 +103,15 @@
                                     <p data-ng-show="data.auctionForm.enddate.$invalid && data.auctionForm.enddate.$dirty" class="help-block m-b-none has-error">End date must be after start date.</p>
                                 </div>
                             </div>
+
+                            <!--AUCTION END TIME -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">End Time :</label>
+                                <div class="col-sm-10">
+                                    <input name="endtime" type="text" class="form-control" readonly data-ng-model='data.endtime' data-lng-clockpicker data-lng-clockpicker-options='options' placeholder="18:00"></input>
+                                </div>
+                            </div>
+
                             <!--AUCTION STARTING PRICE TITLE -->
                             <div class="form-group"
                                  data-ng-class="{'has-success': data.auctionForm.startprice.$valid, 'has-error': data.auctionForm.startprice.$invalid && data.auctionForm.startprice.$dirty}">

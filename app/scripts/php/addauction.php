@@ -22,8 +22,8 @@ if(!empty($_POST)) {
     $isactive = true;
     $startdate = $request -> startdate;
     $enddate = $request -> enddate;
-    $startdate = date("Y-m-d",strtotime($startdate));
-    $enddate = date("Y-m-d",strtotime($enddate));
+    $startdate = date("Y-m-d H:i:s",strtotime($startdate));
+    $enddate = date("Y-m-d H:i:s",strtotime($enddate));
     // DATABASE QUERY
     $sql = "INSERT INTO auction (auctioneerID, itemID, name, description, startingPrice, instantPrice, reservePrice, isActive, startDate, endDate)
             VALUES ($auctioneerid,$itemid, '$auctionname','$description', $startingprice, $instantprice, $reserveprice, $isactive, '$startdate', '$enddate')";

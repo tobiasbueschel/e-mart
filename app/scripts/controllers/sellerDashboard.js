@@ -80,7 +80,7 @@ emart.controller('sellerDashboardCtrl', function ($scope, $http, $state, $window
             url: "/scripts/php/selectRowBysql.php",
             data: {
                sql:  "SELECT i.* FROM item i LEFT JOIN auction a ON i.itemID = a.itemID AND a.isActive=1 "
-               +"WHERE a.itemID IS NULL AND i.ownerID=1371 AND i.isSold=0 ;"
+               +"WHERE a.itemID IS NULL AND i.ownerID="+$cookies.get('userID')+" AND i.isSold=0 ;"
             },
             headers: { 'Content-Type': 'application/json' }
         });

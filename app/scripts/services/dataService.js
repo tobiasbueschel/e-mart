@@ -132,6 +132,23 @@ emart.service('dataService', ['$http','$cookies','toaster', function ($http, $co
         });
     };
 
+    dataServiceScope.getSellerItems = function () {
+        return requestDraftItems = $http({
+            method: "post",
+            url: "/scripts/php/selectRowBysql.php",
+            data: {
+                sql:  "SELECT i.* FROM item i LEFT JOIN auction a ON i.itemID = a.itemID AND a.isActive=1 "
+                +"WHERE a.itemID IS NULL AND i.ownerID="+$cookies.get('userID')+" AND i.isSold=0 ;"
+            },
+            headers: { 'Content-Type': 'application/json' }
+        });
+        requestDraftItems.success(function (result) {
+            console.log("DRAFT ITEMS: ", result);
+            //$scope.data.items = result;
+            return result;
+        });
+    }
+
     //GET SOLD ITEMS
     dataServiceScope.getSellerSoldItems = function (auctioneerID) {
         return request = $http({

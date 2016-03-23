@@ -6,6 +6,12 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
     $scope.data = {}; //creating new scope that can be used inside tabset
 
     //Initial the start and end date fields
+    $scope.options = {
+        done: 'OK',
+        twelvehour: false,
+        nativeOnMobile: true
+    };
+
     var defaultAuctionLength = 7;
     $scope.data.today = new Date();
     $scope.data.startdate = $scope.data.today;
@@ -13,9 +19,14 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
     $scope.data.futureDate.setDate($scope.data.futureDate.getDate() + defaultAuctionLength);
     $scope.data.enddate =   $scope.data.futureDate;
 
+    //default times
+    $scope.data.starttime = moment('2013-09-29 18:00');
+    $scope.data.endtime = moment('2013-09-29 18:00');
+
+
 
     //Get items of the current users
-    var sellerItemsPromise = dataService.getSellerItems($cookies.get('userID'));
+    var sellerItemsPromise = dataService.getSellerItems();
     sellerItemsPromise.then(function(result) {
             //inside promise then
             $scope.data.items = result.data;
@@ -24,11 +35,8 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
     console.log($scope.data.items);
     //get the item chosen
     $scope.data.addAuction = function () {
-        console.log($scope.data);
-        console.log($scope.data.startdate, $scope.data.enddate);
+        //console.log($scope.data);
         //Validation
-
-
         if ($scope.data.auctionForm.name.$valid &&
             $scope.data.auctionForm.description.$valid &&
             $scope.data.auctionForm.startdate.$valid &&
@@ -37,6 +45,12 @@ emart.controller('addAuctionCtrl', function ($scope, $http, $state, $cookies, to
             $scope.data.auctionForm.reserveprice.$valid &&
             $scope.data.auctionForm.instantprice.$valid
         ) {
+            //Set the time in the date object
+            $scope.data.startdate.setHours($scope.data.starttime.hour(),$scope.data.starttime.minutes());
+            $scope.data.enddate.setHours($scope.data.endtime.hour(),$scope.data.endtime.minutes());
+            $scope.data.startdate = $scope.data.startdate.toISOString();
+            $scope.data.enddate = $scope.data.enddate.toISOString();
+
             var request = $http({
                 method: "post",
                 url: "/scripts/php/addauction.php",
