@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kimeshan
- * Date: 17/03/2016
- * Time: 17:35
- */
-
 $tempDir = __DIR__ . DIRECTORY_SEPARATOR . 'temp';
 if (!file_exists($tempDir)) {
     mkdir($tempDir);
