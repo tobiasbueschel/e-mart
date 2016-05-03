@@ -1,10 +1,10 @@
 <?php
 
 // GLOBAL VARIABLES FOR EMART APPLICATION
-$host_name = "eu-cdbr-azure-west-d.cloudapp.net";
-$database = "emartDB";
-$user_name = "b640fc88a35dd7";
-$password = "03076183";
+$host_name = "YOUR_HOST_NAME";
+$database = "YOUR_DB_NAME";
+$user_name = "YOUR_USERNAME";
+$password = "YOUR_PASSWORD";
 $connection = null;
 
 // CONNECT TO THE MYSQL DATABASE
