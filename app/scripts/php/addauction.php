@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kimeshan
- */
 require_once("dbConnection.php");
 ob_start();
 
