@@ -2,7 +2,7 @@
 [![Dependency Status](https://gemnasium.com/badges/github.com/tobiasbueschel/e-mart.svg)](https://gemnasium.com/github.com/tobiasbueschel/e-mart)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/)
 
-*E-Mart is the prototype for an online marketplace - similar to Ebay. The app uses AngularJS and employs a MySQL database hosted on Microsoft Azure.*
+*E-Mart is a prototype for an online marketplace - similar to Ebay. The app uses AngularJS and employs a MySQL database hosted on Microsoft Azure.*
 
 Try out the [demo :computer:](https://e-mart.azurewebsites.net/)
 
