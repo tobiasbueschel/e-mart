@@ -15,26 +15,26 @@ Try out the [demo :computer:](https://e-mart.azurewebsites.net/)
 *If you are new to GitHub, you can find a quick tutorial [here](http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1).*
 
 ###### (1) Download repository & open it
-```
-$ git clone https://github.com/tobiasbueschel/e-mart.git
-$ cd e-mart
+```shell
+git clone https://github.com/tobiasbueschel/e-mart.git
+cd e-mart
 ```
 
 ###### (2) Install node modules
-```
-$ sudo npm install
+```shell
+npm install
 ```
 
 ###### (3) Install bower components
-```
-$ bower install
+```shell
+npx bower install
 ```
 
 ###### (4) Running the application and making changes
 The project uses the JavaScript Task Runner [Grunt](http://gruntjs.com/). The following commands will be usefull:
 
-+ `grunt live` runs the development version from the app folder
-+ `grunt server` runs the production version of the dist folder
++ `npx grunt live` runs the development version from the app folder
++ `npx grunt server` runs the production version of the dist folder
 
 ### Contributing
 Feel free to send a pull request. If you find any bugs please report it on the [issue page](https://github.com/tobiasbueschel/e-mart/issues).
